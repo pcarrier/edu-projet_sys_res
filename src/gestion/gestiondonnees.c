@@ -134,60 +134,21 @@ main (int argc, char *argv[])
       printf ("Annuaire initialisé avec 3 adhérents\n");
 
       /* Ecriture des données */
-      //Si l'écriture ne se passe pas correctement, affichage erreur puis
-      //sortie du programme avec erreur.
-      int bdd_save_ret = bdd_save (fAnnName, fCatName);
-      switch (bdd_save_ret)
-	{
-	case (WErrAnn):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données %s\n",
-		   fAnnName);
-	  exit (1);
-	case (WErrCat):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données %s\n",
-		   fCatName);
-	  exit (1);
-	case (WErrCat + WErrAnn):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de les bases de données %s et %s\n",
-		   fAnnName, fCatName);
-	  exit (1);
-	}
+      //Si l'écriture ne se passe pas correctement, sortie forcée du programme avec erreur.
+      if(bdd_save_catalogue (fCatName)==-1){exit(1);}
+      if(bdd_save_annuaire (fAnName)==-1){exit(1)};
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
     }
   else if (lflag)
     {
-
       /* On tente de lire les données */
-      int bd_load_ret = bdd_load (fAnnName, fCatName);
+      if( bdd_load_catalogue (fCatName)==-1){exit(1);}
+      if( bdd_load_annuaire (fAnnName)==-1){exit(1);}
 
-      switch (bd_load_ret)
-	{
-	case (RErrAnn):
-	  fprintf (stderr,
-		   "Erreur lors de la lecture de la base de données %s\n",
-		   fAnnName);
-	  exit (1);
-	case (RErrCat):
-	  fprintf (stderr,
-		   "Erreur lors de la lecture  de la base de données %s.\n",
-		   fCatName);
-	  exit (1);
-	case (RErrCat + RErrAnn):
-	  fprintf (stderr,
-		   "Erreur lors de la lecture des bases de données %s et %s.\n",
-		   fAnnName, fCatName);
-	  exit (1);
 
-	}
-      if (cat_nb_livres == 0)
-	{
-	  printf ("Aucun livre dans le catalogue\n");
-	}
+     	}
       else
 	{
 	  printf ("%d livre(s) dans le catalogue\n\n", cat_nb_livres);

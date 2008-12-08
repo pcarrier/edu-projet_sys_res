@@ -109,20 +109,7 @@ int
 bdd_load_annuaire (char *annuaire)
 {
   bdd_acces_lecture_debut ();
-  FILE *file = fopen (annuaire, "r");
-
-  if (file == NULL)
-    {
-      return RErrAnn;
-    }
-
-  int nbItemLu = fread (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
-
-  fclose (file);
   bdd_acces_lecture_fin ();
-  printf ("Fichier Chargé\n");
-
-  return 0;
 }
 
 
@@ -132,57 +119,24 @@ int
 bdd_load_catalogue (char *catalogue)
 {
   bdd_acces_lecture_debut ();
-  FILE *file = fopen (catalogue, "r");
-
-  if (file == NULL)
-    {
-      return RErrCat;
-    }
-
-  int nbItemLu = fread (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
-
-  fclose (file);
   bdd_acces_lecture_fin ();
-  printf ("Fichier Chargé\n");
 
-  return 0;
 }
 
 /* Sauvegarde des données depuis la mémoire vers le ou les fichiers
 */
-
+/*
 int
-bdd_save (char *annuaire, char *catalogue)
+bdd_save ()
 {
-  int retAnnuaire = bdd_save_annuaire (annuaire);
-  int retCatalogue = bdd_save_catalogue (catalogue);
 
-  return retAnnuaire + retCatalogue;
 }
-
+*/
 int
 bdd_save_annuaire (char *annuaire)
 {
-  bdd_acces_ecriture_debut ();
-  FILE *file = fopen (annuaire, "w+b");
-
-  int nbItemEcrits =
-    (int) fwrite (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
-
-  fclose (file);
+  bdd_acces_ecriture_debut (); 
   bdd_acces_ecriture_fin ();
-  printf ("Fichié Sauvegardé\n");
-
-
-  if (nbItemEcrits != ann_nb_adhs)
-    {
-      printf ("nbItemsEcrits : %i\n", nbItemEcrits);
-      return WErrAnn;
-    }
-  else
-    {
-      return 0;
-    }
 }
 
 
@@ -190,22 +144,18 @@ int
 bdd_save_catalogue (char *catalogue)
 {
   bdd_acces_ecriture_debut ();
-  FILE *file = fopen (catalogue, "w+b");
-
-  int nbItemE =
-    (int) fwrite (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
-
-  fclose (file);
   bdd_acces_ecriture_fin ();
-  printf ("Fichier Sauvegardé\n");
+}
 
-  if (nbItemE != cat_nb_livres)
-    {
-      printf ("nbItemsE : %i, cat_nb_livres:%i \n", nbItemE, cat_nb_livres);
-      return WErrCat;
-    }
-  else
-    {
-      return 0;
-    }
+void traiteRetourEcriture(int code, char * filename){
+	switch(code){
+		case(ParametresIncorects):
+			printf("Paramètres incorects lors de l'accès au fichier %s.\n",filename);
+			break;
+		case(OuvertureFichierImpossible):
+			printf("Ouverture du fichier %s impossible.\n",filename);
+			break;	
+	}
+}
+
 }
