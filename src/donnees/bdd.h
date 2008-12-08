@@ -44,6 +44,9 @@ void bdd_acces_lecture_fin();
 void bdd_acces_ecriture_debut();
 void bdd_acces_ecriture_fin();
 void bdd_load();
-int bdd_save();
+int bdd_save(char * a, char * b);
+int bdd_save_annuaire(char * a);
+int bdd_save_catalogue(char * b);
+
 
 #endif
