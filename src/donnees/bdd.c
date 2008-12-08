@@ -109,20 +109,7 @@ int
 bdd_load_annuaire (char *annuaire)
 {
   bdd_acces_lecture_debut ();
-  FILE *file = fopen (annuaire, "r");
-
-  if (file == NULL)
-    {
-      return RErrAnn;
-    }
-
-  int nbItemLu = fread (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
-
-  fclose (file);
   bdd_acces_lecture_fin ();
-  printf ("Fichier Chargé\n");
-
-  return 0;
 }
 
 
@@ -132,20 +119,8 @@ int
 bdd_load_catalogue (char *catalogue)
 {
   bdd_acces_lecture_debut ();
-  FILE *file = fopen (catalogue, "r");
-
-  if (file == NULL)
-    {
-      return RErrCat;
-    }
-
-  int nbItemLu = fread (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
-
-  fclose (file);
   bdd_acces_lecture_fin ();
-  printf ("Fichier Chargé\n");
 
-  return 0;
 }
 
 /* Sauvegarde des données depuis la mémoire vers le ou les fichiers
