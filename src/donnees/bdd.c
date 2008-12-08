@@ -176,10 +176,10 @@ bdd_save_catalogue (char *catalogue)
 
 void traiteRetour(ErreurAcces err, char * filename){
 	switch(err){
-		case(ParametresIncorrects):
+		case(bdd_err_params_incorrects):
 			printf("Paramètres incorrects lors de l'accès au fichier %s.\n",filename);
 			break;
-		case(OuvertureFichierImpossible):
+		case(bdd_err_fopen_impossible):
 			printf("Ouverture du fichier %s impossible.\n",filename);
 			break;	
 	}
