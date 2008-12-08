@@ -38,33 +38,35 @@ int NombreAdherentsDansAnnuaire = 0;	/* par défault, aucun adherent */
 		inchangé.
 
 */
-int LireAnnuaire(const char *NomFichier)
+int
+LireAnnuaire (const char *NomFichier)
 {
-	FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-	int NombreAdherentsLus;	/* Nombres d'adhérents lus dans le fichiers */
+  FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
+  int NombreAdherentsLus;	/* Nombres d'adhérents lus dans le fichiers */
 
-	/* Tests des paramètres: pointeur NULL ou chaîne vide */
-	if (NomFichier == NULL || NomFichier[0] == '\0')
-		return ParametresIncorrects;
+  /* Tests des paramètres: pointeur NULL ou chaîne vide */
+  if (NomFichier == NULL || NomFichier[0] == '\0')
+    return ParametresIncorrects;
 
-	/* Tentative d'ouverture du fichier en lecture binaire et vérification */
-	Fichier = fopen(NomFichier, "rb");
-	if (Fichier == NULL) {
-		/* Impossible d'ouvrir le fichier */
-		return OuvertureFichierImpossible;
-	}
+  /* Tentative d'ouverture du fichier en lecture binaire et vérification */
+  Fichier = fopen (NomFichier, "rb");
+  if (Fichier == NULL)
+    {
+      /* Impossible d'ouvrir le fichier */
+      return OuvertureFichierImpossible;
+    }
 
-	/* On lit au maximum NombreMaximumDeAdherents adhérents depuis le fichier */
-	NombreAdherentsLus =
-	    fread(Annuaire, sizeof(Adherent), NombreMaximumDAdherents, Fichier);
+  /* On lit au maximum NombreMaximumDeAdherents adhérents depuis le fichier */
+  NombreAdherentsLus =
+    fread (Annuaire, sizeof (Adherent), NombreMaximumDAdherents, Fichier);
 
-	/* Fermeture du fichier */
-	fclose(Fichier);
+  /* Fermeture du fichier */
+  fclose (Fichier);
 
-	/* Mise a jours des variables du module et retour du résultat */
-	NombreAdherentsDansAnnuaire = NombreAdherentsLus;
+  /* Mise a jours des variables du module et retour du résultat */
+  NombreAdherentsDansAnnuaire = NombreAdherentsLus;
 
-	return NombreAdherentsLus;
+  return NombreAdherentsLus;
 }
 
 /*
@@ -79,32 +81,35 @@ int LireAnnuaire(const char *NomFichier)
 	Remarque : le repertoire reste inchangé.
 
 */
-int EcrireAnnuaire(const char *NomFichier)
+int
+EcrireAnnuaire (const char *NomFichier)
 {
-	FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-	int NombreAdherentsEcrits = 0;	/* Nombres d'adhérents écrits dans le fichiers */
+  FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
+  int NombreAdherentsEcrits = 0;	/* Nombres d'adhérents écrits dans le fichiers */
 
-	/* Tests des paramètres: pointeur NULL ou chaîne vide */
-	if (NomFichier == NULL || NomFichier[0] == '\0')
-		return ParametresIncorrects;
+  /* Tests des paramètres: pointeur NULL ou chaîne vide */
+  if (NomFichier == NULL || NomFichier[0] == '\0')
+    return ParametresIncorrects;
 
-	/* Tentative d'ouverture du fichier en écriture binaire et vérification */
-	Fichier = fopen(NomFichier, "wb");
-	if (Fichier == NULL) {
-		/* Impossible d'ouvrir le fichier */
-		return OuvertureFichierImpossible;
-	}
+  /* Tentative d'ouverture du fichier en écriture binaire et vérification */
+  Fichier = fopen (NomFichier, "wb");
+  if (Fichier == NULL)
+    {
+      /* Impossible d'ouvrir le fichier */
+      return OuvertureFichierImpossible;
+    }
 
-	/* Ecriture des adhérents s'il y en a dans le repertoire */
-	if (NombreAdherentsDansAnnuaire != 0) {
-		NombreAdherentsEcrits =
-		    fwrite(Annuaire, sizeof(Adherent),
-			   NombreAdherentsDansAnnuaire, Fichier);
-	}
+  /* Ecriture des adhérents s'il y en a dans le repertoire */
+  if (NombreAdherentsDansAnnuaire != 0)
+    {
+      NombreAdherentsEcrits =
+	fwrite (Annuaire, sizeof (Adherent),
+		NombreAdherentsDansAnnuaire, Fichier);
+    }
 
-	/* Fermeture du fichier */
-	fclose(Fichier);
+  /* Fermeture du fichier */
+  fclose (Fichier);
 
-	/* On retourne le nombre de livres écrits dans le fichier */
-	return NombreAdherentsEcrits;
+  /* On retourne le nombre de livres écrits dans le fichier */
+  return NombreAdherentsEcrits;
 }

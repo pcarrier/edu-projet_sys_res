@@ -60,7 +60,7 @@
 /* Déclaration de la fonction d'affichage des erreurs (code à la fin
  * de ce fichier)
  */
-int sortie_err(char *format, ...);
+int sortie_err (char *format, ...);
 
 /************************ Définition des paramètres **********************/
 #define AUCUNE_ADR_INET 0xFFFFFFFF
@@ -99,34 +99,33 @@ char aff_debug[120] = ">>>>> DEBUG >>>>> \t";
 /* SORTIE	Numero identificateur de la socket				*/
 /*	     	( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
-int h_socket(int domaine, int mode)
+int
+h_socket (int domaine, int mode)
 {
-	int res;		/* Entier resultat de l'operation */
-	int sendbuff;
+  int res;			/* Entier resultat de l'operation */
+  int sendbuff;
 
 #ifdef DEBUG
-	printf("\n%s H_SOCKET (debut) -------------------\n", aff_debug);
-	printf("%s domaine : %d mode : %d \n", aff_debug, domaine, mode);
+  printf ("\n%s H_SOCKET (debut) -------------------\n", aff_debug);
+  printf ("%s domaine : %d mode : %d \n", aff_debug, domaine, mode);
 #endif
 
-	if (domaine != AF_INET)
-		sortie_err(" Sous internet utiliser -> AF_INET\n");
-	if ((mode != SOCK_STREAM) && (mode != SOCK_DGRAM))
-		sortie_err
-		    (" Mode a choisir parmi : SOCK_STREAM, SOCK_DGRAM \n");
+  if (domaine != AF_INET)
+    sortie_err (" Sous internet utiliser -> AF_INET\n");
+  if ((mode != SOCK_STREAM) && (mode != SOCK_DGRAM))
+    sortie_err (" Mode a choisir parmi : SOCK_STREAM, SOCK_DGRAM \n");
 
-	res = socket(domaine, mode, 0);
+  res = socket (domaine, mode, 0);
 
-	setsockopt(res, SOL_SOCKET, SO_REUSEADDR, (char *)&sendbuff,
-		   sizeof(sendbuff));
+  setsockopt (res, SOL_SOCKET, SO_REUSEADDR, (char *) &sendbuff,
+	      sizeof (sendbuff));
 
-	if (res < 0)
-		sortie_err
-		    ("\nERREUR 'h_socket' : Creation socket impossible \n");
+  if (res < 0)
+    sortie_err ("\nERREUR 'h_socket' : Creation socket impossible \n");
 #ifdef DEBUG
-	printf("%s H_SOCKET (fin) ----- socket %d cree ---\n", aff_debug, res);
+  printf ("%s H_SOCKET (fin) ----- socket %d cree ---\n", aff_debug, res);
 #endif
-	return res;
+  return res;
 }
 
 /*			    +===================+				*/
@@ -151,40 +150,42 @@ int h_socket(int domaine, int mode)
 /* SORTIE								  	*/
 /*	     	aucune ( le rapport d'execution est envoye sur la console )	*/
 /********************************************************************************/
-void h_bind(int num_soc, struct sockaddr_in *p_adr_socket)
+void
+h_bind (int num_soc, struct sockaddr_in *p_adr_socket)
 {
 
-	int res;		/* Entier resultat de l'operation       */
+  int res;			/* Entier resultat de l'operation       */
 #ifdef DEBUG
-	struct sockaddr_in s;
-	unsigned int lensa;
+  struct sockaddr_in s;
+  unsigned int lensa;
 
-	printf("\n%sH_BIND (debut)\n", aff_debug);
-	printf("%ssocket : %d \n", aff_debug, num_soc);
-	printf("%sadresse IP : %s \n", aff_debug,
-	       inet_ntoa(p_adr_socket->sin_addr));
-	printf("%sport : %d OK \n", aff_debug, ntohs(p_adr_socket->sin_port));
+  printf ("\n%sH_BIND (debut)\n", aff_debug);
+  printf ("%ssocket : %d \n", aff_debug, num_soc);
+  printf ("%sadresse IP : %s \n", aff_debug,
+	  inet_ntoa (p_adr_socket->sin_addr));
+  printf ("%sport : %d OK \n", aff_debug, ntohs (p_adr_socket->sin_port));
 #endif
 
-	res = bind(num_soc, (struct sockaddr *)p_adr_socket, sizeof(struct sockaddr_in));	/* Modif PS */
+  res = bind (num_soc, (struct sockaddr *) p_adr_socket, sizeof (struct sockaddr_in));	/* Modif PS */
 
 #ifdef DEBUG
-	/*bzero (&s,sizeof(s)); */
-	lensa = sizeof(struct sockaddr_in);
-	if (!getsockname(num_soc, (struct sockaddr *)&s, &lensa)) {
-		printf("%sport apres le bind: %d OK \n", aff_debug,
-		       ntohs(s.sin_port));
-	} else
-		printf("Probleme getsockname\n");
+  /*bzero (&s,sizeof(s)); */
+  lensa = sizeof (struct sockaddr_in);
+  if (!getsockname (num_soc, (struct sockaddr *) &s, &lensa))
+    {
+      printf ("%sport apres le bind: %d OK \n", aff_debug,
+	      ntohs (s.sin_port));
+    }
+  else
+    printf ("Probleme getsockname\n");
 #endif
 
-	if (res < 0)
-		sortie_err
-		    ("\nERREUR 'h_bind' : liaison socket %d impossible\n",
-		     num_soc);
+  if (res < 0)
+    sortie_err
+      ("\nERREUR 'h_bind' : liaison socket %d impossible\n", num_soc);
 
 #ifdef DEBUG
-	printf("%sH_BIND (fin)  \n", aff_debug);
+  printf ("%sH_BIND (fin)  \n", aff_debug);
 #endif
 }
 
@@ -198,33 +199,34 @@ void h_bind(int num_soc, struct sockaddr_in *p_adr_socket)
 /* ENTREE									*/
 /*		num_soc	: 	Numero identifiant la socket			*/
 /*										*/
-																																																																																																																												    /*              p_adr_serv :    adresses socket d'acces au service              *//*                                                                              */
+																																																																																																																																						      /*              p_adr_serv :    adresses socket d'acces au service              *//*                                                                              */
 /* SORTIE									*/
 /*	     	aucune ( le rapport d'execution est envoye sur la console )	*/
 /********************************************************************************/
-void h_connect(int num_soc, struct sockaddr_in *p_adr_serv)
+void
+h_connect (int num_soc, struct sockaddr_in *p_adr_serv)
 {
 
-	int res;		/* Entier resultat de l'operation       */
+  int res;			/* Entier resultat de l'operation       */
 
 #ifdef DEBUG
-	printf("\n%sH_CONNECT (debut) -------------------\n", aff_debug);
-	printf("%ssocket : %d \n", aff_debug, num_soc);
-	printf("%sadresse IP serveur: %s \n", aff_debug,
-	       inet_ntoa(p_adr_serv->sin_addr));
-	printf("%sport service : %d OK \n", aff_debug,
-	       ntohs(p_adr_serv->sin_port));
+  printf ("\n%sH_CONNECT (debut) -------------------\n", aff_debug);
+  printf ("%ssocket : %d \n", aff_debug, num_soc);
+  printf ("%sadresse IP serveur: %s \n", aff_debug,
+	  inet_ntoa (p_adr_serv->sin_addr));
+  printf ("%sport service : %d OK \n", aff_debug,
+	  ntohs (p_adr_serv->sin_port));
 #endif
 
-	res = connect(num_soc, (struct sockaddr *)p_adr_serv,
-		      sizeof(struct sockaddr));
-	if (res < 0)
-		sortie_err
-		    ("\nERREUR 'h_connect' : connexion serveur %s impossible\n",
-		     inet_ntoa(p_adr_serv->sin_addr));
+  res = connect (num_soc, (struct sockaddr *) p_adr_serv,
+		 sizeof (struct sockaddr));
+  if (res < 0)
+    sortie_err
+      ("\nERREUR 'h_connect' : connexion serveur %s impossible\n",
+       inet_ntoa (p_adr_serv->sin_addr));
 
 #ifdef DEBUG
-	printf("%sH_CONNECT (fin) -------------------\n", aff_debug);
+  printf ("%sH_CONNECT (fin) -------------------\n", aff_debug);
 #endif
 
 }
@@ -244,23 +246,23 @@ void h_connect(int num_soc, struct sockaddr_in *p_adr_serv)
 /* SORTIE									*/
 /*	aucune ( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
-void h_listen(int num_soc, int nb_req_att)
+void
+h_listen (int num_soc, int nb_req_att)
 {
 
-	int res;		/* Entier resultat de l'operation       */
+  int res;			/* Entier resultat de l'operation       */
 
 #ifdef DEBUG
-	printf("\n%sH_LISTEN (debut) -------------------\n", aff_debug);
+  printf ("\n%sH_LISTEN (debut) -------------------\n", aff_debug);
 #endif
 
-	res = listen(num_soc, nb_req_att);
-	if (res < 0)
-		sortie_err
-		    ("\nERREUR 'h_listen' : ecoute sur socket %d impossible \n",
-		     num_soc);
+  res = listen (num_soc, nb_req_att);
+  if (res < 0)
+    sortie_err
+      ("\nERREUR 'h_listen' : ecoute sur socket %d impossible \n", num_soc);
 
 #ifdef DEBUG
-	printf("%sH_LISTEN (fin)\n", aff_debug);
+  printf ("%sH_LISTEN (fin)\n", aff_debug);
 #endif
 }
 
@@ -279,26 +281,27 @@ void h_listen(int num_soc, int nb_req_att)
 /* SORTIE	identificateur de la nouvelle socket cree			*/
 /*	     	( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
-int h_accept(int num_soc, struct sockaddr_in *p_adr_client)
+int
+h_accept (int num_soc, struct sockaddr_in *p_adr_client)
 {
 
-	unsigned int longueur;
-	int res;		/* Entier resultat de l'operation       */
+  unsigned int longueur;
+  int res;			/* Entier resultat de l'operation       */
 
 #ifdef DEBUG
-	printf("\n%sH_ACCEPT (debut)\n", aff_debug);
+  printf ("\n%sH_ACCEPT (debut)\n", aff_debug);
 #endif
 
-	longueur = sizeof(struct sockaddr);
-	res = accept(num_soc, (struct sockaddr *)p_adr_client, &longueur);
-	if (res < 0)
-		sortie_err("\nERREUR 'h_accept' : Acceptation impossible \n");
+  longueur = sizeof (struct sockaddr);
+  res = accept (num_soc, (struct sockaddr *) p_adr_client, &longueur);
+  if (res < 0)
+    sortie_err ("\nERREUR 'h_accept' : Acceptation impossible \n");
 
 #ifdef DEBUG
-	printf("%sH_ACCEPT (fin)\n", aff_debug);
+  printf ("%sH_ACCEPT (fin)\n", aff_debug);
 #endif
 
-	return res;
+  return res;
 
 }
 
@@ -319,50 +322,52 @@ int h_accept(int num_soc, struct sockaddr_in *p_adr_client)
 /*	     	( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
 
-int h_reads(int num_soc, char *tampon, int nb_octets)
+int
+h_reads (int num_soc, char *tampon, int nb_octets)
 {
-	int nb_restant, nb_lus;
+  int nb_restant, nb_lus;
 
 #ifdef DEBUG
-	printf("\n%sH_READS (debut) 	-------------------\n", aff_debug);
-	printf("%sH_READS nb_octets : %d \n", aff_debug, nb_octets);
+  printf ("\n%sH_READS (debut) 	-------------------\n", aff_debug);
+  printf ("%sH_READS nb_octets : %d \n", aff_debug, nb_octets);
 #endif
 
-	nb_restant = nb_octets;
-	while (nb_restant > 0) {
-		nb_lus = read(num_soc, tampon, nb_restant);
+  nb_restant = nb_octets;
+  while (nb_restant > 0)
+    {
+      nb_lus = read (num_soc, tampon, nb_restant);
 
 #ifdef DEBUG
-		printf("%sH_READS apres read ..................\n", aff_debug);
-		printf("%sH_READS nb octets lus: %d \n", aff_debug, nb_lus);
+      printf ("%sH_READS apres read ..................\n", aff_debug);
+      printf ("%sH_READS nb octets lus: %d \n", aff_debug, nb_lus);
 #endif
 
-		if (nb_lus < 0) {
-			sortie_err
-			    ("\nERREUR 'Lire_mes' : lecture socket %d impossible\n",
-			     num_soc);
-			return (nb_lus);
-		}
-
-		nb_restant = nb_restant - nb_lus;
-
-		/*if (nb_lus==0 || tampon[nb_lus]=='\0') *//* fin transfert */
-		if (nb_lus == 0) {
-#ifdef DEBUG
-			printf("%sH_READS (fin) 	-------------------\n",
-			       aff_debug);
-#endif
-			return (nb_octets - nb_restant);
-		}
-		tampon = tampon + nb_lus;
-
+      if (nb_lus < 0)
+	{
+	  sortie_err
+	    ("\nERREUR 'Lire_mes' : lecture socket %d impossible\n", num_soc);
+	  return (nb_lus);
 	}
 
+      nb_restant = nb_restant - nb_lus;
+
+      /*if (nb_lus==0 || tampon[nb_lus]=='\0') *//* fin transfert */
+      if (nb_lus == 0)
+	{
 #ifdef DEBUG
-	printf("%sH_READS (fin) 	-------------------\n", aff_debug);
+	  printf ("%sH_READS (fin) 	-------------------\n", aff_debug);
+#endif
+	  return (nb_octets - nb_restant);
+	}
+      tampon = tampon + nb_lus;
+
+    }
+
+#ifdef DEBUG
+  printf ("%sH_READS (fin) 	-------------------\n", aff_debug);
 #endif
 
-	return (nb_octets - nb_restant);
+  return (nb_octets - nb_restant);
 }
 
 /*			    +===================+				*/
@@ -383,34 +388,37 @@ int h_reads(int num_soc, char *tampon, int nb_octets)
 /*	     	( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
 
-int h_writes(int num_soc, char *tampon, int nb_octets)
+int
+h_writes (int num_soc, char *tampon, int nb_octets)
 {
-	int nb_restant, nb_ecrits;	/* nb octets restant a ecrire, nb octets ecrits */
+  int nb_restant, nb_ecrits;	/* nb octets restant a ecrire, nb octets ecrits */
 
 #ifdef DEBUG
-	printf("\n%sH_WRITES (debut) 	-------------------\n", aff_debug);
+  printf ("\n%sH_WRITES (debut) 	-------------------\n", aff_debug);
 #endif
 
-	nb_restant = nb_octets;
-	while (nb_restant > 0) {
-		nb_ecrits = write(num_soc, tampon, nb_restant);
+  nb_restant = nb_octets;
+  while (nb_restant > 0)
+    {
+      nb_ecrits = write (num_soc, tampon, nb_restant);
 
-		if (nb_ecrits < 0) {
-			sortie_err
-			    ("\nERREUR 'Ecrire_mes' : ecriture socket %d impossible\n",
-			     num_soc);
-			return (nb_ecrits);
-		}
-
-		nb_restant = nb_restant - nb_ecrits;
-		tampon = tampon + nb_ecrits;
+      if (nb_ecrits < 0)
+	{
+	  sortie_err
+	    ("\nERREUR 'Ecrire_mes' : ecriture socket %d impossible\n",
+	     num_soc);
+	  return (nb_ecrits);
 	}
 
+      nb_restant = nb_restant - nb_ecrits;
+      tampon = tampon + nb_ecrits;
+    }
+
 #ifdef DEBUG
-	printf("%sH_WRITES (fin) 	-------------------\n", aff_debug);
+  printf ("%sH_WRITES (fin) 	-------------------\n", aff_debug);
 #endif
 
-	return (nb_octets - nb_restant);
+  return (nb_octets - nb_restant);
 }
 
 /*			    +===================+				*/
@@ -428,28 +436,29 @@ int h_writes(int num_soc, char *tampon, int nb_octets)
 /*	SORTIE	Nombre d'octets effectivement emis 				*/
 /*	     	( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
-int h_sendto(int num_soc,
-	     char *tampon, int nb_octets, struct sockaddr_in *p_adr_distant)
+int
+h_sendto (int num_soc,
+	  char *tampon, int nb_octets, struct sockaddr_in *p_adr_distant)
 {
 
-	int res;		/* Entier resultat de l'operation       */
+  int res;			/* Entier resultat de l'operation       */
 
 #ifdef DEBUG
-	printf("\n%sH_SENDTO (debut)\n", aff_debug);
+  printf ("\n%sH_SENDTO (debut)\n", aff_debug);
 #endif
 
-	res = sendto(num_soc, tampon, nb_octets, 0,
-		     (struct sockaddr *)p_adr_distant, sizeof(*p_adr_distant));
-	if (res < 0) {
-		sortie_err
-		    ("\nERREUR 'h_sendto' : emission socket %d impossible\n",
-		     num_soc);
-	}
+  res = sendto (num_soc, tampon, nb_octets, 0,
+		(struct sockaddr *) p_adr_distant, sizeof (*p_adr_distant));
+  if (res < 0)
+    {
+      sortie_err
+	("\nERREUR 'h_sendto' : emission socket %d impossible\n", num_soc);
+    }
 #ifdef DEBUG
-	printf("%sH_SENDTO (fin)\n", aff_debug);
+  printf ("%sH_SENDTO (fin)\n", aff_debug);
 #endif
 
-	return res;
+  return res;
 
 }
 
@@ -469,29 +478,28 @@ int h_sendto(int num_soc,
 /*	     	( le rapport d'execution est envoye sur la console )	*/
 /********************************************************************************/
 int
-h_recvfrom(int num_soc, char *tampon, int nb_octets,
-	   struct sockaddr_in *p_adr_distant)
+h_recvfrom (int num_soc, char *tampon, int nb_octets,
+	    struct sockaddr_in *p_adr_distant)
 {
-	int res;		/* Entier resultat de l'operation       */
-	unsigned int taille;
+  int res;			/* Entier resultat de l'operation       */
+  unsigned int taille;
 
 #ifdef DEBUG
-	printf("\n%sH_RECVFROM (debut)\n", aff_debug);
+  printf ("\n%sH_RECVFROM (debut)\n", aff_debug);
 #endif
 
-	taille = sizeof(*p_adr_distant);
-	res = recvfrom(num_soc, tampon, nb_octets, 0,
-		       (struct sockaddr *)p_adr_distant, &taille);
-	if (res < 0)
-		sortie_err
-		    ("\nERREUR 'h_recvfrom' : reception socket %d impossible\n",
-		     num_soc);
+  taille = sizeof (*p_adr_distant);
+  res = recvfrom (num_soc, tampon, nb_octets, 0,
+		  (struct sockaddr *) p_adr_distant, &taille);
+  if (res < 0)
+    sortie_err
+      ("\nERREUR 'h_recvfrom' : reception socket %d impossible\n", num_soc);
 
 #ifdef DEBUG
-	printf("%sH_RECVFROM (fin)\n", aff_debug);
+  printf ("%sH_RECVFROM (fin)\n", aff_debug);
 #endif
 
-	return res;
+  return res;
 
 }
 
@@ -515,22 +523,22 @@ h_recvfrom(int num_soc, char *tampon, int nb_octets,
 /* SORTIE	Aucune								*/
 /*	     	( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
-void h_shutdown(int num_soc, int sens)
+void
+h_shutdown (int num_soc, int sens)
 {
-	int res;		/* Entier resultat de l'operation       */
+  int res;			/* Entier resultat de l'operation       */
 
 #ifdef DEBUG
-	printf("\n%s H_SHUTDOWN (debut)\n", aff_debug);
+  printf ("\n%s H_SHUTDOWN (debut)\n", aff_debug);
 #endif
 
-	res = shutdown(num_soc, sens);
-	if (res < 0)
-		sortie_err
-		    ("\nERREUR 'h_shutdown' : fermeture socket %d impossible\n",
-		     num_soc);
+  res = shutdown (num_soc, sens);
+  if (res < 0)
+    sortie_err
+      ("\nERREUR 'h_shutdown' : fermeture socket %d impossible\n", num_soc);
 
 #ifdef DEBUG
-	printf("%s H_SHUTDOWN (fin)\n", aff_debug);
+  printf ("%s H_SHUTDOWN (fin)\n", aff_debug);
 #endif
 
 }
@@ -544,22 +552,22 @@ void h_shutdown(int num_soc, int sens)
 /* SORTIE	Aucune								*/
 /*	     	( le rapport d'execution est envoye sur la console )		*/
 /********************************************************************************/
-void h_close(int num_soc)
+void
+h_close (int num_soc)
 {
-	int res;		/* Entier resultat de l'operation       */
+  int res;			/* Entier resultat de l'operation       */
 
 #ifdef DEBUG
-	printf("\n%s H_CLOSE (debut)\n", aff_debug);
+  printf ("\n%s H_CLOSE (debut)\n", aff_debug);
 #endif
 
-	res = close(num_soc);
-	if (res < 0)
-		sortie_err
-		    ("\nERREUR 'h_close' : fermeture socket %d impossible\n",
-		     num_soc);
+  res = close (num_soc);
+  if (res < 0)
+    sortie_err
+      ("\nERREUR 'h_close' : fermeture socket %d impossible\n", num_soc);
 
 #ifdef DEBUG
-	printf("%s H_CLOSE (fin)\n", aff_debug);
+  printf ("%s H_CLOSE (fin)\n", aff_debug);
 #endif
 
 }
@@ -601,93 +609,97 @@ par adr_serv */
 /*	     	 ( le rapport d'execution est envoye sur la console )	*/
 /********************************************************************************/
 
-void adr_socket(char *service,
-		char *serveur,
-		char *protocole, struct sockaddr_in *p_adr_serv, int type_adr)
+void
+adr_socket (char *service,
+	    char *serveur,
+	    char *protocole, struct sockaddr_in *p_adr_serv, int type_adr)
 {
 
-	struct hostent *p_info_serveur;	/* pointeur sur infos serveur         */
-	struct servent *p_info_service;	/* pointeur sur infos service distant */
+  struct hostent *p_info_serveur;	/* pointeur sur infos serveur         */
+  struct servent *p_info_service;	/* pointeur sur infos service distant */
 
 #ifdef DEBUG
-	printf("\n%s ADR_SOCKET (debut) .........\n", aff_debug);
+  printf ("\n%s ADR_SOCKET (debut) .........\n", aff_debug);
 #endif
 
-	/* RENSEIGNEMENT ADRESSES SOCKET  ------------------------------ */
+  /* RENSEIGNEMENT ADRESSES SOCKET  ------------------------------ */
 
-	/* Mise a zero de la structure d'adresse socket recherchee      */
-	memset((char *)p_adr_serv, 0, sizeof(*p_adr_serv));
+  /* Mise a zero de la structure d'adresse socket recherchee      */
+  memset ((char *) p_adr_serv, 0, sizeof (*p_adr_serv));
 
-	/* Definition du domaine ( famille )    */
-	p_adr_serv->sin_family = AF_INET;
+  /* Definition du domaine ( famille )    */
+  p_adr_serv->sin_family = AF_INET;
 
-	/* ------ RENSEIGNE @IP ----------------------------------------- */
+  /* ------ RENSEIGNE @IP ----------------------------------------- */
 
-	switch (type_adr) {
-	case CLIENT:		/* cas client : @IP = @IP du serveur (machine ou s'execute le service) */
+  switch (type_adr)
+    {
+    case CLIENT:		/* cas client : @IP = @IP du serveur (machine ou s'execute le service) */
 
-		p_info_serveur = gethostbyname(serveur);
-		if (p_info_serveur) {	/* Serveur reference dans /etc/hosts */
-			memcpy((char *)&p_adr_serv->sin_addr,
-			       p_info_serveur->h_addr,
-			       p_info_serveur->h_length);
-			/* PS: ici pas besoin de htonl */
-		} else {
-			/* Adresse IP sous forme de chaine a transcrire */
-			p_adr_serv->sin_addr.s_addr = inet_addr(serveur);
-
-			/* PS: ici pas besoin de htonl */
-
-			if (p_adr_serv->sin_addr.s_addr == AUCUNE_ADR_INET)
-				sortie_err
-				    ("\nER 'h_connect' : serveur %s inaccessible \n",
-				     serveur);
-		}
-
-		break;
-
-	case SERVEUR:		/* cas serveur : tous les clients peuvent s'adresser au serveur */
-		p_adr_serv->sin_addr.s_addr = htonl(INADDR_ANY);
-		/*Modif PS */
-		break;
-
-	default:
-		sortie_err("\nERREUR 'type_adr' : %d non identifie \n",
-			   type_adr);
-
+      p_info_serveur = gethostbyname (serveur);
+      if (p_info_serveur)
+	{			/* Serveur reference dans /etc/hosts */
+	  memcpy ((char *) &p_adr_serv->sin_addr,
+		  p_info_serveur->h_addr, p_info_serveur->h_length);
+	  /* PS: ici pas besoin de htonl */
 	}
-
-#ifdef DEBUG
-	printf("%s adresse IP : %s OK..........\n", aff_debug,
-	       inet_ntoa(p_adr_serv->sin_addr));
-
-#endif
-
-	/* --------- RENSEIGNE PORT -------------------------------------------- */
-
-	p_info_service = getservbyname(service, protocole);
-
-	if (p_info_service) {	/* Service reference dans /etc/service */
-		p_adr_serv->sin_port = htons(ntohs(p_info_service->s_port)
-					     + DEFPORTBASE);
-#ifdef DEBUG
-		printf("%s port : %d associe au service %s OK .........\n", aff_debug, ntohs(p_adr_serv->sin_port), service);	/*Modif PS */
-#endif
-
-	} else
-		/* Service repere par un numero ( chaine ) il faut en deduire le numero de port */
+      else
 	{
-		p_adr_serv->sin_port = htons((u_short) atoi(service));
-		/* Modif P. Sicard port a 0 on remplit avec 0 , il sera affecte
-		   dynamiquement au niveau du bind */
-		/*      if ( p_adr_serv->sin_port == 0 )
-		   sortie_err("\nERREUR 'adr_socket' : service %s introuvable \n ",
-		   service ); */
+	  /* Adresse IP sous forme de chaine a transcrire */
+	  p_adr_serv->sin_addr.s_addr = inet_addr (serveur);
+
+	  /* PS: ici pas besoin de htonl */
+
+	  if (p_adr_serv->sin_addr.s_addr == AUCUNE_ADR_INET)
+	    sortie_err
+	      ("\nER 'h_connect' : serveur %s inaccessible \n", serveur);
 	}
 
+      break;
+
+    case SERVEUR:		/* cas serveur : tous les clients peuvent s'adresser au serveur */
+      p_adr_serv->sin_addr.s_addr = htonl (INADDR_ANY);
+      /*Modif PS */
+      break;
+
+    default:
+      sortie_err ("\nERREUR 'type_adr' : %d non identifie \n", type_adr);
+
+    }
+
 #ifdef DEBUG
-	printf("%s port : %d OK .........\n", aff_debug, ntohs(p_adr_serv->sin_port));	/*Modif PS */
-	printf("%s ADR_SOCKET (fin) .........\n", aff_debug);
+  printf ("%s adresse IP : %s OK..........\n", aff_debug,
+	  inet_ntoa (p_adr_serv->sin_addr));
+
+#endif
+
+  /* --------- RENSEIGNE PORT -------------------------------------------- */
+
+  p_info_service = getservbyname (service, protocole);
+
+  if (p_info_service)
+    {				/* Service reference dans /etc/service */
+      p_adr_serv->sin_port = htons (ntohs (p_info_service->s_port)
+				    + DEFPORTBASE);
+#ifdef DEBUG
+      printf ("%s port : %d associe au service %s OK .........\n", aff_debug, ntohs (p_adr_serv->sin_port), service);	/*Modif PS */
+#endif
+
+    }
+  else
+    /* Service repere par un numero ( chaine ) il faut en deduire le numero de port */
+    {
+      p_adr_serv->sin_port = htons ((u_short) atoi (service));
+      /* Modif P. Sicard port a 0 on remplit avec 0 , il sera affecte
+         dynamiquement au niveau du bind */
+      /*      if ( p_adr_serv->sin_port == 0 )
+         sortie_err("\nERREUR 'adr_socket' : service %s introuvable \n ",
+         service ); */
+    }
+
+#ifdef DEBUG
+  printf ("%s port : %d OK .........\n", aff_debug, ntohs (p_adr_serv->sin_port));	/*Modif PS */
+  printf ("%s ADR_SOCKET (fin) .........\n", aff_debug);
 #endif
 }
 
@@ -695,31 +707,32 @@ void adr_socket(char *service,
 /*==========================|	SORTIE_ERR  |=================================*/
 /*			    =================				      */
 
-int sortie_err(char *format, ...)
+int
+sortie_err (char *format, ...)
 {
-	va_list args;
+  va_list args;
 
-	va_start(args, format);
-	vfprintf(stderr, format, args);	/* affich erreur */
-	va_end(args);
-	printf("\n   Cause de l'erreur :  %s\n", strerror(errno));
-	/*if (errno == EACCES)
-	   printf ("numero de port protege\n");
-	   if (errno == EADDRINUSE)
-	   printf ("numero de port deja utilise\n");
-	   if (errno == EADDRNOTAVAIL)
-	   printf ("numero de port inexistant sur cette machine\n");
-	   if (errno == EBADF)
-	   printf ("descripteur incorrect\n");
-	   if (errno == EFAULT)
-	   printf ("nom incorrect\n");
-	   if (errno == EINVAL)
-	   printf ("socket deja utilisee\n");
-	   if (errno == EADDRNOTAVAIL)
-	   printf ("port innaccessible sur machine distante\n");
-	   if (errno == ECONNREFUSED)
-	   printf ("demande de connection rejetee\n"); */
+  va_start (args, format);
+  vfprintf (stderr, format, args);	/* affich erreur */
+  va_end (args);
+  printf ("\n   Cause de l'erreur :  %s\n", strerror (errno));
+  /*if (errno == EACCES)
+     printf ("numero de port protege\n");
+     if (errno == EADDRINUSE)
+     printf ("numero de port deja utilise\n");
+     if (errno == EADDRNOTAVAIL)
+     printf ("numero de port inexistant sur cette machine\n");
+     if (errno == EBADF)
+     printf ("descripteur incorrect\n");
+     if (errno == EFAULT)
+     printf ("nom incorrect\n");
+     if (errno == EINVAL)
+     printf ("socket deja utilisee\n");
+     if (errno == EADDRNOTAVAIL)
+     printf ("port innaccessible sur machine distante\n");
+     if (errno == ECONNREFUSED)
+     printf ("demande de connection rejetee\n"); */
 
-	exit(1);
-	return (0);
+  exit (1);
+  return (0);
 }

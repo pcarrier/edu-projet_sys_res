@@ -40,44 +40,52 @@ int NombreAdherentsDansAnnuaire = 0;	/* par défault, aucun adherent */
 
 static int lock_fd = -1;
 
-void BdD_acces_lecture_debut()
+void
+BdD_acces_lecture_debut ()
 {
-	lock_fd = open(LOCK_FILENAME, O_RDONLY | O_CREAT, S_IRUSR);
-	if (-1 == lock_fd) {
-		perror("Unable to open " LOCK_FILENAME);
-		return;
-	}
-	flock(lock_fd, LOCK_SH);
+  lock_fd = open (LOCK_FILENAME, O_RDONLY | O_CREAT, S_IRUSR);
+  if (-1 == lock_fd)
+    {
+      perror ("Unable to open " LOCK_FILENAME);
+      return;
+    }
+  flock (lock_fd, LOCK_SH);
 }
 
-void BdD_acces_lecture_fin()
+void
+BdD_acces_lecture_fin ()
 {
-	if (-1 == lock_fd) {
-		return;
-	}
-	flock(lock_fd, LOCK_UN);
-	close(lock_fd);
-	lock_fd = -1;
+  if (-1 == lock_fd)
+    {
+      return;
+    }
+  flock (lock_fd, LOCK_UN);
+  close (lock_fd);
+  lock_fd = -1;
 }
 
-void BdD_acces_ecriture_debut()
+void
+BdD_acces_ecriture_debut ()
 {
-	lock_fd = open(LOCK_FILENAME, O_RDONLY | O_CREAT, S_IRUSR);
-	if (-1 == lock_fd) {
-		perror("Unable to open " LOCK_FILENAME);
-		return;
-	}
-	flock(lock_fd, LOCK_EX);
+  lock_fd = open (LOCK_FILENAME, O_RDONLY | O_CREAT, S_IRUSR);
+  if (-1 == lock_fd)
+    {
+      perror ("Unable to open " LOCK_FILENAME);
+      return;
+    }
+  flock (lock_fd, LOCK_EX);
 }
 
-void BdD_acces_ecriture_fin()
+void
+BdD_acces_ecriture_fin ()
 {
-	if (-1 == lock_fd) {
-		return;
-	}
-	flock(lock_fd, LOCK_UN);
-	close(lock_fd);
-	lock_fd = -1;
+  if (-1 == lock_fd)
+    {
+      return;
+    }
+  flock (lock_fd, LOCK_UN);
+  close (lock_fd);
+  lock_fd = -1;
 }
 
 /* Lecture des données depuis le ou les fichiers vers la mémoire
@@ -85,17 +93,19 @@ void BdD_acces_ecriture_fin()
    variables globales NombreOuvragesAuCatalogue et
    NombreAdherentsDansAnnuaire)
 */
-void BdD_chargement()
+void
+BdD_chargement ()
 {
-	/* A COMPLETER
-	 */
+  /* A COMPLETER
+   */
 }
 
 /* Sauvegarde des données depuis la mémoire vers le ou les fichiers
 */
-void BdD_sauvegarde()
+void
+BdD_sauvegarde ()
 {
-	/* A COMPLETER
-	 */
-	printf("Hello sauvegarde\n");
+  /* A COMPLETER
+   */
+  printf ("Hello sauvegarde\n");
 }

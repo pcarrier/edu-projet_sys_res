@@ -36,33 +36,35 @@ int NombreOuvragesAuCatalogue = 0;	/* par défault, aucun livre */
 		inchangé.
 
 */
-int LireCatalogue(const char *NomFichier)
+int
+LireCatalogue (const char *NomFichier)
 {
-	FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-	int NombreLivresLus;	/* Nombres de livres lus dans le fichiers */
+  FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
+  int NombreLivresLus;		/* Nombres de livres lus dans le fichiers */
 
-	/* Tests des paramètres: pointeur NULL ou chaåne vide */
-	if (NomFichier == NULL || NomFichier[0] == '\0')
-		return ParametresIncorrects;
+  /* Tests des paramètres: pointeur NULL ou chaåne vide */
+  if (NomFichier == NULL || NomFichier[0] == '\0')
+    return ParametresIncorrects;
 
-	/* Tentative d'ouverture du fichier en lecture binaire et vérification */
-	Fichier = fopen(NomFichier, "rb");
-	if (Fichier == NULL) {
-		/* Impossible d'ouvrir le fichier */
-		return OuvertureFichierImpossible;
-	}
+  /* Tentative d'ouverture du fichier en lecture binaire et vérification */
+  Fichier = fopen (NomFichier, "rb");
+  if (Fichier == NULL)
+    {
+      /* Impossible d'ouvrir le fichier */
+      return OuvertureFichierImpossible;
+    }
 
-	/* On lit au maximum NombreMaximumDeLivres livres depuis le fichier */
-	NombreLivresLus =
-	    fread(Catalogue, sizeof(Livre), NombreMaximumDeLivres, Fichier);
+  /* On lit au maximum NombreMaximumDeLivres livres depuis le fichier */
+  NombreLivresLus =
+    fread (Catalogue, sizeof (Livre), NombreMaximumDeLivres, Fichier);
 
-	/* Fermeture du fichier */
-	fclose(Fichier);
+  /* Fermeture du fichier */
+  fclose (Fichier);
 
-	/* Mise a jours des variables du module et retour du résultat */
-	NombreOuvragesAuCatalogue = NombreLivresLus;
+  /* Mise a jours des variables du module et retour du résultat */
+  NombreOuvragesAuCatalogue = NombreLivresLus;
 
-	return NombreLivresLus;
+  return NombreLivresLus;
 }
 
 /*
@@ -77,43 +79,46 @@ int LireCatalogue(const char *NomFichier)
 	Remarque : le catalogue reste inchangé.
 
 */
-int EcrireCatalogue(const char *NomFichier)
+int
+EcrireCatalogue (const char *NomFichier)
 {
-	FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-	int NombreLivresEcrits = 0;	/* Nombres de livres écrits dans le fichiers */
+  FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
+  int NombreLivresEcrits = 0;	/* Nombres de livres écrits dans le fichiers */
 
-	/* Tests des paramètres: pointeur NULL ou chaîne vide */
-	if (NomFichier == NULL || NomFichier[0] == '\0')
-		return ParametresIncorrects;
+  /* Tests des paramètres: pointeur NULL ou chaîne vide */
+  if (NomFichier == NULL || NomFichier[0] == '\0')
+    return ParametresIncorrects;
 
-	/* Tentative d'ouverture du fichier en écriture binaire et vérification */
-	Fichier = fopen(NomFichier, "wb");
-	if (Fichier == NULL) {
-		/* Impossible d'ouvrir le fichier */
-		return OuvertureFichierImpossible;
-	}
+  /* Tentative d'ouverture du fichier en écriture binaire et vérification */
+  Fichier = fopen (NomFichier, "wb");
+  if (Fichier == NULL)
+    {
+      /* Impossible d'ouvrir le fichier */
+      return OuvertureFichierImpossible;
+    }
 
-	/* Ecriture des livres s'il y en a dans le catalogue */
-	if (NombreOuvragesAuCatalogue != 0) {
-		NombreLivresEcrits =
-		    fwrite(Catalogue, sizeof(Livre),
-			   NombreOuvragesAuCatalogue, Fichier);
-	}
+  /* Ecriture des livres s'il y en a dans le catalogue */
+  if (NombreOuvragesAuCatalogue != 0)
+    {
+      NombreLivresEcrits =
+	fwrite (Catalogue, sizeof (Livre),
+		NombreOuvragesAuCatalogue, Fichier);
+    }
 
-	/* Fermeture du fichier */
-	fclose(Fichier);
+  /* Fermeture du fichier */
+  fclose (Fichier);
 
-	/* On retourne le nombre de livres écrits dans le fichier */
-	return NombreLivresEcrits;
+  /* On retourne le nombre de livres écrits dans le fichier */
+  return NombreLivresEcrits;
 }
 
-void AfficherLivre(Livre l)
+void
+AfficherLivre (Livre l)
 {
-	fprintf(stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
-	fprintf(stderr, "Nombre d'exemplaires : %u\n", l.NombreExemplaires);
-	fprintf(stderr,
-		"Exemplaires empruntés : %u\n", l.ExemplairesEmpruntes);
-	fprintf(stderr,
-		"Exemplaires disponibles : %u\n\n", l.ExemplairesDisponibles);
+  fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
+  fprintf (stderr, "Nombre d'exemplaires : %u\n", l.NombreExemplaires);
+  fprintf (stderr, "Exemplaires empruntés : %u\n", l.ExemplairesEmpruntes);
+  fprintf (stderr,
+	   "Exemplaires disponibles : %u\n\n", l.ExemplairesDisponibles);
 
 }
