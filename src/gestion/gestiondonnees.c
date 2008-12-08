@@ -132,13 +132,13 @@ main (int argc, char *argv[])
       int bdd_save_ret=bdd_save (fAnnName, fCatName);
       switch(bdd_save_ret){
       	case(WErrAnn):
-      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s",fAnnName);
+      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s\n",fAnnName);
 		exit(1);
 	case(WErrCat):
-      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s",fCatName);
+      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s\n",fCatName);
 		exit(1);	
 	case(WErrCat+WErrAnn):
-      		fprintf(stderr, "Erreur lors de l'écriture de les bases de données %s et %s",fAnnName, fCatName);
+      		fprintf(stderr, "Erreur lors de l'écriture de les bases de données %s et %s\n",fAnnName, fCatName);
 		exit(1);
       }
 
@@ -158,7 +158,7 @@ main (int argc, char *argv[])
 	case(RErrCat):
       		fprintf(stderr, "Erreur lors de la lecture  de la base de données %s.\n",fCatName);
 		exit(1);
-	case(RErrCat + RerrAnn):
+	case(RErrCat + RErrAnn):
       		fprintf(stderr, "Erreur lors de la lecture des bases de données %s et %s.\n",fAnnName, fCatName);
 		exit(1);
 
