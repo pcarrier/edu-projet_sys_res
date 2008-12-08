@@ -6,15 +6,19 @@
 #include <string.h>
 #include "donnees/bdd.h"
 
-/*Censé etre utile à Getopt*/
 #include <ctype.h>
 #include <unistd.h>
+
+#define FANNNAME "annuaire.db"
+#define FCATNAME "catalogue.db"
 void
 Usage (const char *NomProgramme)
 {
   fprintf (stderr, "Usage : %s [-c|-l]\n", NomProgramme);
   fprintf (stderr, "\t-c: création des fichiers de données\n");
   fprintf (stderr, "\t-l: lecture des fichiers de données\n");
+  fprintf (stderr, "\t-a: fichier pour ecriture du catalogue\n");
+  fprintf (stderr, "\t-d: fichier pour écriture des adhérents\n");
 }
 
 int
@@ -34,27 +38,39 @@ main (int argc, char *argv[])
 //      }
   int cflag = 0;
   int lflag = 0;
-  int fflag = 0;
-  char *fvalue = NULL;
+  int fAnnFlag = 0;
+  char *fAnnName = NULL;
+  int fCatFlag = 0;
+  char *fCatName = NULL;
   int c = 0;
-  opterror = 0;
+  opterr = 0;
 
-  while ((c = getopt (argc, argv, "clf:")) != -1)
+  while ((c = getopt (argc, argv, "cla:d:")) != -1)
     {
       switch (c)
 	{
 	case 'c':
 	  cflag = 1;
+	  break;
 	case 'l':
 	  lflag = 1;
-	case 'f':
-	  fflag = 1;
-	  fvalue = optarg;
-	  printf ("%s", fvalue);
+	  break;
+	case 'a':
+	  fAnnFlag = 1;
+	  fAnnName = optarg;
+	  break;
+	case 'd':
+	 fCatFlag=1;
+	 fCatName=optarg;
+	 break;
 	}
     }
+   //On attribue les valeur par défaut si les noms n'ont pas été donnés en paramètre.
+    if(fCatFlag==0){fCatName=FCATNAME;}
+    if(fAnnFlag==0){fAnnName=FANNNAME;}
+	
 
-  if (!strcmp (argv[1], "-c"))
+ if(cflag)
     {				/* creation données */
       strcpy (Catalogue[0].Titre, "Da Vinci Code");
       strcpy (Catalogue[0].Auteur, "Dan Brown, Daniel Roche");
@@ -114,12 +130,14 @@ main (int argc, char *argv[])
       printf ("Annuaire initialisé avec 3 adhérents\n");
 
       /* Ecriture des données */
+      //TODO : pass file as arguments to BdD_sauvegarde().
       BdD_sauvegarde ();
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
     }
-  else if (!strcmp (argv[1], "-l"))
+//  else if (!strcmp (argv[1], "-l"))
+    else if(lflag)
     {
 
       /* On tente de lire les données */

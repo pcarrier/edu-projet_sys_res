@@ -1,15 +1,3 @@
-/******************************************************************************/
-/*			Application: ...				      */
-/******************************************************************************/
-/*									      */
-/*			 programme  CLIENT				      */
-/*									      */
-/******************************************************************************/
-/*									      */
-/*		Auteurs : ... 					              */
-/*									      */
-/******************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <curses.h>		/* Primitives de gestion d'écran */
@@ -20,21 +8,14 @@
 #include <reseau/fon.h>		/* primitives de la boite a outils */
 #include <reseau/protocole.h>	/* structures de données pour communication client <->serveur */
 #include <donnees/donnees.h>
-#include <client/client.h>
-
-#define SERVICE_DEFAUT "1111"
-#define PROTOCOLE_DEFAUT "udp"
-#define SERVEUR_DEFAUT "localhost"
-
-#define LongNomProtocole 4
-#define LongMaxServeur   50
-#define LongMaxService   100
+#include "client.h"
+#include <common.h>
 
 void client_appli (char *serveur, char *service, char *protocole);
 extern void interface_client ();
 
 static char serveur_courant[LongMaxServeur] = SERVEUR_DEFAUT;
-static char service_courant[LongMaxService] = SERVICE_DEFAUT;
+static char service_courant[LongMaxService] = PORT_DEFAUT;
 static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
 
 

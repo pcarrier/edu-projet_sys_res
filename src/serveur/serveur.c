@@ -21,16 +21,11 @@
 
 #include <reseau/fon.h>		/* Primitives de la boite a outils */
 #include <reseau/protocole.h>	/* Types pour la communication client <-> serveur */
-
-#define SERVICE_DEFAUT "1111"
-#define PROTOCOLE_DEFAUT "udp"
+#include <common.h>
 
 void serveur_appli (char *service, char *protocole);	/* programme serveur */
 
-#define LongNomProtocole 4
-#define LongMaxService   100
-
-static char service_courant[LongMaxService] = SERVICE_DEFAUT;
+static char service_courant[LongMaxService] = PORT_DEFAUT;
 static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
 
 /*------------------------------------------------------------------*/
