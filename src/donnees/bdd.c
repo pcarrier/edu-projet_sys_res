@@ -40,7 +40,7 @@ adherent_t Annuaire[ADHS_NBMAX];
 /*Fonction de traitement du code de retour des fonctions d'acces aux fichiers.
  * Son header est donné ici et non dans le .h afin de cacher sa visibilité aux autres modules.
  */
-void traiteRetour(ErreurAcces err, char * filename);
+void traiteRetour(bdd_erreur_e err, char * filename);
 
 
 #define LOCK_FILENAME "serveur.lock"
@@ -174,7 +174,7 @@ bdd_save_catalogue (char *catalogue)
   }
 }
 
-void traiteRetour(ErreurAcces err, char * filename){
+void traiteRetour(bdd_err_e err, char * filename){
 	switch(err){
 		case(bdd_err_params_incorrects):
 			printf("Paramètres incorrects lors de l'accès au fichier %s.\n",filename);
