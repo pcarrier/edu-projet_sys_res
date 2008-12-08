@@ -1,7 +1,7 @@
 #ifndef __GESTIONADHERENTS_H__
 #define __GESTIONADHERENTS_H__
 
-#include "donnes/types"
+#include <donnees/types.h>
 
 /* Définition de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation

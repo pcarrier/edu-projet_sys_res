@@ -8,9 +8,9 @@
 /* Verification de l'inclusion multiple de ce fichier */
 #ifndef __GESTIONLIVRES_H__
 #define __GESTIONLIVRES_H__
-#include "donnes/types.h"
+#include <donnees/types.h>
 /****************************************************************
-/* Définition du catalogue et de sa taille maximum en nombre de livres
+ Définition du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
 #define nb_max_livres 1000
@@ -21,8 +21,7 @@ extern int cat_nb_livres;
 
 /****************************************************************
 		Code d'erreur renvoyés par les fonctions du module */
-enum
-{ ParametresIncorrects = -1, OuvertureFichierImpossible = -2 };
+typedef enum { ParametresIncorrects = -1, OuvertureFichierImpossible = -2 } ErreurAcces;
 
 /****************************************************************
 		Fonctions exportées par le module */

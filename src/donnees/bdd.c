@@ -13,8 +13,8 @@
 #include <stdio.h>
 #include "bdd.h"
 #include <common.h>
-#include "gestion/gestionlivres.h"
-#include "gestion/gestionadherents.h"
+#include <gestion/gestionlivres.h>
+#include <gestion/gestionadherents.h>
 
 /****************************************************************
     Définition des variables conformément au fichier .h 
@@ -37,6 +37,10 @@ int ann_nb_adhs = 0;		/* par défault, aucun adherent */
 /****************************************************************
     Implémentation des fonctions du module
 */
+/*Fonction de traitement du code de retour des fonctions d'acces aux fichiers.
+ * Son header est donné ici et non dans le .h afin de cacher sa visibilité aux autres modules.
+ */
+void traiteRetour(ErreurAcces err, char * filename);
 
 
 #define LOCK_FILENAME "serveur.lock"
@@ -105,7 +109,7 @@ bdd_load_annuaire (char *annuaire)
   bdd_acces_lecture_fin ();
 
   if (retAnnuaire < 0){
-    traiteRetour(annuaire);
+    traiteRetour(retAnnuaire,annuaire);
     return -1;
   }else{
     return 0;
@@ -124,7 +128,7 @@ bdd_load_catalogue (char *catalogue)
   bdd_acces_lecture_fin ();
 
   if (retCatalogue < 0){
-    traiteRetour(catalogue);
+    traiteRetour(retCatalogue, catalogue);
     return -1;
   }else{
     return 0;
@@ -144,7 +148,7 @@ bdd_save_annuaire (char *annuaire)
   bdd_acces_ecriture_fin ();
 
   if (retAnnuaire < 0){
-    traiteRetour(annuaire);
+    traiteRetour(retAnnuaire, annuaire);
     return -1;
   }else{
     return 0;
@@ -163,16 +167,16 @@ bdd_save_catalogue (char *catalogue)
   bdd_acces_ecriture_fin ();
 
   if (retCatalogue < 0){
-    traiteRetour(catalogue);
+    traiteRetour(retCatalogue, catalogue);
     return -1;
   }else{
     return 0;
   }
 }
 
-void traiteRetour(int code, char * filename){
-	switch(code){
-		case(ParametresIncorects):
+void traiteRetour(ErreurAcces err, char * filename){
+	switch(err){
+		case(ParametresIncorrects):
 			printf("Paramètres incorrects lors de l'accès au fichier %s.\n",filename);
 			break;
 		case(OuvertureFichierImpossible):
@@ -181,4 +185,4 @@ void traiteRetour(int code, char * filename){
 	}
 }
 
-}
+

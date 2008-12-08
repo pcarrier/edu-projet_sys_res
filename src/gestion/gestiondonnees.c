@@ -136,7 +136,7 @@ main (int argc, char *argv[])
       /* Ecriture des données */
       //Si l'écriture ne se passe pas correctement, sortie forcée du programme avec erreur.
       if(bdd_save_catalogue (fCatName)==-1){exit(1);}
-      if(bdd_save_annuaire (fAnName)==-1){exit(1)};
+      if(bdd_save_annuaire (fAnnName)==-1){exit(1)};
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
