@@ -15,6 +15,8 @@ Usage (const char *NomProgramme)
   fprintf (stderr, "Usage : %s [-c|-l]\n", NomProgramme);
   fprintf (stderr, "\t-c: création des fichiers de données\n");
   fprintf (stderr, "\t-l: lecture des fichiers de données\n");
+  fprintf (stderr, "\t-a: fichier pour ecriture du catalogue\n");
+  fprintf (stderr, "\t-d: fichier pour écriture des adhérents\n");
 }
 
 int
@@ -34,12 +36,14 @@ main (int argc, char *argv[])
 //      }
   int cflag = 0;
   int lflag = 0;
-  int fflag = 0;
-  char *fvalue = NULL;
+  int fAnnFlag = 0;
+  char *fAnnName = NULL;
+  int fCatFlag = 0;
+  char *fCatName = NULL;
   int c = 0;
-  opterror = 0;
+  opterr = 0;
 
-  while ((c = getopt (argc, argv, "clf:")) != -1)
+  while ((c = getopt (argc, argv, "clad:")) != -1)
     {
       switch (c)
 	{
@@ -47,14 +51,19 @@ main (int argc, char *argv[])
 	  cflag = 1;
 	case 'l':
 	  lflag = 1;
-	case 'f':
-	  fflag = 1;
-	  fvalue = optarg;
-	  printf ("%s", fvalue);
+	case 'a':
+	  fAnnFlag = 1;
+	  fAnnName = optarg;
+	  printf ("\nValeur de fAnnName : %s\n", fAnnName);
+	case 'd':
+	 fCatFlag=1;
+	 fCatName=optarg;
+	 printf ("\nValeur de fCatName : %s\n", fCatName);
 	}
     }
 
-  if (!strcmp (argv[1], "-c"))
+ // if (!strcmp (argv[1], "-c"))
+ if(cflag)
     {				/* creation données */
       strcpy (Catalogue[0].Titre, "Da Vinci Code");
       strcpy (Catalogue[0].Auteur, "Dan Brown, Daniel Roche");
@@ -119,7 +128,8 @@ main (int argc, char *argv[])
 	/*----------------------------------------------------*/
       /* lecture catalogue */
     }
-  else if (!strcmp (argv[1], "-l"))
+//  else if (!strcmp (argv[1], "-l"))
+    else if(lflag)
     {
 
       /* On tente de lire les données */
