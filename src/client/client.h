@@ -13,4 +13,3 @@ char *client_consulter_auteur(char *auteur);
 char *client_rendre_livre(char *auteur, char *titre);
 char *client_consulter_adherent(char *nom);
 char *client_fermer_session();
-/*---------------------------------------------*/
