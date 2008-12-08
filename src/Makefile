@@ -2,7 +2,7 @@ PROGS=gestiondonnees.bin client.bin serveur.bin
 
 SOURCES_client=reseau/fon.c client/client.c client/interface_client.c donnees/donnees.c
 SOURCES_serveur=reseau/fon.c serveur/serveur.c donnees/bdd.c
-SOURCES_GestionDonnees=donnees/bdd.c donnees/donnees.c tests/gestiondonnees.c
+SOURCES_GestionDonnees=donnees/bdd.c donnees/donnees.c gestion/gestiondonnees.c
 
 SOURCES=$(SOURCES_client) $(SOURCES_serveur) $(SOURCES_projet)
 
