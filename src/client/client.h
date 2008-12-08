@@ -10,7 +10,7 @@
  *
  * Charge les paramètres
  */
-char *client_init (int *argc, char **argv);
+char *client_init (int argc, char **argv);
 
 /*!
  * \brief Ouverture de session
