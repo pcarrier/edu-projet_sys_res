@@ -31,7 +31,7 @@ interface_client ()
          supplémentaires nécessaires et on appelle une fonction
          correspondante dans client.c pour faire le travail
        */
-      switch (lire_caractere ())
+      switch (1)
 	{
 	case 'o':
 	  /* A COMPLETER
