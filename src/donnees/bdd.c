@@ -105,7 +105,7 @@ int
 bdd_load_annuaire (char *annuaire)
 {
   bdd_acces_lecture_debut ();
-  int retAnnuaire = LireCatalogue (annuaire);
+  int retAnnuaire = LireAnnuaire (annuaire);
   bdd_acces_lecture_fin ();
 
   if (retAnnuaire < 0){
