@@ -136,7 +136,7 @@ main (int argc, char *argv[])
       /* Ecriture des données */
       //Si l'écriture ne se passe pas correctement, sortie forcée du programme avec erreur.
       if(bdd_save_catalogue (fCatName)==-1){exit(1);}
-      if(bdd_save_annuaire (fAnnName)==-1){exit(1)};
+      if(bdd_save_annuaire (fAnnName)==-1){exit(1);}
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
@@ -146,16 +146,14 @@ main (int argc, char *argv[])
       /* On tente de lire les données */
       if( bdd_load_catalogue (fCatName)==-1){exit(1);}
       if( bdd_load_annuaire (fAnnName)==-1){exit(1);}
-     	}
-      else
-	{
+     //	}
+     // else
+     //	{
 	  printf ("%d livre(s) dans le catalogue\n\n", cat_nb_livres);
 	  for (i = 0; i < cat_nb_livres; i++)
 	    {
 	      afficher_livre (Catalogue[i]);
 	    }
-	}
-
       if (ann_nb_adhs == 0)
 	{
 	  printf ("Aucun adhérent dans l'annuaire\n");
@@ -169,8 +167,9 @@ main (int argc, char *argv[])
 	    }
 	}
     }
-  else
+  else{
     Usage (argv[0]);
+  }
 
   return 0;
 }

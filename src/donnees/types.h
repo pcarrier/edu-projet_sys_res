@@ -29,4 +29,9 @@ typedef struct
   char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
 } adherent_t;
 
+
+/****************************************************************
+		Code d'erreur renvoyés par les fonctions du module */
+typedef enum { ParametresIncorrects = -1, OuvertureFichierImpossible = -2 } ErreurAcces;
+
 #endif

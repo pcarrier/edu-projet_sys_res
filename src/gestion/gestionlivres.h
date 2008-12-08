@@ -20,10 +20,6 @@ extern livre_t Catalogue[nb_max_livres];
 extern int cat_nb_livres;
 
 /****************************************************************
-		Code d'erreur renvoyés par les fonctions du module */
-typedef enum { ParametresIncorrects = -1, OuvertureFichierImpossible = -2 } ErreurAcces;
-
-/****************************************************************
 		Fonctions exportées par le module */
 
 /*

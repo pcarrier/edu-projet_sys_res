@@ -110,8 +110,7 @@ EcrireCatalogue (const char *NomFichier)
   return nb_livres_ecrits;
 }
 
-void
-afficher_livre (livre_t l)
+void afficher_livre (livre_t l)
 {
   fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
   fprintf (stderr, "Nombre d'exemplaires : %u\n", l.livre_nbex);
