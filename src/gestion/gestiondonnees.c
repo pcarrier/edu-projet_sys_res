@@ -129,20 +129,40 @@ main (int argc, char *argv[])
       /* Ecriture des données */
       //Si l'écriture ne se passe pas correctement, affichage erreur puis
       //sortie du programme avec erreur.
-      if (bdd_save (fAnnName)!=0){
-      	fprintf(stderr, "Erreur lors de l'écriture de la base de données");
-	exit(1);
+      int bdd_save_ret=bdd_save (fAnnName, fCatName);
+      switch(bdd_save_ret){
+      	case(WErrAnn):
+      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s",fAnnName);
+		exit(1);
+	case(WErrCat):
+      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s",fCatName);
+		exit(1);	
+	case(WErrCat+WErrAnn):
+      		fprintf(stderr, "Erreur lors de l'écriture de les bases de données %s et %s",fAnnName, fCatName);
+		exit(1);
       }
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
     }
-//  else if (!strcmp (argv[1], "-l"))
     else if(lflag)
     {
 
       /* On tente de lire les données */
-      bdd_load ();
+      int bd_load_ret=bdd_load (fAnnName, fCatName);
+      
+      switch(bd_load_ret){
+      	case(RErrAnn):
+      		fprintf(stderr, "Erreur lors de la lecture de la base de données %s\n",fAnnName);
+		exit(1);
+	case(RErrCat):
+      		fprintf(stderr, "Erreur lors de la lecture  de la base de données %s.\n",fCatName);
+		exit(1);
+	case(RErrCat + RerrAnn):
+      		fprintf(stderr, "Erreur lors de la lecture des bases de données %s et %s.\n",fAnnName, fCatName);
+		exit(1);
+
+      }
       if (cat_nb_livres == 0)
 	{
 	  printf ("Aucun livre dans le catalogue\n");

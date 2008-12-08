@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "bdd.h"
+#include <common.h>
 
 /****************************************************************
     Définition des variables conformément au fichier .h 
@@ -102,8 +103,17 @@ bdd_load ()
 
 /* Sauvegarde des données depuis la mémoire vers le ou les fichiers
 */
+
 int
-bdd_save (char * annuaire)
+bdd_save(char * annuaire, char * catalogue){
+  int retAnnuaire = bdd_save_annuaire(annuaire);
+  int retCatalogue = bdd_save_catalogue(catalogue);
+
+  return retAnnuaire + retCatalogue;
+}
+
+int
+bdd_save_annuaire (char * annuaire)
 {
   bdd_acces_lecture_debut();
   FILE * file=fopen(annuaire,"w");
@@ -115,7 +125,26 @@ bdd_save (char * annuaire)
   printf ("Fichié Sauvegardé\n");
 
   if (nbItemEcrits != ann_nb_adhs){
-    return -1;
+    return WErrAnn;
+  }else{
+    return 0;
+  }
+}
+
+
+int
+bdd_save_catalogue (char * catalogue){
+  bdd_acces_lecture_debut();
+  FILE * file=fopen(catalogue,"w");
+
+  int nbItemEcrits = fwrite(&Catalogue, sizeof(Catalogue), cat_nb_livre, file);
+
+  fclose(file);
+  bdd_acces_lecture_fin();
+  printf ("Fichié Sauvegardé\n");
+
+  if (nbItemEcrits != cat_nb_livre){
+    return WErrCat;
   }else{
     return 0;
   }
