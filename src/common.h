@@ -6,3 +6,5 @@
 #define LongMaxService 100
 #define FANNNAME "annuaire.db"
 #define FCATNAME "catalogue.db"
+#define WErrAnn -1
+#define WErrCat -2
