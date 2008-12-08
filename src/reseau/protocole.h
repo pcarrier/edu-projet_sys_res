@@ -55,7 +55,7 @@ typedef struct
 {
   retour_e code;		///< Code de retour
   livre_t livres[RESULT_LMAX];	///< Livres si la requête le requiert
-  adherent_t a;			///< Adhérent si la requête le requiert
+  adherent_t adh;		///< Adhérent si la requête le requiert
 } reponse_t;
 
 /*!
