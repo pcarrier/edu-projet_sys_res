@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include "bdd.h"
 #include <common.h>
+#include "gestion/gestionlivres.h"
+#include "gestion/gestionadherents.h"
 
 /****************************************************************
     Définition des variables conformément au fichier .h 
@@ -94,36 +96,20 @@ bdd_acces_ecriture_fin ()
    variables globales cat_nb_livres et
    ann_nb_adhs)
 */
-int
-bdd_load (char *annuaire, char *catalogue)
-{
-  int retAnnuaire = bdd_load_annuaire (annuaire);
-  int retCatalogue = bdd_load_catalogue (catalogue);
 
-  return retAnnuaire + retCatalogue;
-
-}
-
-/* Lecture des données du fichier d'annuaires
-*/
 int
 bdd_load_annuaire (char *annuaire)
 {
   bdd_acces_lecture_debut ();
-  FILE *file = fopen (annuaire, "r");
-
-  if (file == NULL)
-    {
-      return RErrAnn;
-    }
-
-  int nbItemLu = fread (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
-
-  fclose (file);
+  int retAnnuaire = LireCatalogue (annuaire);
   bdd_acces_lecture_fin ();
-  printf ("Fichier Chargé\n");
 
-  return 0;
+  if (retAnnuaire < 0){
+    traiteRetour(annuaire);
+    return -1;
+  }else{
+    return 0;
+  }
 }
 
 
@@ -133,31 +119,16 @@ int
 bdd_load_catalogue (char *catalogue)
 {
   bdd_acces_lecture_debut ();
-  FILE *file = fopen (catalogue, "r");
-
-  if (file == NULL)
-    {
-      return RErrCat;
-    }
-
-  int nbItemLu = fread (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
-
-  fclose (file);
+  int retCatalogue = LireCatalogue (catalogue);
   bdd_acces_lecture_fin ();
-  printf ("Fichier Chargé\n");
 
-  return 0;
+  if (retCatalogue < 0){
+    traiteRetour(catalogue);
+    return -1;
+  }else{
+    return 0;
+  }
 }
-
-/* Sauvegarde des données depuis la mémoire vers le ou les fichiers
-*/
-/*
-int
-bdd_save ()
-{
-
-}
-<<<<<<< HEAD:src/donnees/bdd.c
 
 /* Sauvegarde des données vers le fichier annuaire
  */
@@ -165,8 +136,17 @@ bdd_save ()
 int
 bdd_save_annuaire (char *annuaire)
 {
-  bdd_acces_ecriture_debut (); 
+  bdd_acces_ecriture_debut ();
+  int retAnnuaire = EcrireAnnuaire (annuaire);
   bdd_acces_ecriture_fin ();
+
+  if (retAnnuaire < 0){
+    traiteRetour(annuaire);
+    return -1;
+  }else{
+    return 0;
+  }  
+
 }
 
 
@@ -176,13 +156,21 @@ int
 bdd_save_catalogue (char *catalogue)
 {
   bdd_acces_ecriture_debut ();
+  int retCatalogue = EcrireCatalogue (catalogue);
   bdd_acces_ecriture_fin ();
+
+  if (retCatalogue < 0){
+    traiteRetour(catalogue);
+    return -1;
+  }else{
+    return 0;
+  }
 }
 
-void traiteRetourEcriture(int code, char * filename){
+void traiteRetour(int code, char * filename){
 	switch(code){
 		case(ParametresIncorects):
-			printf("Paramètres incorects lors de l'accès au fichier %s.\n",filename);
+			printf("Paramètres incorrects lors de l'accès au fichier %s.\n",filename);
 			break;
 		case(OuvertureFichierImpossible):
 			printf("Ouverture du fichier %s impossible.\n",filename);
