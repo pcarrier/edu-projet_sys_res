@@ -139,7 +139,11 @@ bdd_load_catalogue (char *catalogue)
       return RErrCat;
     }
 
+<<<<<<< HEAD:src/donnees/bdd.c
   int nbItemLu = fread (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
+=======
+  fread(&Catalogue, sizeof(Catalogue) , cat_nb_livres, file);
+>>>>>>> e2a054e83ee61cfa102e295056762ff921aadf0e:src/donnees/bdd.c
 
   fclose (file);
   bdd_acces_lecture_fin ();
@@ -166,7 +170,11 @@ bdd_save_annuaire (char *annuaire)
   bdd_acces_ecriture_debut ();
   FILE *file = fopen (annuaire, "w+b");
 
+<<<<<<< HEAD:src/donnees/bdd.c
   int nbItemEcrits = fwrite (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
+=======
+  int nbItemEcrits = (int) fwrite(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
+>>>>>>> e2a054e83ee61cfa102e295056762ff921aadf0e:src/donnees/bdd.c
 
   fclose (file);
   bdd_acces_ecriture_fin ();
@@ -191,7 +199,11 @@ bdd_save_catalogue (char *catalogue)
   bdd_acces_ecriture_debut ();
   FILE *file = fopen (catalogue, "w+b");
 
+<<<<<<< HEAD:src/donnees/bdd.c
   int nbItemE = fwrite (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
+=======
+  int nbItemE = (int) fwrite(&Catalogue, sizeof(Catalogue), cat_nb_livres, file);
+>>>>>>> e2a054e83ee61cfa102e295056762ff921aadf0e:src/donnees/bdd.c
 
   fclose (file);
   bdd_acces_ecriture_fin ();

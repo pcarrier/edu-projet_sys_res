@@ -111,7 +111,7 @@ main (int argc, char *argv[])
       Catalogue[4].livre_dispos = 1;
       cat_nb_livres++;
 
-      printf ("Catalogue initialisé avec 5 ouvrages\n");
+      printf ("Catalogue initialisé avec %i ouvrages\n", cat_nb_livres);
 
       strcpy (Annuaire[0].Nom, "Martin");
       strcpy (Annuaire[0].Prenom, "Daniel");
