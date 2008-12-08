@@ -27,8 +27,8 @@
 #include <unistd.h>
 void serveur_appli (char *service, char *protocole);	/* programme serveur */
 
-static char service_courant[LongMaxService] = PORT_DEFAUT;
-static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
+static char service_courant[PORT_LMAX] = PORT_DEFAUT;
+static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
 
 /*------------------------------------------------------------------*/
 /* SERVEUR															*/

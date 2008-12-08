@@ -66,46 +66,46 @@ main (int argc, char *argv[])
   //On attribue les valeur par défaut si les noms n'ont pas été donnés en paramètre.
   if (fCatFlag == 0)
     {
-      fCatName = FCATNAME;
+      fCatName = F_CAT_NAME;
     }
   if (fAnnFlag == 0)
     {
-      fAnnName = FANNNAME;
+      fAnnName = F_ANN_NAME;
     }
 
 
   if (cflag)
     {				/* creation données */
-      strcpy (Catalogue[0].Titre, "Da Vinci Code");
-      strcpy (Catalogue[0].Auteur, "Dan Brown, Daniel Roche");
+      strcpy (Catalogue[0].titre, "Da Vinci Code");
+      strcpy (Catalogue[0].auteur, "Dan Brown, Daniel Roche");
       Catalogue[0].livre_nbex = 5;
       Catalogue[0].livre_nbemprunts = 1;
       Catalogue[0].livre_dispos = 4;
       cat_nb_livres++;
 
-      strcpy (Catalogue[1].Titre, "Moi, Bouddha");
-      strcpy (Catalogue[1].Auteur, "José Fräches");
+      strcpy (Catalogue[1].titre, "Moi, Bouddha");
+      strcpy (Catalogue[1].auteur, "José Fräches");
       Catalogue[1].livre_nbex = 1;
       Catalogue[1].livre_nbemprunts = 0;
       Catalogue[1].livre_dispos = 1;
       cat_nb_livres++;
 
-      strcpy (Catalogue[2].Titre, "Histoires inédites du Petit Nicolas");
-      strcpy (Catalogue[2].Auteur, "René Goscinny, Sempé");
+      strcpy (Catalogue[2].titre, "Histoires inédites du Petit Nicolas");
+      strcpy (Catalogue[2].auteur, "René Goscinny, Sempé");
       Catalogue[2].livre_nbex = 2;
       Catalogue[2].livre_nbemprunts = 0;
       Catalogue[2].livre_dispos = 2;
       cat_nb_livres++;
 
-      strcpy (Catalogue[3].Titre, "Le Soleil des Scorta");
-      strcpy (Catalogue[3].Auteur, "Laurent Gaudé");
+      strcpy (Catalogue[3].titre, "Le Soleil des Scorta");
+      strcpy (Catalogue[3].auteur, "Laurent Gaudé");
       Catalogue[3].livre_nbex = 2;
       Catalogue[3].livre_nbemprunts = 1;
       Catalogue[3].livre_dispos = 1;
       cat_nb_livres++;
 
-      strcpy (Catalogue[4].Titre, "Un long dimanche de fiançailles");
-      strcpy (Catalogue[4].Auteur, "Sébastien Japrisot");
+      strcpy (Catalogue[4].titre, "Un long dimanche de fiançailles");
+      strcpy (Catalogue[4].auteur, "Sébastien Japrisot");
       Catalogue[4].livre_nbex = 3;
       Catalogue[4].livre_nbemprunts = 2;
       Catalogue[4].livre_dispos = 1;
@@ -113,22 +113,22 @@ main (int argc, char *argv[])
 
       printf ("Catalogue initialisé avec %i ouvrages\n", cat_nb_livres);
 
-      strcpy (Annuaire[0].Nom, "Martin");
-      strcpy (Annuaire[0].Prenom, "Daniel");
+      strcpy (Annuaire[0].nom, "Martin");
+      strcpy (Annuaire[0].prenom, "Daniel");
       Annuaire[0].nbPrets = 1;
       strcpy (Annuaire[0].Prets[0], "Le Soleil des Scorta");
       ann_nb_adhs++;
 
-      strcpy (Annuaire[1].Nom, "Vinoux");
-      strcpy (Annuaire[1].Prenom, "Cyrille");
+      strcpy (Annuaire[1].nom, "Vinoux");
+      strcpy (Annuaire[1].prenom, "Cyrille");
       Annuaire[1].nbPrets = 0;
       ann_nb_adhs++;
 
-      strcpy (Annuaire[2].Nom, "Guillard");
-      strcpy (Annuaire[2].Prenom, "Myriam");
+      strcpy (Annuaire[2].nom, "Guillard");
+      strcpy (Annuaire[2].prenom, "Myriam");
       Annuaire[2].nbPrets = 2;
-      strcpy (Annuaire[2].Prets[0], "Un long dimanche de fiançailles");
-      strcpy (Annuaire[2].Prets[1], "Da Vinci Code");
+      strcpy (Annuaire[2].prets[0], "Un long dimanche de fiançailles");
+      strcpy (Annuaire[2].prets[1], "Da Vinci Code");
       ann_nb_adhs++;
 
       printf ("Annuaire initialisé avec 3 adhérents\n");

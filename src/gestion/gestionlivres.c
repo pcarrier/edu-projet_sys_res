@@ -11,8 +11,8 @@
 /****************************************************************
     Déclaration des variables conformément au fichier .h */
 
-/* Déclaration du catalogue contenant au maximum nb_max_livres */
-livre_t Catalogue[nb_max_livres];
+/* Déclaration du catalogue contenant au maximum LIVRES_NBMAX */
+livre_t Catalogue[LIVRES_NBMAX];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
@@ -54,8 +54,8 @@ LireCatalogue (const char *NomFichier)
       return OuvertureFichierImpossible;
     }
 
-  /* On lit au maximum nb_max_livres livres depuis le fichier */
-  nb_livres_lus = fread (Catalogue, sizeof (livre_t), nb_max_livres, Fichier);
+  /* On lit au maximum LIVRES_NBMAX livres depuis le fichier */
+  nb_livres_lus = fread (Catalogue, sizeof (livre_t), LIVRES_NBMAX, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);

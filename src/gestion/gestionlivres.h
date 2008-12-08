@@ -13,8 +13,8 @@
  Définition du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-#define nb_max_livres 1000
-extern livre_t Catalogue[nb_max_livres];
+#define LIVRES_NBMAX 1000
+extern livre_t Catalogue[LIVRES_NBMAX];
 
 /* Valeur contenant le nombre de livre actuellement dans le catalogue */
 extern int cat_nb_livres;

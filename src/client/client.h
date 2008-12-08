@@ -2,6 +2,7 @@
  * \file client.h
  *
  * Fonctions de communication avec le serveur
+ *
  * Chaque fonction renvoie le message à afficher sur le client
  */
 
