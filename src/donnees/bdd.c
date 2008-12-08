@@ -105,7 +105,15 @@ BdD_chargement ()
 void
 BdD_sauvegarde ()
 {
-  /* A COMPLETER
-   */
-  printf ("Hello sauvegarde\n");
+  char * annuaire="annuaire.db";
+  BdD_acces_lecture_debut();
+  file=fopen(annuaire,"w");
+
+  for (int i = 0; i <= NombreAdherentsDansAnnuaire ; i++){
+    fwrite(Annuaire[i] + "\n",file);
+  }
+
+  fclose(file);
+  printf ("Fichié Sauvegardé");
+  BdD_acces_lecture_fin();
 }
