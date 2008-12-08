@@ -110,6 +110,7 @@ bdd_load_annuaire (char *annuaire)
   }else{
     return 0;
   }
+  bdd_acces_lecture_fin ();
 }
 
 
@@ -128,6 +129,8 @@ bdd_load_catalogue (char *catalogue)
   }else{
     return 0;
   }
+  bdd_acces_lecture_fin ();
+
 }
 
 /* Sauvegarde des données vers le fichier annuaire
