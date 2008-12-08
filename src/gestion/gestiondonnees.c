@@ -129,7 +129,7 @@ main (int argc, char *argv[])
       /* Ecriture des données */
       //Si l'écriture ne se passe pas correctement, affichage erreur puis
       //sortie du programme avec erreur.
-      if (BdD_sauvegarde (fAnnName)!=0){
+      if (BdD_save (fAnnName)!=0){
       	fprintf(stderr, "Erreur lors de l'écriture de la base de données");
 	exit(1);
       }

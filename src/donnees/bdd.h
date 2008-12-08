@@ -44,6 +44,6 @@ void BdD_acces_lecture_fin();
 void BdD_acces_ecriture_debut();
 void BdD_acces_ecriture_fin();
 void BdD_chargement();
-int BdD_sauvegarde();
+int BdD_save();
 
 #endif

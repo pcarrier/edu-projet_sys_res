@@ -103,7 +103,7 @@ BdD_chargement ()
 /* Sauvegarde des données depuis la mémoire vers le ou les fichiers
 */
 int
-BdD_sauvegarde (char * annuaire)
+BdD_save (char * annuaire)
 {
   BdD_acces_lecture_debut();
   FILE * file=fopen(annuaire,"w");
