@@ -3,7 +3,11 @@
 void
 client_doc_syntaxe (char *progname)
 {
-  fprintf (stderr, "Usage: %s [-p port] [-P (tcp|udp)] host\n", progname);
+  fprintf (stderr, "Usage: %s [-p port] [-t] [host]\n"
+		   "  -p port: utiliser le port p plutot que " PORT_DEFAUT "\n",
+		   "  -u: utiliser TCP plutot que UDP ;\n",
+		   "  host: hote a utiliser au lieu de " SERVEUR_DEFAUT "\n",
+		   progname);
 }
 
 /*!
