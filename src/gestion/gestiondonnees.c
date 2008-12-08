@@ -6,9 +6,9 @@
 #include <string.h>
 #include "donnees/bdd.h"
 
-/*Censé etre utile à Getopt*/
 #include <ctype.h>
 #include <unistd.h>
+
 void
 Usage (const char *NomProgramme)
 {
