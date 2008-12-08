@@ -187,7 +187,7 @@ bdd_save_catalogue (char * catalogue){
 
   fclose(file);
   bdd_acces_ecriture_fin();
-  printf ("Fichié Sauvegardé\n");
+  printf ("Fichier Sauvegardé\n");
 
   if (nbItemE != cat_nb_livres){
   	printf("nbItemsE : %i, cat_nb_livres:%i \n",nbItemE, cat_nb_livres);
