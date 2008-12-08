@@ -130,14 +130,14 @@ main (int argc, char *argv[])
       //Si l'écriture ne se passe pas correctement, affichage erreur puis
       //sortie du programme avec erreur.
       int bdd_save_ret=bdd_save (fAnnName, fCatName);
-      switch(bdd_save){
+      switch(bdd_save_ret){
       	case(WErrAnn):
       		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s",fAnnName);
 		exit(1);
 	case(WErrCat):
       		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s",fCatName);
 		exit(1);	
-	case(WErrCat+WErrAn):
+	case(WErrCat+WErrAnn):
       		fprintf(stderr, "Erreur lors de l'écriture de les bases de données %s et %s",fAnnName, fCatName);
 		exit(1);
       }
