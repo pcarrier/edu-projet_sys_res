@@ -45,7 +45,7 @@ main (int argc, char *argv[])
   int c = 0;
   opterr = 0;
 
-  while ((c = getopt (argc, argv, "clad")) != -1)
+  while ((c = getopt (argc, argv, "cla:d:")) != -1)
     {
       switch (c)
 	{
@@ -65,13 +65,11 @@ main (int argc, char *argv[])
 	 break;
 	}
     }
+   //On attribue les valeur par défaut si les noms n'ont pas été donnés en paramètre.
     if(fCatFlag==0){fCatName=FCATNAME;}
     if(fAnnFlag==0){fAnnName=FANNNAME;}
 	
-    printf ("\nValeur de fAnnName : %s\n", fAnnName);
-     printf ("\nValeur de fCatName : %s\n", fCatName);
 
- // if (!strcmp (argv[1], "-c"))
  if(cflag)
     {				/* creation données */
       strcpy (Catalogue[0].Titre, "Da Vinci Code");
@@ -132,6 +130,7 @@ main (int argc, char *argv[])
       printf ("Annuaire initialisé avec 3 adhérents\n");
 
       /* Ecriture des données */
+      //TODO : pass file as arguments to BdD_sauvegarde().
       BdD_sauvegarde ();
 
 	/*----------------------------------------------------*/
