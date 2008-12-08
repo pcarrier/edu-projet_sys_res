@@ -115,8 +115,8 @@ BdD_sauvegarde (char * annuaire)
   printf ("Fichié Sauvegardé");
 
   if (nbItemEcrits != NombreAdherentsDansAnnuaire){
-    return 0;
-  }else{
     return -1;
+  }else{
+    return 0;
   }
 }
