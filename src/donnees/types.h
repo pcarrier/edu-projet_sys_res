@@ -23,15 +23,15 @@ typedef struct
 
 typedef struct
 {
-  char Nom[ADH_NMAX + 1];	/*nom */
-  char Prenom[ADH_NMAX + 1];	/*prenom */
-  unsigned int nbPrets;		/* le nombre de prêts */
-  char Prets[PRETS_NBMAX][LIVRE_LMAX + 1];	/* la liste des titres empruntés */
+  char nom[ADH_NMAX + 1];	/*nom */
+  char prenom[ADH_NMAX + 1];	/*prenom */
+  unsigned int nb_prets;		/* le nombre de prêts */
+  char prets[PRETS_NBMAX][LIVRE_LMAX + 1];	/* la liste des titres empruntés */
 } adherent_t;
 
 
 /****************************************************************
 		Code d'erreur renvoyés par les fonctions du module */
-typedef enum { ParametresIncorrects = -1, OuvertureFichierImpossible = -2 } ErreurAcces;
+typedef enum { bdd_err_params_incorrects = -1, bdd_err_fopen_impossible = -2 } bdd_erreur_e;
 
 #endif
