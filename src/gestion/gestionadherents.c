@@ -18,7 +18,7 @@ adherent_t Annuaire[nb_max_adhs];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
-int ann_nb_adhs = 0;	/* par défault, aucun adherent */
+int ann_nb_adhs = 0;		/* par défault, aucun adherent */
 
 /****************************************************************
     Ecriture des fonctions nécessaires au fonctionnement du module */
@@ -42,7 +42,7 @@ int
 LireAnnuaire (const char *NomFichier)
 {
   FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-  int nb_adherents_lus;	/* Nombres d'adhérents lus dans le fichiers */
+  int nb_adherents_lus;		/* Nombres d'adhérents lus dans le fichiers */
 
   /* Tests des paramètres: pointeur NULL ou chaîne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
@@ -103,8 +103,7 @@ EcrireAnnuaire (const char *NomFichier)
   if (ann_nb_adhs != 0)
     {
       nb_adherents_ecrits =
-	fwrite (Annuaire, sizeof (adherent_t),
-		ann_nb_adhs, Fichier);
+	fwrite (Annuaire, sizeof (adherent_t), ann_nb_adhs, Fichier);
     }
 
   /* Fermeture du fichier */

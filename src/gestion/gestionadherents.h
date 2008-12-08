@@ -6,11 +6,12 @@
 //LonguerMaxNom défini dans gestionlivres
 #define MaxNbPrets 5
 
-typedef struct {
-	char Nom[adh_nmax + 1];	/*nom */
-	char Prenom[adh_nmax + 1];	/*prenom */
-	unsigned int nbPrets;	/* le nombre de prêts */
-	char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
+typedef struct
+{
+  char Nom[adh_nmax + 1];	/*nom */
+  char Prenom[adh_nmax + 1];	/*prenom */
+  unsigned int nbPrets;		/* le nombre de prêts */
+  char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
 } adherent_t;
 
 /* Définition de l'annuaire et de sa taille maximum en nombre d'adhérents
@@ -38,7 +39,7 @@ extern int ann_nb_adhs;
 	     inchangé.
 
 */
-int LireAnnuaire(const char *NomFichier);
+int LireAnnuaire (const char *NomFichier);
 
 /*
 	Fonction : EcrireAnnuaire
@@ -52,6 +53,6 @@ int LireAnnuaire(const char *NomFichier);
 	Remarque : l'annuaire reste inchangé.
 
 */
-int EcrireAnnuaire(const char *NomFichier);
+int EcrireAnnuaire (const char *NomFichier);
 
-#endif				// ifndef __GESTIONADHERENTS_H__
+#endif // ifndef __GESTIONADHERENTS_H__

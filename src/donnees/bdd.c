@@ -23,14 +23,14 @@ livre_t Catalogue[nb_max_livres];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
-int cat_nb_livres = 0;	/* par défault, aucun livre */
+int cat_nb_livres = 0;		/* par défault, aucun livre */
 
 /* Déclaration de l'annuaire contenant au maximum nb_max_adherents */
 adherent_t Annuaire[nb_max_adhs];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
-int ann_nb_adhs = 0;	/* par défault, aucun adherent */
+int ann_nb_adhs = 0;		/* par défault, aucun adherent */
 
 /****************************************************************
     Implémentation des fonctions du module
@@ -95,29 +95,31 @@ bdd_acces_ecriture_fin ()
    ann_nb_adhs)
 */
 int
-bdd_load (char * annuaire, char * catalogue){
-  int retAnnuaire = bdd_load_annuaire(annuaire);
-  int retCatalogue = bdd_load_catalogue(catalogue);
+bdd_load (char *annuaire, char *catalogue)
+{
+  int retAnnuaire = bdd_load_annuaire (annuaire);
+  int retCatalogue = bdd_load_catalogue (catalogue);
 
   return retAnnuaire + retCatalogue;
- 
+
 }
 
 
 int
-bdd_load_annuaire (char * annuaire)
+bdd_load_annuaire (char *annuaire)
 {
-  bdd_acces_lecture_debut();
-  FILE * file=fopen(annuaire,"r");
+  bdd_acces_lecture_debut ();
+  FILE *file = fopen (annuaire, "r");
 
-  if (file == NULL){
-    return RErrAnn;
-  }
+  if (file == NULL)
+    {
+      return RErrAnn;
+    }
 
-  int nbItemLu = fread(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
+  int nbItemLu = fread (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
 
-  fclose(file);
-  bdd_acces_lecture_fin();
+  fclose (file);
+  bdd_acces_lecture_fin ();
   printf ("Fichier Chargé\n");
 
   return 0;
@@ -127,19 +129,20 @@ bdd_load_annuaire (char * annuaire)
 
 
 int
-bdd_load_catalogue (char * catalogue)
+bdd_load_catalogue (char *catalogue)
 {
-  bdd_acces_lecture_debut();
-  FILE * file=fopen(catalogue,"r");
+  bdd_acces_lecture_debut ();
+  FILE *file = fopen (catalogue, "r");
 
-  if (file == NULL){
-    return RErrCat;
-  }
+  if (file == NULL)
+    {
+      return RErrCat;
+    }
 
-  int nbItemLu = fread(&Catalogue, sizeof(Catalogue) , cat_nb_livres, file);
+  int nbItemLu = fread (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
 
-  fclose(file);
-  bdd_acces_lecture_fin();
+  fclose (file);
+  bdd_acces_lecture_fin ();
   printf ("Fichier Chargé\n");
 
   return 0;
@@ -149,50 +152,58 @@ bdd_load_catalogue (char * catalogue)
 */
 
 int
-bdd_save(char * annuaire, char * catalogue){
-  int retAnnuaire = bdd_save_annuaire(annuaire);
-  int retCatalogue = bdd_save_catalogue(catalogue);
+bdd_save (char *annuaire, char *catalogue)
+{
+  int retAnnuaire = bdd_save_annuaire (annuaire);
+  int retCatalogue = bdd_save_catalogue (catalogue);
 
   return retAnnuaire + retCatalogue;
 }
 
 int
-bdd_save_annuaire (char * annuaire)
+bdd_save_annuaire (char *annuaire)
 {
-  bdd_acces_ecriture_debut();
-  FILE * file=fopen(annuaire,"w+b");
+  bdd_acces_ecriture_debut ();
+  FILE *file = fopen (annuaire, "w+b");
 
-  int nbItemEcrits = fwrite(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
+  int nbItemEcrits = fwrite (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
 
-  fclose(file);
-  bdd_acces_ecriture_fin();
+  fclose (file);
+  bdd_acces_ecriture_fin ();
   printf ("Fichié Sauvegardé\n");
-  
-  
-  if (nbItemEcrits != ann_nb_adhs){
-    printf("nbItemsEcrits : %i\n",nbItemEcrits);
-    return WErrAnn;
-  }else{
-    return 0;
-  }
+
+
+  if (nbItemEcrits != ann_nb_adhs)
+    {
+      printf ("nbItemsEcrits : %i\n", nbItemEcrits);
+      return WErrAnn;
+    }
+  else
+    {
+      return 0;
+    }
 }
 
 
 int
-bdd_save_catalogue (char * catalogue){
-  bdd_acces_ecriture_debut();
-  FILE * file=fopen(catalogue,"w+b");
+bdd_save_catalogue (char *catalogue)
+{
+  bdd_acces_ecriture_debut ();
+  FILE *file = fopen (catalogue, "w+b");
 
-  int nbItemE = fwrite(&Catalogue, sizeof(Catalogue), cat_nb_livres, file);
+  int nbItemE = fwrite (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
 
-  fclose(file);
-  bdd_acces_ecriture_fin();
+  fclose (file);
+  bdd_acces_ecriture_fin ();
   printf ("Fichier Sauvegardé\n");
 
-  if (nbItemE != cat_nb_livres){
-  	printf("nbItemsE : %i, cat_nb_livres:%i \n",nbItemE, cat_nb_livres);
-	return WErrCat;
-  }else{
-    return 0;
-  }
+  if (nbItemE != cat_nb_livres)
+    {
+      printf ("nbItemsE : %i, cat_nb_livres:%i \n", nbItemE, cat_nb_livres);
+      return WErrCat;
+    }
+  else
+    {
+      return 0;
+    }
 }

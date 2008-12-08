@@ -28,11 +28,11 @@ interface_client ()
 	       "  q - quitter le client\n" "\nCommande : ");
 
       /* Suivant l'action demandée, on demande les informations
-	 supplémentaires nécessaires et on appelle une fonction
-	 correspondante dans client.c pour faire le travail
+         supplémentaires nécessaires et on appelle une fonction
+         correspondante dans client.c pour faire le travail
        */
       switch (lire_caractere ())
-		{
+	{
 	case 'o':
 	  /* A COMPLETER
 	     par un appel vers une fonction implémentée dans client.c

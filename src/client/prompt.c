@@ -12,6 +12,7 @@ getline (char *prompt)
 }
 
 char *
-getcommande () {
+getcommande ()
+{
 
 }

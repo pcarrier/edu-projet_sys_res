@@ -22,34 +22,32 @@ static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
 char *
 client_init (int argc, char **argv)
 {
-  while ((c = get
-
-  /* Permet de passer un nombre de parametre variable a l'executable */
-  switch (*argc)
-    {
-    case 1:			/* arguments par defaut */
-      break;
-    case 2:			/* serveur renseigne  */
-      strcpy (serveur_courant, argv[1]);
-      break;
-    case 3:			/* serveur, service renseignes */
-      strcpy (serveur_courant, argv[1]);
-      strcpy (service_courant, argv[2]);
-      break;
-    case 4:			/* serveur, service, protocole renseignes */
-      strcpy (serveur_courant, argv[1]);
-      strcpy (service_courant, argv[2]);
-      strcpy (protocole_courant, argv[3]);
-      break;
-    default:
-      printf
-	("Usage:client serveur(nom ou @IP)  service (nom ou port)  protocole (tcp ou udp)\n");
-      exit (1);
-    }
+  while ((c = get ()))
+    /* Permet de passer un nombre de parametre variable a l'executable */
+    switch (*argc)
+      {
+      case 1:			/* arguments par defaut */
+	break;
+      case 2:			/* serveur renseigne  */
+	strcpy (serveur_courant, argv[1]);
+	break;
+      case 3:			/* serveur, service renseignes */
+	strcpy (serveur_courant, argv[1]);
+	strcpy (service_courant, argv[2]);
+	break;
+      case 4:			/* serveur, service, protocole renseignes */
+	strcpy (serveur_courant, argv[1]);
+	strcpy (service_courant, argv[2]);
+	strcpy (protocole_courant, argv[3]);
+	break;
+      default:
+	printf
+	  ("Usage:client serveur(nom ou @IP)  service (nom ou port)  protocole (tcp ou udp)\n");
+	exit (1);
+      }
   printf ("Utilisation de serveur : %s\n", serveur_courant);
   printf ("Utilisation de service : %s\n", service_courant);
   printf ("Utilisation de protocole : %s\n\n", protocole_courant);
-
   return "OK";
 }
 
@@ -62,10 +60,10 @@ client_ouvrir_session ()
     }
   else if (!strcmp (protocole_courant, "tcp"))
     {
+      printf ("???");
     }
   else
     return "Protocole non connu.\n";
-
   return "OK";
 }
 
@@ -109,7 +107,7 @@ int
 main (int argc, char **argv)
 {
   int c;
-  while ((c = getopt(argc, argv, "p:P:
+  while ((c = getopt (argc, argv, "p:P:")));
   client_init (&argc, argv);
   /* Lancement de l'interface client */
   interface_client ();
