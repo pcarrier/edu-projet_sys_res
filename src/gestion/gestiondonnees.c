@@ -12,10 +12,10 @@ void
 Usage (const char *NomProgramme)
 {
   fprintf (stderr, "Usage : %s [-c|-l]\n", NomProgramme);
-  fprintf (stderr, "\t-c: création des fichiers de données\n");
-  fprintf (stderr, "\t-l: lecture des fichiers de données\n");
-  fprintf (stderr, "\t-a: fichier pour ecriture du catalogue\n");
-  fprintf (stderr, "\t-d: fichier pour écriture des adhérents\n");
+  fprintf (stderr, "\t-c: création des fichiers de données.\n");
+  fprintf (stderr, "\t-l: lecture des fichiers de données.\n");
+  fprintf (stderr, "\t-a: fichier pour ecriture du catalogue.\n");
+  fprintf (stderr, "\t-d: fichier pour écriture des adhérents.\n");
 }
 
 int
@@ -128,7 +128,10 @@ main (int argc, char *argv[])
 
       /* Ecriture des données */
       //TODO : pass file as arguments to BdD_sauvegarde().
-      BdD_sauvegarde ();
+      if (BdD_sauvegarde (fAnnName)!=0){
+      	fprintf(stderr, "Erreur lors de l'écriture de la base de données");
+	exit(1);
+      }
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
