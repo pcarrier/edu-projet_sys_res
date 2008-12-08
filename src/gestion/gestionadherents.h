@@ -2,11 +2,10 @@
 #define __GESTIONADHERENTS_H__
 
 #include <donnees/types.h>
-
+#include <common.h>
 /* Définition de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-#define ADHS_NBMAX 50
 extern adherent_t Annuaire[ADHS_NBMAX];
 
 /* Valeur contenant le nombre d'adhérents actuellement dans l'annuaire */

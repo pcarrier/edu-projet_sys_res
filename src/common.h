@@ -6,3 +6,4 @@
 #define PORT_LMAX 100
 #define F_ANN_NAME "annuaire.db"
 #define F_CAT_NAME "catalogue.db"
+#define ADHS_NBMAX 50
