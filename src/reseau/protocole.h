@@ -7,7 +7,7 @@
  *  Copyright 2006-2007 UJF
  *
  */
-#include "Donnees.h"
+#include "donnees/donnees.h"
 
 //types des operations sur la bibliotheque
 #define MaxLongueurParam 50

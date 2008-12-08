@@ -11,7 +11,7 @@
 #include <sys/file.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "BdD.h"
+#include "bdd.h"
 
 /****************************************************************
     Définition des variables conformément au fichier .h 

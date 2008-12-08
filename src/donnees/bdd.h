@@ -7,7 +7,7 @@
   données de la bibliothèque.
  */
 
-#include "Donnees.h"
+#include "donnees.h"
 
 /***********************************************/
 /* Définition des constantes de taille maximum */

@@ -17,11 +17,10 @@
 #include <sys/wait.h>
 #include <string.h>
 
-#include "fon.h"		/* primitives de la boite a outils */
-#include "protocole.h"		/* structures de données pour communication
-				   client <->serveur */
-#include "Donnees.h"
-#include "client.h"
+#include <reseau/fon.h>		/* primitives de la boite a outils */
+#include <reseau/protocole.h>	/* structures de données pour communication client <->serveur */
+#include <donnees/donnees.h>
+#include <client/client.h>
 
 #define SERVICE_DEFAUT "1111"
 #define PROTOCOLE_DEFAUT "udp"

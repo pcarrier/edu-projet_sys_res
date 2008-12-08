@@ -1,9 +1,8 @@
+PROGS=gestiondonnees.bin client.bin serveur.bin
 
-PROGS=GestionDonnees client serveur
-
-SOURCES_client=fon.c client.c interface_client.c Donnees.c
-SOURCES_serveur=fon.c serveur.c BdD.c
-SOURCES_GestionDonnees=BdD.c Donnees.c GestionDonnees.c
+SOURCES_client=reseau/fon.c client/client.c client/interface_client.c donnees/donnees.c
+SOURCES_serveur=reseau/fon.c serveur/serveur.c donnees/bdd.c
+SOURCES_GestionDonnees=donnees/bdd.c donnees/donnees.c tests/gestiondonnees.c
 
 SOURCES=$(SOURCES_client) $(SOURCES_serveur) $(SOURCES_projet)
 
@@ -20,7 +19,9 @@ CFLAGS += -O2
 # DÈtection d'un maximum d'erreurs
 CFLAGS += -Wall
 # On ne crée pas le programme tant qu'il y a des erreurs
-CFLAGS += -Werror
+#CFLAGS += -Werror
+# On fait tout d'ici...
+CFLAGS += -I.
 
 # Si la ligne suivante est décommentée, du code de debug est compilé
 # dans fon.c. Il permet d'observer les messages.
@@ -33,7 +34,7 @@ CPPFLAGS += -DSOLUTION
 CC=gcc
 
 # Bibliothèques à utiliser
-LIBS = -ltermcap -lcurses 
+LIBS = -ltermcap -lcurses -lreadline -lhistory
 # Bibliothèques supplémentaires spécifiques à SunOS/Solaris
 LIBS_SunOS = -lnsl -lsocket
 # Bibliothèques supplémentaires spécifiques à Linux
@@ -50,13 +51,13 @@ all: $(PROGS)
 %.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
-client : $(SOURCES_client:%.c=%.o)
+client.bin : $(SOURCES_client:%.c=%.o)
 	$(CC) $(LDFLAGS) $(SOURCES_client:%.c=%.o) -o $@ $(LIBS)
 
-serveur : $(SOURCES_serveur:%.c=%.o)
+serveur.bin : $(SOURCES_serveur:%.c=%.o)
 	$(CC) $(LDFLAGS) $(SOURCES_serveur:%.c=%.o) -o $@ $(LIBS)
 
-GestionDonnees : $(SOURCES_GestionDonnees:%.c=%.o)
+gestiondonnees.bin : $(SOURCES_GestionDonnees:%.c=%.o)
 	$(CC) $(LDFLAGS) $(SOURCES_GestionDonnees:%.c=%.o) -o $@ $(LIBS)
 	
 clean : 

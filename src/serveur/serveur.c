@@ -19,8 +19,8 @@
 #include <sys/signal.h>
 #include <sys/wait.h>
 
-#include "fon.h"		/* Primitives de la boite a outils */
-#include "protocole.h"		/* Types pour la communication client <-> serveur */
+#include <reseau/fon.h>		/* Primitives de la boite a outils */
+#include <reseau/protocole.h>		/* Types pour la communication client <-> serveur */
 
 #define SERVICE_DEFAUT "1111"
 #define PROTOCOLE_DEFAUT "udp"

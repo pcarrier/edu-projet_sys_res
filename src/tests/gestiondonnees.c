@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "BdD.h"
+#include "donnees/bdd.h"
 
 void Usage(const char *NomProgramme)
 {
