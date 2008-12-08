@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "tests/gestionlivres.h"
-#include "tests/gestionadherents.h"
-#include "client/client.h"
+#include <gestion/gestionlivres.h>
+#include <gestion/gestionadherents.h>
+#include "client.h"
 
 #define TAILLE_LIGNE	256
 

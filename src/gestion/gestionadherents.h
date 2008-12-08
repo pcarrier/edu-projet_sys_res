@@ -1,7 +1,7 @@
 #ifndef __GESTIONADHERENTS_H__
 #define __GESTIONADHERENTS_H__
 
-#include "tests/gestionlivres.h"
+#include "gestion/gestionlivres.h"
 
 //LonguerMaxNom défini dans GestionLivres
 #define MaxNbPrets 5

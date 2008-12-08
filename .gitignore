@@ -2,3 +2,4 @@
 *.o
 *.bin
 doc/
+src/depends.mk
