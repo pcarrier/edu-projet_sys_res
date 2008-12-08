@@ -139,20 +139,13 @@ main (int argc, char *argv[])
       int bdd_save_ret = bdd_save (fAnnName, fCatName);
       switch (bdd_save_ret)
 	{
-	case (WErrAnn):
+	case (ParametresIncorects):
 	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données %s\n",
-		   fAnnName);
+		   "Erreur lors de l'écriture de la base de données : paramètres incorects.\n");
 	  exit (1);
-	case (WErrCat):
+	case (OuvertureFichierImpossible):
 	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données %s\n",
-		   fCatName);
-	  exit (1);
-	case (WErrCat + WErrAnn):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de les bases de données %s et %s\n",
-		   fAnnName, fCatName);
+		   "Erreur lors de l'écriture de la base de données : ouverture impossible\n");
 	  exit (1);
 	}
 
@@ -161,32 +154,19 @@ main (int argc, char *argv[])
     }
   else if (lflag)
     {
-
       /* On tente de lire les données */
       int bd_load_ret = bdd_load (fAnnName, fCatName);
 
       switch (bd_load_ret)
 	{
-	case (RErrAnn):
+	case (ParametresIncorects):
 	  fprintf (stderr,
-		   "Erreur lors de la lecture de la base de données %s\n",
-		   fAnnName);
+		   "Erreur lors de l'écriture de la base de données : paramètres incorects.\n");
 	  exit (1);
-	case (RErrCat):
+	case (OuvertureFichierImpossible):
 	  fprintf (stderr,
-		   "Erreur lors de la lecture  de la base de données %s.\n",
-		   fCatName);
+		   "Erreur lors de l'écriture de la base de données : ouverture impossible\n");
 	  exit (1);
-	case (RErrCat + RErrAnn):
-	  fprintf (stderr,
-		   "Erreur lors de la lecture des bases de données %s et %s.\n",
-		   fAnnName, fCatName);
-	  exit (1);
-
-	}
-      if (cat_nb_livres == 0)
-	{
-	  printf ("Aucun livre dans le catalogue\n");
 	}
       else
 	{
