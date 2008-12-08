@@ -22,20 +22,15 @@ static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
 char *
 client_init (int argc, char **argv)
 {
-  while ((c = get ()))
-    /* Permet de passer un nombre de parametre variable a l'executable */
+  /*  while ((c = get ()))
     switch (*argc)
       {
-      case 1:			/* arguments par defaut */
 	break;
-      case 2:			/* serveur renseigne  */
 	strcpy (serveur_courant, argv[1]);
 	break;
-      case 3:			/* serveur, service renseignes */
 	strcpy (serveur_courant, argv[1]);
 	strcpy (service_courant, argv[2]);
 	break;
-      case 4:			/* serveur, service, protocole renseignes */
 	strcpy (serveur_courant, argv[1]);
 	strcpy (service_courant, argv[2]);
 	strcpy (protocole_courant, argv[3]);
@@ -49,6 +44,7 @@ client_init (int argc, char **argv)
   printf ("Utilisation de service : %s\n", service_courant);
   printf ("Utilisation de protocole : %s\n\n", protocole_courant);
   return "OK";
+  */
 }
 
 char *
@@ -106,11 +102,32 @@ client_fermer_session ()
 int
 main (int argc, char **argv)
 {
-  int c;
-  while ((c = getopt (argc, argv, "p:P:")));
-  client_init (&argc, argv);
-  /* Lancement de l'interface client */
-  interface_client ();
-
-  return 0;
+  int c, tflag = 0, index;
+  char *port, *serveur, *protocole;
+  while ((c = getopt (argc, argv, "p:t")) != -1) {
+    switch (c) {
+    case 't':
+      tflag = 1;
+      break;
+    case 'p':
+      port = optarg;
+      break;
+    case '?':
+      if (optopt == 'p')
+	fprintf (stderr, "Option -%c requiert un argument.\n", optopt);
+      else if (isprint (optopt))
+	fprintf (stderr, "Option '-%c' inconnue.\n", optopt);
+      else
+	fprintf (stderr,
+		 "Caractère d'option '\\x%x'.\n inconne.", optopt);
+      return EXIT_FAILURE;
+    }
+  }
+  for (index = optind; index < argc; index++)
+    serveur = argv[index];
+  if(tflag)
+    protocole = "tcp";
+  else
+    protocole = "udp";
+  return EXIT_SUCCESS;
 }

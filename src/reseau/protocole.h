@@ -16,21 +16,24 @@
 /*!
  * Opérations disponibles dans le protocole
  */
-enum operation_e
+typedef enum
 {
   consulter_auteur = 0,
   consulter_titre = 1,
   emprunter = 2,
   rendre = 3,
   consulter_adherent = 4
-};
+} operation_e;
 
-enum retour_e
+/*!
+ * Erreurs disponibles dans le protocole
+ */
+typedef enum
 {
   operation_impossible = -1,
   inexistant = 0,
   trouve = 1
-};
+} retour_e;
 
 /*!
  * Requêtes du client au serveur
@@ -39,10 +42,10 @@ typedef struct
 {
   operation_e operation;	///<  Opération à effectuer
   char param[MaxLongueurParam];	/*!< Paramètre de l'opération, suivant le contexte :
-				   - Nom d'auteur
-				   - Titre de livre
-				   - Nom d'adhérent
-				 */
+				  - Nom d'auteur
+				  - Titre de livre
+				  - Nom d'adhérent
+				*/
 } requete_t;
 
 /*!
@@ -54,3 +57,11 @@ typedef struct
   livre_t livres[result_lmax];	///< Livres si la requête le requiert
   adherent_t a;			///< Adhérent si la requête le requiert
 } reponse_t;
+
+/*!
+ * Paramètres de l'application
+ *
+typedef struct
+{
+}
+*/
