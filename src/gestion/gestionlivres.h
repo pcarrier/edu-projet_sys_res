@@ -16,12 +16,13 @@
 #define livre_lmax  50
 #define adh_nmax 50
 
-typedef struct {
-	char Titre[livre_lmax + 1];	/* le titre du livre. +1 pour pouvoir gerer le '\0' à la fin des chaines */
-	char Auteur[adh_nmax + 1];	/* L'auteur ou les auteurs du livre, soit son nom et prénom ou son nom d'écrivain */
-	unsigned int livre_nbex;	/* le nombre d'exemplaires que possède la bibliothèque */
-	unsigned int livre_nbemprunts;	/* Le nombre d'exemplaires empruntés */
-	unsigned int livre_dispos;	/* Ceux qui sont disponibles */
+typedef struct
+{
+  char Titre[livre_lmax + 1];	/* le titre du livre. +1 pour pouvoir gerer le '\0' à la fin des chaines */
+  char Auteur[adh_nmax + 1];	/* L'auteur ou les auteurs du livre, soit son nom et prénom ou son nom d'écrivain */
+  unsigned int livre_nbex;	/* le nombre d'exemplaires que possède la bibliothèque */
+  unsigned int livre_nbemprunts;	/* Le nombre d'exemplaires empruntés */
+  unsigned int livre_dispos;	/* Ceux qui sont disponibles */
 } livre_t;
 
 /* Définition du catalogue et de sa taille maximum en nombre de livres
@@ -35,7 +36,8 @@ extern int cat_nb_livres;
 
 /****************************************************************
 		Code d'erreur renvoyés par les fonctions du module */
-enum { ParametresIncorrects = -1, OuvertureFichierImpossible = -2 };
+enum
+{ ParametresIncorrects = -1, OuvertureFichierImpossible = -2 };
 
 /****************************************************************
 		Fonctions exportées par le module */
@@ -53,7 +55,7 @@ enum { ParametresIncorrects = -1, OuvertureFichierImpossible = -2 };
 		inchangé.
 
 */
-int LireCatalogue(const char *NomFichier);
+int LireCatalogue (const char *NomFichier);
 
 /*
 	Fonction : EcrireCatalogue
@@ -67,8 +69,8 @@ int LireCatalogue(const char *NomFichier);
 	Remarque : le catalogue reste inchangé.
 
 */
-int EcrireCatalogue(const char *NomFichier);
+int EcrireCatalogue (const char *NomFichier);
 
-void afficher_livre(livre_t l);
+void afficher_livre (livre_t l);
 
-#endif				// ifndef __GESTIONLIVRES_H__
+#endif // ifndef __GESTIONLIVRES_H__

@@ -39,16 +39,16 @@ extern int ann_nb_adhs;
 /* Fonctions exportées par le module */
 /*************************************/
 
-void bdd_acces_lecture_debut();
-void bdd_acces_lecture_fin();
-void bdd_acces_ecriture_debut();
-void bdd_acces_ecriture_fin();
-int bdd_load(char * a, char * b);
-int bdd_load_annuaire(char * a);
-int bdd_load_catalogue(char * b);
-int bdd_save(char * a, char * b);
-int bdd_save_annuaire(char * a);
-int bdd_save_catalogue(char * b);
+void bdd_acces_lecture_debut ();
+void bdd_acces_lecture_fin ();
+void bdd_acces_ecriture_debut ();
+void bdd_acces_ecriture_fin ();
+int bdd_load (char *a, char *b);
+int bdd_load_annuaire (char *a);
+int bdd_load_catalogue (char *b);
+int bdd_save (char *a, char *b);
+int bdd_save_annuaire (char *a);
+int bdd_save_catalogue (char *b);
 
 
 #endif

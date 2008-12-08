@@ -11,7 +11,8 @@
 void
 Usage (const char *NomProgramme)
 {
-  fprintf (stderr, "Usage : %s [-c|-l] [-a filename] [-d filename]\n", NomProgramme);
+  fprintf (stderr, "Usage : %s [-c|-l] [-a filename] [-d filename]\n",
+	   NomProgramme);
   fprintf (stderr, "\t-c: création des fichiers de données.\n");
   fprintf (stderr, "\t-l: lecture des fichiers de données.\n");
   fprintf (stderr, "\t-a: fichier pour ecriture du catalogue.\n");
@@ -57,17 +58,23 @@ main (int argc, char *argv[])
 	  fAnnName = optarg;
 	  break;
 	case 'd':
-	 fCatFlag=1;
-	 fCatName=optarg;
-	 break;
+	  fCatFlag = 1;
+	  fCatName = optarg;
+	  break;
 	}
     }
-   //On attribue les valeur par défaut si les noms n'ont pas été donnés en paramètre.
-    if(fCatFlag==0){fCatName=FCATNAME;}
-    if(fAnnFlag==0){fAnnName=FANNNAME;}
-	
+  //On attribue les valeur par défaut si les noms n'ont pas été donnés en paramètre.
+  if (fCatFlag == 0)
+    {
+      fCatName = FCATNAME;
+    }
+  if (fAnnFlag == 0)
+    {
+      fAnnName = FANNNAME;
+    }
 
- if(cflag)
+
+  if (cflag)
     {				/* creation données */
       strcpy (Catalogue[0].Titre, "Da Vinci Code");
       strcpy (Catalogue[0].Auteur, "Dan Brown, Daniel Roche");
@@ -104,7 +111,7 @@ main (int argc, char *argv[])
       Catalogue[4].livre_dispos = 1;
       cat_nb_livres++;
 
-      printf ("Catalogue initialisé avec 5 ouvrages\n");
+      printf ("Catalogue initialisé avec %i ouvrages\n", cat_nb_livres);
 
       strcpy (Annuaire[0].Nom, "Martin");
       strcpy (Annuaire[0].Prenom, "Daniel");
@@ -129,48 +136,61 @@ main (int argc, char *argv[])
       /* Ecriture des données */
       //Si l'écriture ne se passe pas correctement, affichage erreur puis
       //sortie du programme avec erreur.
-      int bdd_save_ret=bdd_save (fAnnName, fCatName);
-      switch(bdd_save_ret){
-      	case(WErrAnn):
-      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s\n",fAnnName);
-		exit(1);
-	case(WErrCat):
-      		fprintf(stderr, "Erreur lors de l'écriture de la base de données %s\n",fCatName);
-		exit(1);	
-	case(WErrCat+WErrAnn):
-      		fprintf(stderr, "Erreur lors de l'écriture de les bases de données %s et %s\n",fAnnName, fCatName);
-		exit(1);
-      }
+      int bdd_save_ret = bdd_save (fAnnName, fCatName);
+      switch (bdd_save_ret)
+	{
+	case (WErrAnn):
+	  fprintf (stderr,
+		   "Erreur lors de l'écriture de la base de données %s\n",
+		   fAnnName);
+	  exit (1);
+	case (WErrCat):
+	  fprintf (stderr,
+		   "Erreur lors de l'écriture de la base de données %s\n",
+		   fCatName);
+	  exit (1);
+	case (WErrCat + WErrAnn):
+	  fprintf (stderr,
+		   "Erreur lors de l'écriture de les bases de données %s et %s\n",
+		   fAnnName, fCatName);
+	  exit (1);
+	}
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
     }
-    else if(lflag)
+  else if (lflag)
     {
 
       /* On tente de lire les données */
-      int bd_load_ret=bdd_load (fAnnName, fCatName);
-      
-      switch(bd_load_ret){
-      	case(RErrAnn):
-      		fprintf(stderr, "Erreur lors de la lecture de la base de données %s\n",fAnnName);
-		exit(1);
-	case(RErrCat):
-      		fprintf(stderr, "Erreur lors de la lecture  de la base de données %s.\n",fCatName);
-		exit(1);
-	case(RErrCat + RErrAnn):
-      		fprintf(stderr, "Erreur lors de la lecture des bases de données %s et %s.\n",fAnnName, fCatName);
-		exit(1);
+      int bd_load_ret = bdd_load (fAnnName, fCatName);
 
-      }
+      switch (bd_load_ret)
+	{
+	case (RErrAnn):
+	  fprintf (stderr,
+		   "Erreur lors de la lecture de la base de données %s\n",
+		   fAnnName);
+	  exit (1);
+	case (RErrCat):
+	  fprintf (stderr,
+		   "Erreur lors de la lecture  de la base de données %s.\n",
+		   fCatName);
+	  exit (1);
+	case (RErrCat + RErrAnn):
+	  fprintf (stderr,
+		   "Erreur lors de la lecture des bases de données %s et %s.\n",
+		   fAnnName, fCatName);
+	  exit (1);
+
+	}
       if (cat_nb_livres == 0)
 	{
 	  printf ("Aucun livre dans le catalogue\n");
 	}
       else
 	{
-	  printf ("%d livre(s) dans le catalogue\n\n",
-		  cat_nb_livres);
+	  printf ("%d livre(s) dans le catalogue\n\n", cat_nb_livres);
 	  for (i = 0; i < cat_nb_livres; i++)
 	    {
 	      afficher_livre (Catalogue[i]);
@@ -183,8 +203,7 @@ main (int argc, char *argv[])
 	}
       else
 	{
-	  printf ("%d adherents(s) dans l'annuaire\n\n",
-		  ann_nb_adhs);
+	  printf ("%d adherents(s) dans l'annuaire\n\n", ann_nb_adhs);
 	  for (i = 0; i < ann_nb_adhs; i++)
 	    {
 	      afficher_adherent (Annuaire[i]);

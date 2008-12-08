@@ -16,7 +16,7 @@ livre_t Catalogue[nb_max_livres];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
-int cat_nb_livres = 0;	/* par défault, aucun livre */
+int cat_nb_livres = 0;		/* par défault, aucun livre */
 
 /****************************************************************
     Ecriture des fonctions nécessaires au fonctionnement du module */
@@ -55,8 +55,7 @@ LireCatalogue (const char *NomFichier)
     }
 
   /* On lit au maximum nb_max_livres livres depuis le fichier */
-  nb_livres_lus =
-    fread (Catalogue, sizeof (livre_t), nb_max_livres, Fichier);
+  nb_livres_lus = fread (Catalogue, sizeof (livre_t), nb_max_livres, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);
@@ -101,8 +100,7 @@ EcrireCatalogue (const char *NomFichier)
   if (cat_nb_livres != 0)
     {
       nb_livres_ecrits =
-	fwrite (Catalogue, sizeof (livre_t),
-		cat_nb_livres, Fichier);
+	fwrite (Catalogue, sizeof (livre_t), cat_nb_livres, Fichier);
     }
 
   /* Fermeture du fichier */
@@ -118,7 +116,6 @@ afficher_livre (livre_t l)
   fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
   fprintf (stderr, "Nombre d'exemplaires : %u\n", l.livre_nbex);
   fprintf (stderr, "Exemplaires empruntés : %u\n", l.livre_nbemprunts);
-  fprintf (stderr,
-	   "Exemplaires disponibles : %u\n\n", l.livre_dispos);
+  fprintf (stderr, "Exemplaires disponibles : %u\n\n", l.livre_dispos);
 
 }

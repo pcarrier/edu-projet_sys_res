@@ -11,4 +11,4 @@
  *
  * Récupère une ligne, la place dans l'historique et la renvoie.
  */
-char *getline(char *prompt);
+char *getline (char *prompt);

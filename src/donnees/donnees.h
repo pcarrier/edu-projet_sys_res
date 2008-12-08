@@ -18,26 +18,28 @@
 /* Définition des structures de données */
 /****************************************/
 
-typedef struct {
-	char Titre[livre_lmax + 1];	/* le titre du livre. +1 pour pouvoir gerer le '\0' à la fin des chaines */
-	char Auteur[adh_nmax + 1];	/* L'auteur ou les auteurs du livre, soit son nom et prénom ou son nom d'écrivain */
-	unsigned int livre_nbex;	/* le nombre d'exemplaires que possède la bibliothèque */
-	unsigned int livre_nbemprunts;	/* Le nombre d'exemplaires empruntés */
-	unsigned int livre_dispos;	/* Ceux qui sont disponibles */
+typedef struct
+{
+  char Titre[livre_lmax + 1];	/* le titre du livre. +1 pour pouvoir gerer le '\0' à la fin des chaines */
+  char Auteur[adh_nmax + 1];	/* L'auteur ou les auteurs du livre, soit son nom et prénom ou son nom d'écrivain */
+  unsigned int livre_nbex;	/* le nombre d'exemplaires que possède la bibliothèque */
+  unsigned int livre_nbemprunts;	/* Le nombre d'exemplaires empruntés */
+  unsigned int livre_dispos;	/* Ceux qui sont disponibles */
 } livre_t;
 
-typedef struct {
-	char Nom[adh_nmax + 1];	/*nom */
-	char Prenom[adh_nmax + 1];	/*prenom */
-	unsigned int nbPrets;	/* le nombre de prêts */
-	char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
+typedef struct
+{
+  char Nom[adh_nmax + 1];	/*nom */
+  char Prenom[adh_nmax + 1];	/*prenom */
+  unsigned int nbPrets;		/* le nombre de prêts */
+  char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
 } adherent_t;
 
 /*************************************/
 /* Fonctions exportées par le module */
 /*************************************/
 
-void afficher_livre(livre_t l);
-void afficher_adherent(adherent_t a);
+void afficher_livre (livre_t l);
+void afficher_adherent (adherent_t a);
 
 #endif
