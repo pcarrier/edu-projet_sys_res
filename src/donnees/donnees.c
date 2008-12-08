@@ -12,7 +12,7 @@
     Fonction pour afficher les données relatives à un livre ou à un adhérent
 */
 void
-AfficherLivre (Livre l)
+afficher_livre (livre_t l)
 {
   printf ("Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
   printf ("Nombre d'exemplaires : %u\n", l.livre_nbex);
@@ -21,7 +21,7 @@ AfficherLivre (Livre l)
 }
 
 void
-AfficherAdherent (Adherent a)
+afficher_adherent (adherent_t a)
 {
   int j;
   printf ("Prenom: %s\nNom: %s\n", a.Prenom, a.Nom);

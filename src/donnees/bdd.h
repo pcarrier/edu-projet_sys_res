@@ -22,7 +22,7 @@
 /* Déclaration du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-extern Livre Catalogue[nb_max_livres];
+extern livre_t Catalogue[nb_max_livres];
 
 /* Valeur contenant le nombre de livre actuellement dans le catalogue */
 extern int cat_nb_livres;
@@ -30,7 +30,7 @@ extern int cat_nb_livres;
 /* Déclaration de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-extern Adherent Annuaire[nb_max_adhs];
+extern adherent_t Annuaire[nb_max_adhs];
 
 /* Valeur contenant le nombre d'adhérents actuellement dans l'annuaire */
 extern int ann_nb_adhs;

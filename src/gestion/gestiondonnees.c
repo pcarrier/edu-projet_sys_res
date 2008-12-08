@@ -173,7 +173,7 @@ main (int argc, char *argv[])
 		  cat_nb_livres);
 	  for (i = 0; i < cat_nb_livres; i++)
 	    {
-	      AfficherLivre (Catalogue[i]);
+	      afficher_livre (Catalogue[i]);
 	    }
 	}
 
@@ -187,7 +187,7 @@ main (int argc, char *argv[])
 		  ann_nb_adhs);
 	  for (i = 0; i < ann_nb_adhs; i++)
 	    {
-	      AfficherAdherent (Annuaire[i]);
+	      afficher_adherent (Annuaire[i]);
 	    }
 	}
     }

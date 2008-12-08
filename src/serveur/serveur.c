@@ -95,7 +95,7 @@ traitement_serveur ()
     {
     case Consulter_Auteur:
     case Consulter_Titre:
-    case Consulter_Adherent:
+    case Consulter_adherent_t:
       /* accès en lecture uniquement */
       bdd_acces_lecture_debut ();
       bdd_load ();
@@ -117,7 +117,7 @@ traitement_serveur ()
     {
     case Consulter_Auteur:
     case Consulter_Titre:
-    case Consulter_Adherent:
+    case Consulter_adherent_t:
       /* accès en lecture uniquement */
       bdd_acces_lecture_fin ();
       break;

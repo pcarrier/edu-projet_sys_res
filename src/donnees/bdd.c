@@ -19,14 +19,14 @@
 */
 
 /* Déclaration du catalogue contenant au maximum nb_max_livres */
-Livre Catalogue[nb_max_livres];
+livre_t Catalogue[nb_max_livres];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
 int cat_nb_livres = 0;	/* par défault, aucun livre */
 
-/* Déclaration de l'annuaire contenant au maximum NombreMaximumDeAdherents */
-Adherent Annuaire[nb_max_adhs];
+/* Déclaration de l'annuaire contenant au maximum nb_max_adherents */
+adherent_t Annuaire[nb_max_adhs];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */

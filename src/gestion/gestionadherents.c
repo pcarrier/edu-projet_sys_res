@@ -1,5 +1,5 @@
 /*
- *  GestionAdherents.c
+ *  Gestionadherent_ts.c
  *  MIAGE2
  *
  *  Created by Vania Marangozova-Martin on 23/11/06.
@@ -8,13 +8,13 @@
  */
 
 #include <stdio.h>
-#include "GestionAdherents.h"
+#include "gestionadherents.h"
 
 /****************************************************************
     Déclaration des variables conformément au fichier .h */
 
-/* Déclaration de l'annuaire contenant au maximum NombreMaximumDeAdherents */
-Adherent Annuaire[nb_max_adhs];
+/* Déclaration de l'annuaire contenant au maximum nb_max_adherents */
+adherent_t Annuaire[nb_max_adhs];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
@@ -42,7 +42,7 @@ int
 LireAnnuaire (const char *NomFichier)
 {
   FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-  int NombreAdherentsLus;	/* Nombres d'adhérents lus dans le fichiers */
+  int nb_adherents_lus;	/* Nombres d'adhérents lus dans le fichiers */
 
   /* Tests des paramètres: pointeur NULL ou chaîne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
@@ -56,17 +56,17 @@ LireAnnuaire (const char *NomFichier)
       return OuvertureFichierImpossible;
     }
 
-  /* On lit au maximum NombreMaximumDeAdherents adhérents depuis le fichier */
-  NombreAdherentsLus =
-    fread (Annuaire, sizeof (Adherent), nb_max_adhs, Fichier);
+  /* On lit au maximum nb_max_adherents adhérents depuis le fichier */
+  nb_adherents_lus =
+    fread (Annuaire, sizeof (adherent_t), nb_max_adhs, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);
 
   /* Mise a jours des variables du module et retour du résultat */
-  ann_nb_adhs = NombreAdherentsLus;
+  ann_nb_adhs = nb_adherents_lus;
 
-  return NombreAdherentsLus;
+  return nb_adherents_lus;
 }
 
 /*
@@ -85,7 +85,7 @@ int
 EcrireAnnuaire (const char *NomFichier)
 {
   FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-  int NombreAdherentsEcrits = 0;	/* Nombres d'adhérents écrits dans le fichiers */
+  int nb_adherents_ecrits = 0;	/* Nombres d'adhérents écrits dans le fichiers */
 
   /* Tests des paramètres: pointeur NULL ou chaîne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
@@ -102,8 +102,8 @@ EcrireAnnuaire (const char *NomFichier)
   /* Ecriture des adhérents s'il y en a dans le repertoire */
   if (ann_nb_adhs != 0)
     {
-      NombreAdherentsEcrits =
-	fwrite (Annuaire, sizeof (Adherent),
+      nb_adherents_ecrits =
+	fwrite (Annuaire, sizeof (adherent_t),
 		ann_nb_adhs, Fichier);
     }
 
@@ -111,5 +111,5 @@ EcrireAnnuaire (const char *NomFichier)
   fclose (Fichier);
 
   /* On retourne le nombre de livres écrits dans le fichier */
-  return NombreAdherentsEcrits;
+  return nb_adherents_ecrits;
 }

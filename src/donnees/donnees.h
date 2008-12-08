@@ -24,20 +24,20 @@ typedef struct {
 	unsigned int livre_nbex;	/* le nombre d'exemplaires que possède la bibliothèque */
 	unsigned int livre_nbemprunts;	/* Le nombre d'exemplaires empruntés */
 	unsigned int livre_dispos;	/* Ceux qui sont disponibles */
-} Livre;
+} livre_t;
 
 typedef struct {
 	char Nom[adh_nmax + 1];	/*nom */
 	char Prenom[adh_nmax + 1];	/*prenom */
 	unsigned int nbPrets;	/* le nombre de prêts */
 	char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
-} Adherent;
+} adherent_t;
 
 /*************************************/
 /* Fonctions exportées par le module */
 /*************************************/
 
-void AfficherLivre(Livre l);
-void AfficherAdherent(Adherent a);
+void afficher_livre(livre_t l);
+void afficher_adherent(adherent_t a);
 
 #endif

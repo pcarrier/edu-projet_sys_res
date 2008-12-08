@@ -1,18 +1,18 @@
 /****************************************************************
 
-	Corps du module de Gestion de livres GestionLivres.c
+	Corps du module de Gestion de livres gestionlivres.c
 	Auteur: Dominique Vaufreydaz
 
 *****************************************************************/
 
 #include <stdio.h>
-#include "GestionLivres.h"
+#include "gestionlivres.h"
 
 /****************************************************************
     Déclaration des variables conformément au fichier .h */
 
 /* Déclaration du catalogue contenant au maximum nb_max_livres */
-Livre Catalogue[nb_max_livres];
+livre_t Catalogue[nb_max_livres];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
@@ -40,7 +40,7 @@ int
 LireCatalogue (const char *NomFichier)
 {
   FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-  int NombreLivresLus;		/* Nombres de livres lus dans le fichiers */
+  int nb_livres_lus;		/* Nombres de livres lus dans le fichiers */
 
   /* Tests des paramètres: pointeur NULL ou chaåne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
@@ -55,16 +55,16 @@ LireCatalogue (const char *NomFichier)
     }
 
   /* On lit au maximum nb_max_livres livres depuis le fichier */
-  NombreLivresLus =
-    fread (Catalogue, sizeof (Livre), nb_max_livres, Fichier);
+  nb_livres_lus =
+    fread (Catalogue, sizeof (livre_t), nb_max_livres, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);
 
   /* Mise a jours des variables du module et retour du résultat */
-  cat_nb_livres = NombreLivresLus;
+  cat_nb_livres = nb_livres_lus;
 
-  return NombreLivresLus;
+  return nb_livres_lus;
 }
 
 /*
@@ -83,7 +83,7 @@ int
 EcrireCatalogue (const char *NomFichier)
 {
   FILE *Fichier;		/* le pointeur sur le descripteur de fichier */
-  int NombreLivresEcrits = 0;	/* Nombres de livres écrits dans le fichiers */
+  int nb_livres_ecrits = 0;	/* Nombres de livres écrits dans le fichiers */
 
   /* Tests des paramètres: pointeur NULL ou chaîne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
@@ -100,8 +100,8 @@ EcrireCatalogue (const char *NomFichier)
   /* Ecriture des livres s'il y en a dans le catalogue */
   if (cat_nb_livres != 0)
     {
-      NombreLivresEcrits =
-	fwrite (Catalogue, sizeof (Livre),
+      nb_livres_ecrits =
+	fwrite (Catalogue, sizeof (livre_t),
 		cat_nb_livres, Fichier);
     }
 
@@ -109,11 +109,11 @@ EcrireCatalogue (const char *NomFichier)
   fclose (Fichier);
 
   /* On retourne le nombre de livres écrits dans le fichier */
-  return NombreLivresEcrits;
+  return nb_livres_ecrits;
 }
 
 void
-AfficherLivre (Livre l)
+afficher_livre (livre_t l)
 {
   fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
   fprintf (stderr, "Nombre d'exemplaires : %u\n", l.livre_nbex);

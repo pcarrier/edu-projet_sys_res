@@ -1,6 +1,6 @@
 /********************************************************
 
-	Header du module de Gestion de livres GestionLivres.h
+	Header du module de Gestion de livres gestionlivres.h
 	Auteur: Dominique Vaufreydaz
 
 *********************************************************/
@@ -12,7 +12,7 @@
 /****************************************************************
 		Déclaration des types et variables du module */
 
-/* Longueur des champs pour la définition de la structure Livre */
+/* Longueur des champs pour la définition de la structure livre_t */
 #define livre_lmax  50
 #define adh_nmax 50
 
@@ -22,13 +22,13 @@ typedef struct {
 	unsigned int livre_nbex;	/* le nombre d'exemplaires que possède la bibliothèque */
 	unsigned int livre_nbemprunts;	/* Le nombre d'exemplaires empruntés */
 	unsigned int livre_dispos;	/* Ceux qui sont disponibles */
-} Livre;
+} livre_t;
 
 /* Définition du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
 #define nb_max_livres 1000
-extern Livre Catalogue[nb_max_livres];
+extern livre_t Catalogue[nb_max_livres];
 
 /* Valeur contenant le nombre de livre actuellement dans le catalogue */
 extern int cat_nb_livres;
@@ -69,6 +69,6 @@ int LireCatalogue(const char *NomFichier);
 */
 int EcrireCatalogue(const char *NomFichier);
 
-void AfficherLivre(Livre l);
+void afficher_livre(livre_t l);
 
 #endif				// ifndef __GESTIONLIVRES_H__

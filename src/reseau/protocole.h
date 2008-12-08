@@ -11,14 +11,14 @@
 
 //types des operations sur la bibliotheque
 #define MaxLongueurParam 50
-#define MaxLongueurResult 10
+#define result_lmax 10
 
 /* Liste des différents types de requêtes possibles */
-#define Consulter_Auteur   0
-#define Consulter_Titre    1
+#define consulter_auteur   0
+#define consulter_titre    1
 #define Emprunter          2
 #define Rendre             3
-#define Consulter_Adherent 4
+#define consulter_adherent 4
 
 //type du message de requête, communication client -> serveur
 typedef struct {
@@ -47,8 +47,8 @@ typedef struct {
 	int code;
 
 	/* Partie remplie uniquement si la requête demande des livres */
-	Livre livres[MaxLongueurResult];
+	livre_t livres[result_lmax];
 	/* Partie remplie uniquement si la requête conserne un adhérent */
-	Adherent a;
+	adherent_t a;
 } reponse_t;
 

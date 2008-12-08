@@ -3,7 +3,7 @@
 
 #include "gestion/gestionlivres.h"
 
-//LonguerMaxNom défini dans GestionLivres
+//LonguerMaxNom défini dans gestionlivres
 #define MaxNbPrets 5
 
 typedef struct {
@@ -11,13 +11,13 @@ typedef struct {
 	char Prenom[adh_nmax + 1];	/*prenom */
 	unsigned int nbPrets;	/* le nombre de prêts */
 	char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
-} Adherent;
+} adherent_t;
 
 /* Définition de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
 #define nb_max_adhs 50
-extern Adherent Annuaire[nb_max_adhs];
+extern adherent_t Annuaire[nb_max_adhs];
 
 /* Valeur contenant le nombre d'adhérents actuellement dans l'annuaire */
 extern int ann_nb_adhs;
