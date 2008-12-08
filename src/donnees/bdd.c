@@ -112,7 +112,7 @@ BdD_sauvegarde (char * annuaire)
 
   fclose(file);
   BdD_acces_lecture_fin();
-  printf ("Fichié Sauvegardé");
+  printf ("Fichié Sauvegardé\n");
 
   if (nbItemEcrits != NombreAdherentsDansAnnuaire){
     return -1;

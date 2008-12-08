@@ -11,7 +11,7 @@
 void
 Usage (const char *NomProgramme)
 {
-  fprintf (stderr, "Usage : %s [-c|-l]\n", NomProgramme);
+  fprintf (stderr, "Usage : %s [-c|-l] [-a filename] [-d filename]\n", NomProgramme);
   fprintf (stderr, "\t-c: création des fichiers de données.\n");
   fprintf (stderr, "\t-l: lecture des fichiers de données.\n");
   fprintf (stderr, "\t-a: fichier pour ecriture du catalogue.\n");
