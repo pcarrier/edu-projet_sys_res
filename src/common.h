@@ -4,3 +4,5 @@
 #define LongNomProtocole 4
 #define LongMaxServeur 50
 #define LongMaxService 100
+#define FANNNAME "annuaire.db"
+#define FCATNAME "catalogue.db"

@@ -5,12 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "donnees/bdd.h"
-
 #include <ctype.h>
 #include <unistd.h>
-
-#define FANNNAME "annuaire.db"
-#define FCATNAME "catalogue.db"
+#include <common.h>
 void
 Usage (const char *NomProgramme)
 {
