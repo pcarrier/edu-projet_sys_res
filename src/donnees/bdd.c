@@ -102,10 +102,21 @@ BdD_chargement ()
 
 /* Sauvegarde des données depuis la mémoire vers le ou les fichiers
 */
-void
-BdD_sauvegarde ()
+int
+BdD_sauvegarde (char * annuaire)
 {
-  /* A COMPLETER
-   */
-  printf ("Hello sauvegarde\n");
+  BdD_acces_lecture_debut();
+  file=fopen(annuaire,"w");
+
+  int nbItemEcrits = fwrite(&Annuaire, sizeof(Annuaire) , NombreAdherentsDansAnnuaire, file);
+
+  fclose(file);
+  BdD_acces_lecture_fin();
+  printf ("Fichié Sauvegardé");
+
+  if (nbItemEcrits != NombreAdherentsDansAnnuaire){
+    return 0;
+  }else{
+    return -1;
+  }
 }
