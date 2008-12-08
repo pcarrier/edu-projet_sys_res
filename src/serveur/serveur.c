@@ -34,6 +34,12 @@ static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
 /* SERVEUR															*/
 /*------------------------------------------------------------------*/
 
+void serveur_doc_syntaxe(char *programme){
+	fprintf(stderr, "Usage : %s [-p port] [-t]\n"
+			"-p port: utiliser le port p plutot que " PORT_DEFAUT "\n"
+			"-t utiliser TPC plutot que UDP\n");
+}
+
 void
 Usage ()
 {
