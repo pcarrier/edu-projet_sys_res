@@ -103,7 +103,8 @@ bdd_load (char * annuaire, char * catalogue){
  
 }
 
-
+/* Lecture des données du fichier d'annuaires
+*/
 int
 bdd_load_annuaire (char * annuaire)
 {
@@ -124,8 +125,8 @@ bdd_load_annuaire (char * annuaire)
 }
 
 
-
-
+/* Lecture des données du fichier catalogue
+*/
 int
 bdd_load_catalogue (char * catalogue)
 {
@@ -156,6 +157,8 @@ bdd_save(char * annuaire, char * catalogue){
   return retAnnuaire + retCatalogue;
 }
 
+/* Sauvegarde des données vers le fichier annuaire
+ */
 int
 bdd_save_annuaire (char * annuaire)
 {
@@ -178,6 +181,8 @@ bdd_save_annuaire (char * annuaire)
 }
 
 
+/* Sauvegarde des données vers le fichier catalogue
+ */
 int
 bdd_save_catalogue (char * catalogue){
   bdd_acces_ecriture_debut();
