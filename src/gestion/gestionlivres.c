@@ -16,7 +16,7 @@ livre_t Catalogue[nb_max_livres];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
-int cat_nb_livres = 0;		/* par défault, aucun livre */
+//int cat_nb_livres = 0;		/* par défault, aucun livre */
 
 /****************************************************************
     Ecriture des fonctions nécessaires au fonctionnement du module */
@@ -109,7 +109,7 @@ EcrireCatalogue (const char *NomFichier)
   /* On retourne le nombre de livres écrits dans le fichier */
   return nb_livres_ecrits;
 }
-
+/*
 void afficher_livre (livre_t l)
 {
   fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
@@ -118,3 +118,4 @@ void afficher_livre (livre_t l)
   fprintf (stderr, "Exemplaires disponibles : %u\n\n", l.livre_dispos);
 
 }
+*/
