@@ -199,7 +199,7 @@ h_bind (int num_soc, struct sockaddr_in *p_adr_socket)
 /* ENTREE									*/
 /*		num_soc	: 	Numero identifiant la socket			*/
 /*										*/
-																																																																																																																																																											  /*              p_adr_serv :    adresses socket d'acces au service              *//*                                                                              */
+																																																																																																																																																																															      /*              p_adr_serv :    adresses socket d'acces au service              *//*                                                                              */
 /* SORTIE									*/
 /*	     	aucune ( le rapport d'execution est envoye sur la console )	*/
 /********************************************************************************/

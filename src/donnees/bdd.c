@@ -166,7 +166,8 @@ bdd_save_annuaire (char *annuaire)
   bdd_acces_ecriture_debut ();
   FILE *file = fopen (annuaire, "w+b");
 
-  int nbItemEcrits = (int) fwrite(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
+  int nbItemEcrits =
+    (int) fwrite (&Annuaire, sizeof (Annuaire), ann_nb_adhs, file);
 
   fclose (file);
   bdd_acces_ecriture_fin ();
@@ -191,7 +192,8 @@ bdd_save_catalogue (char *catalogue)
   bdd_acces_ecriture_debut ();
   FILE *file = fopen (catalogue, "w+b");
 
-  int nbItemE = (int) fwrite(&Catalogue, sizeof(Catalogue), cat_nb_livres, file);
+  int nbItemE =
+    (int) fwrite (&Catalogue, sizeof (Catalogue), cat_nb_livres, file);
 
   fclose (file);
   bdd_acces_ecriture_fin ();
