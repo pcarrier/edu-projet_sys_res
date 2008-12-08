@@ -1,14 +1,5 @@
-/******************************************************************************/
-/*			Application: ...				      */
-/******************************************************************************/
-/*									      */
-/*			 programme  CLIENT				      */
-/*									      */
-/******************************************************************************/
-/*									      */
-/*		Auteurs : ... 					              */
-/*									      */
-/******************************************************************************/
+/*!
+ * \file client.c
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +12,7 @@
 #include <reseau/protocole.h>	/* structures de données pour communication client <->serveur */
 #include <donnees/donnees.h>
 #include "client.h"
-#include "common.h"
+#include <common.h>
 
 void client_appli (char *serveur, char *service, char *protocole);
 extern void interface_client ();

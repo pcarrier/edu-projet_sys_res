@@ -1,15 +1,10 @@
-/*
- *  client.h
- *  MIAGE2
+/*!
+ * \file client.h
+ * \brief Fonctions de communication avec le serveur
  *
- *  Created by Vania Marangozova-Martin on 24/11/06.
- *  Copyright 2006 __MyCompanyName__. All rights reserved.
- *
+ * Chaque fonction renvoie le message affiché sur le client
  */
 
-/* FONCTIONS de communication avec le serveur */
-/* Chanque fonction renvoie le message 
-qui doit être affiché pour le client */
 char *client_init(int *argc, char **argv);
 char *client_ouvrir_session();
 char *client_emprunter_livre(char *auteur, char *titre);
