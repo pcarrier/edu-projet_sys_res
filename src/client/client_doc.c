@@ -10,9 +10,6 @@ client_doc_syntaxe (char *progname)
 	   progname);
 }
 
-/*!
- * \brief Affichage de la liste des commandes
- */
 void
 client_doc_commandes ()
 {
@@ -20,18 +17,12 @@ client_doc_commandes ()
 	   "  ouvrir, fermer, titre, auteur, emprunter, rendre, adherent, quitter\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe d'ouverture de session
- */
 void
 client_doc_ouvrir ()
 {
   fprintf (stdout, "[ouvrir]\n" "  Bonne question ! Rien dans la doc...\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe de fermeture de session
- */
 void
 client_doc_fermer ()
 {
@@ -39,9 +30,6 @@ client_doc_fermer ()
 	   "  Usage: fermer\n" "  Ferme la session en cours\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe de l'emprunt de livre
- */
 void
 client_doc_emprunt ()
 {
@@ -50,9 +38,6 @@ client_doc_emprunt ()
 	   "  L'adhérent de référence 'a' emprunte le livre de référence 'l'.\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe de retour de livre
- */
 void
 client_doc_retour ()
 {
@@ -61,9 +46,6 @@ client_doc_retour ()
 	   "  L'adhérent de référence 'a' retourne le livre de référence 'l'.\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe de la consultation d'auteur
- */
 void
 client_doc_livre ()
 {
@@ -72,9 +54,6 @@ client_doc_livre ()
 	   "  Affiche les informations sur livre de titre 't'.\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe de la consultation d'auteur
- */
 void
 client_doc_auteur ()
 {
@@ -83,9 +62,6 @@ client_doc_auteur ()
 	   "  Liste les titres dont l'auteur a pour nom 'a'.\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe de la consultation d'un adhérent
- */
 void
 client_doc_adherent ()
 {
@@ -94,9 +70,6 @@ client_doc_adherent ()
 	   "  Affiche les informations sur l'adhérent ayant pour nom 'a'.\n");
 }
 
-/*!
- * \brief Affichage de la syntaxe de fermeture de session
- */
 void
 client_doc_quitter ()
 {

@@ -1,43 +1,28 @@
 #include <stdio.h>
 
+/*!
+ * \brief Affichage de la syntaxe du programme
+ */
 void
-client_doc_syntaxe (char *progname)
-{
-  fprintf (stderr, "Usage: %s [-p port] [-t] [host]\n"
-	   "  -p port: utiliser le port p plutot que " PORT_DEFAUT "\n",
-	   "  -u: utiliser TCP plutot que UDP ;\n",
-	   "  host: hote a utiliser au lieu de " SERVEUR_DEFAUT "\n",
-	   progname);
-}
+client_doc_syntaxe (char *progname);
 
 /*!
  * \brief Affichage de la liste des commandes
  */
 void
-client_doc_commandes ()
-{
-  fprintf (stdout, "[Commandes disponibles]\n"
-	   "  ouvrir, fermer, titre, auteur, emprunter, rendre, adherent, quitter\n");
-}
+client_doc_commandes ();
 
 /*!
  * \brief Affichage de la syntaxe d'ouverture de session
  */
 void
-client_doc_ouvrir ()
-{
-  fprintf (stdout, "[ouvrir]\n" "  Bonne question ! Rien dans la doc...\n");
-}
+client_doc_ouvrir ();
 
 /*!
  * \brief Affichage de la syntaxe de fermeture de session
  */
 void
-client_doc_fermer ()
-{
-  fprintf (stdout, "[fermer]\n"
-	   "  Usage: fermer\n" "  Ferme la session en cours\n");
-}
+client_doc_fermer ();
 
 /*!
  * \brief Affichage de la syntaxe de l'emprunt de livre
