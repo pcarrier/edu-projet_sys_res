@@ -11,12 +11,12 @@
 /****************************************************************
     Déclaration des variables conformément au fichier .h */
 
-/* Déclaration du catalogue contenant au maximum NombreMaximumDeLivres */
-Livre Catalogue[NombreMaximumDeLivres];
+/* Déclaration du catalogue contenant au maximum nb_max_livres */
+Livre Catalogue[nb_max_livres];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
-int NombreOuvragesAuCatalogue = 0;	/* par défault, aucun livre */
+int cat_nb_livres = 0;	/* par défault, aucun livre */
 
 /****************************************************************
     Ecriture des fonctions nécessaires au fonctionnement du module */
@@ -54,15 +54,15 @@ LireCatalogue (const char *NomFichier)
       return OuvertureFichierImpossible;
     }
 
-  /* On lit au maximum NombreMaximumDeLivres livres depuis le fichier */
+  /* On lit au maximum nb_max_livres livres depuis le fichier */
   NombreLivresLus =
-    fread (Catalogue, sizeof (Livre), NombreMaximumDeLivres, Fichier);
+    fread (Catalogue, sizeof (Livre), nb_max_livres, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);
 
   /* Mise a jours des variables du module et retour du résultat */
-  NombreOuvragesAuCatalogue = NombreLivresLus;
+  cat_nb_livres = NombreLivresLus;
 
   return NombreLivresLus;
 }
@@ -98,11 +98,11 @@ EcrireCatalogue (const char *NomFichier)
     }
 
   /* Ecriture des livres s'il y en a dans le catalogue */
-  if (NombreOuvragesAuCatalogue != 0)
+  if (cat_nb_livres != 0)
     {
       NombreLivresEcrits =
 	fwrite (Catalogue, sizeof (Livre),
-		NombreOuvragesAuCatalogue, Fichier);
+		cat_nb_livres, Fichier);
     }
 
   /* Fermeture du fichier */
@@ -116,9 +116,9 @@ void
 AfficherLivre (Livre l)
 {
   fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
-  fprintf (stderr, "Nombre d'exemplaires : %u\n", l.NombreExemplaires);
-  fprintf (stderr, "Exemplaires empruntés : %u\n", l.ExemplairesEmpruntes);
+  fprintf (stderr, "Nombre d'exemplaires : %u\n", l.livre_nbex);
+  fprintf (stderr, "Exemplaires empruntés : %u\n", l.livre_nbemprunts);
   fprintf (stderr,
-	   "Exemplaires disponibles : %u\n\n", l.ExemplairesDisponibles);
+	   "Exemplaires disponibles : %u\n\n", l.livre_dispos);
 
 }

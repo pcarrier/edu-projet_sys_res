@@ -1,6 +1,6 @@
 /****************************************************************
 
-	Corps du module des données BdD.c
+	Corps du module des données bdd.c
 	Auteur: Dominique Vaufreydaz, Vincent Danjean
 
 *****************************************************************/
@@ -15,9 +15,9 @@ void
 AfficherLivre (Livre l)
 {
   printf ("Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
-  printf ("Nombre d'exemplaires : %u\n", l.NombreExemplaires);
-  printf ("Exemplaires empruntés : %u\n", l.ExemplairesEmpruntes);
-  printf ("Exemplaires disponibles : %u\n\n", l.ExemplairesDisponibles);
+  printf ("Nombre d'exemplaires : %u\n", l.livre_nbex);
+  printf ("Exemplaires empruntés : %u\n", l.livre_nbemprunts);
+  printf ("Exemplaires disponibles : %u\n\n", l.livre_dispos);
 }
 
 void

@@ -71,38 +71,38 @@ main (int argc, char *argv[])
     {				/* creation données */
       strcpy (Catalogue[0].Titre, "Da Vinci Code");
       strcpy (Catalogue[0].Auteur, "Dan Brown, Daniel Roche");
-      Catalogue[0].NombreExemplaires = 5;
-      Catalogue[0].ExemplairesEmpruntes = 1;
-      Catalogue[0].ExemplairesDisponibles = 4;
-      NombreOuvragesAuCatalogue++;
+      Catalogue[0].livre_nbex = 5;
+      Catalogue[0].livre_nbemprunts = 1;
+      Catalogue[0].livre_dispos = 4;
+      cat_nb_livres++;
 
       strcpy (Catalogue[1].Titre, "Moi, Bouddha");
       strcpy (Catalogue[1].Auteur, "José Fräches");
-      Catalogue[1].NombreExemplaires = 1;
-      Catalogue[1].ExemplairesEmpruntes = 0;
-      Catalogue[1].ExemplairesDisponibles = 1;
-      NombreOuvragesAuCatalogue++;
+      Catalogue[1].livre_nbex = 1;
+      Catalogue[1].livre_nbemprunts = 0;
+      Catalogue[1].livre_dispos = 1;
+      cat_nb_livres++;
 
       strcpy (Catalogue[2].Titre, "Histoires inédites du Petit Nicolas");
       strcpy (Catalogue[2].Auteur, "René Goscinny, Sempé");
-      Catalogue[2].NombreExemplaires = 2;
-      Catalogue[2].ExemplairesEmpruntes = 0;
-      Catalogue[2].ExemplairesDisponibles = 2;
-      NombreOuvragesAuCatalogue++;
+      Catalogue[2].livre_nbex = 2;
+      Catalogue[2].livre_nbemprunts = 0;
+      Catalogue[2].livre_dispos = 2;
+      cat_nb_livres++;
 
       strcpy (Catalogue[3].Titre, "Le Soleil des Scorta");
       strcpy (Catalogue[3].Auteur, "Laurent Gaudé");
-      Catalogue[3].NombreExemplaires = 2;
-      Catalogue[3].ExemplairesEmpruntes = 1;
-      Catalogue[3].ExemplairesDisponibles = 1;
-      NombreOuvragesAuCatalogue++;
+      Catalogue[3].livre_nbex = 2;
+      Catalogue[3].livre_nbemprunts = 1;
+      Catalogue[3].livre_dispos = 1;
+      cat_nb_livres++;
 
       strcpy (Catalogue[4].Titre, "Un long dimanche de fiançailles");
       strcpy (Catalogue[4].Auteur, "Sébastien Japrisot");
-      Catalogue[4].NombreExemplaires = 3;
-      Catalogue[4].ExemplairesEmpruntes = 2;
-      Catalogue[4].ExemplairesDisponibles = 1;
-      NombreOuvragesAuCatalogue++;
+      Catalogue[4].livre_nbex = 3;
+      Catalogue[4].livre_nbemprunts = 2;
+      Catalogue[4].livre_dispos = 1;
+      cat_nb_livres++;
 
       printf ("Catalogue initialisé avec 5 ouvrages\n");
 
@@ -110,26 +110,26 @@ main (int argc, char *argv[])
       strcpy (Annuaire[0].Prenom, "Daniel");
       Annuaire[0].nbPrets = 1;
       strcpy (Annuaire[0].Prets[0], "Le Soleil des Scorta");
-      NombreAdherentsDansAnnuaire++;
+      ann_nb_adhs++;
 
       strcpy (Annuaire[1].Nom, "Vinoux");
       strcpy (Annuaire[1].Prenom, "Cyrille");
       Annuaire[1].nbPrets = 0;
-      NombreAdherentsDansAnnuaire++;
+      ann_nb_adhs++;
 
       strcpy (Annuaire[2].Nom, "Guillard");
       strcpy (Annuaire[2].Prenom, "Myriam");
       Annuaire[2].nbPrets = 2;
       strcpy (Annuaire[2].Prets[0], "Un long dimanche de fiançailles");
       strcpy (Annuaire[2].Prets[1], "Da Vinci Code");
-      NombreAdherentsDansAnnuaire++;
+      ann_nb_adhs++;
 
       printf ("Annuaire initialisé avec 3 adhérents\n");
 
       /* Ecriture des données */
       //Si l'écriture ne se passe pas correctement, affichage erreur puis
       //sortie du programme avec erreur.
-      if (BdD_save (fAnnName)!=0){
+      if (bdd_save (fAnnName)!=0){
       	fprintf(stderr, "Erreur lors de l'écriture de la base de données");
 	exit(1);
       }
@@ -142,30 +142,30 @@ main (int argc, char *argv[])
     {
 
       /* On tente de lire les données */
-      BdD_chargement ();
-      if (NombreOuvragesAuCatalogue == 0)
+      bdd_load ();
+      if (cat_nb_livres == 0)
 	{
 	  printf ("Aucun livre dans le catalogue\n");
 	}
       else
 	{
 	  printf ("%d livre(s) dans le catalogue\n\n",
-		  NombreOuvragesAuCatalogue);
-	  for (i = 0; i < NombreOuvragesAuCatalogue; i++)
+		  cat_nb_livres);
+	  for (i = 0; i < cat_nb_livres; i++)
 	    {
 	      AfficherLivre (Catalogue[i]);
 	    }
 	}
 
-      if (NombreAdherentsDansAnnuaire == 0)
+      if (ann_nb_adhs == 0)
 	{
 	  printf ("Aucun adhérent dans l'annuaire\n");
 	}
       else
 	{
 	  printf ("%d adherents(s) dans l'annuaire\n\n",
-		  NombreAdherentsDansAnnuaire);
-	  for (i = 0; i < NombreAdherentsDansAnnuaire; i++)
+		  ann_nb_adhs);
+	  for (i = 0; i < ann_nb_adhs; i++)
 	    {
 	      AfficherAdherent (Annuaire[i]);
 	    }

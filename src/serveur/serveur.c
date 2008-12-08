@@ -83,14 +83,14 @@ traitement_serveur ()
     case Consulter_Titre:
     case Consulter_Adherent:
       /* accès en lecture uniquement */
-      BdD_acces_lecture_debut ();
-      BdD_chargement ();
+      bdd_acces_lecture_debut ();
+      bdd_load ();
       break;
     case Emprunter:
     case Rendre:
       /* accès en écriture */
-      BdD_acces_ecriture_debut ();
-      BdD_chargement ();
+      bdd_acces_ecriture_debut ();
+      bdd_load ();
       break;
     }
   /* ... traitement de la requète, préparation de la réponse ... */
@@ -105,13 +105,13 @@ traitement_serveur ()
     case Consulter_Titre:
     case Consulter_Adherent:
       /* accès en lecture uniquement */
-      BdD_acces_lecture_fin ();
+      bdd_acces_lecture_fin ();
       break;
     case Emprunter:
     case Rendre:
       /* accès en écriture */
-      BdD_sauvegarde ();
-      BdD_acces_ecriture_fin ();
+      bdd_sauvegarde ();
+      bdd_acces_ecriture_fin ();
       break;
     }
   /* ... */

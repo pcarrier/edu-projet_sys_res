@@ -7,20 +7,20 @@
 #define MaxNbPrets 5
 
 typedef struct {
-	char Nom[LongueurMaxNom + 1];	/*nom */
-	char Prenom[LongueurMaxNom + 1];	/*prenom */
+	char Nom[adh_nmax + 1];	/*nom */
+	char Prenom[adh_nmax + 1];	/*prenom */
 	unsigned int nbPrets;	/* le nombre de prêts */
-	char Prets[MaxNbPrets][LongueurMaxTitre + 1];	/* la liste des titres empruntés */
+	char Prets[MaxNbPrets][livre_lmax + 1];	/* la liste des titres empruntés */
 } Adherent;
 
 /* Définition de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-#define NombreMaximumDAdherents 50
-extern Adherent Annuaire[NombreMaximumDAdherents];
+#define nb_max_adhs 50
+extern Adherent Annuaire[nb_max_adhs];
 
 /* Valeur contenant le nombre d'adhérents actuellement dans l'annuaire */
-extern int NombreAdherentsDansAnnuaire;
+extern int ann_nb_adhs;
 
 /****************************************************************
 		Fonctions exportées par le module */

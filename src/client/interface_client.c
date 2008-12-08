@@ -57,8 +57,8 @@ interface_client ()
   int fin = 0;
   char *infos = NULL;
 
-  char auteur[LongueurMaxNom];	/*  nom de l'auteur dont le livre est à consulter/rendre */
-  char titre[LongueurMaxTitre];	/*  titre du livre à consulter/rendre */
+  char auteur[adh_nmax];	/*  nom de l'auteur dont le livre est à consulter/rendre */
+  char titre[livre_lmax];	/*  titre du livre à consulter/rendre */
 
   while (!fin)
     {
@@ -88,7 +88,7 @@ interface_client ()
 	case 't':
 	  fprintf (stdout, "<-- Consulter les livres par titre -->\n");
 	  fprintf (stdout, "Entrer un titre :");
-	  lire_chaine (titre, LongueurMaxTitre);
+	  lire_chaine (titre, livre_lmax);
 	  infos = client_consulter_titre (titre);
 	  break;
 

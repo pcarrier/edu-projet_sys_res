@@ -12,8 +12,8 @@
 /***********************************************/
 /* Définition des constantes de taille maximum */
 /***********************************************/
-#define NombreMaximumDeLivres 1000
-#define NombreMaximumDAdherents 50
+#define nb_max_livres 1000
+#define nb_max_adhs 50
 
 /**************************************/
 /* Déclaration des variables globales */
@@ -22,28 +22,28 @@
 /* Déclaration du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-extern Livre Catalogue[NombreMaximumDeLivres];
+extern Livre Catalogue[nb_max_livres];
 
 /* Valeur contenant le nombre de livre actuellement dans le catalogue */
-extern int NombreOuvragesAuCatalogue;
+extern int cat_nb_livres;
 
 /* Déclaration de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-extern Adherent Annuaire[NombreMaximumDAdherents];
+extern Adherent Annuaire[nb_max_adhs];
 
 /* Valeur contenant le nombre d'adhérents actuellement dans l'annuaire */
-extern int NombreAdherentsDansAnnuaire;
+extern int ann_nb_adhs;
 
 /*************************************/
 /* Fonctions exportées par le module */
 /*************************************/
 
-void BdD_acces_lecture_debut();
-void BdD_acces_lecture_fin();
-void BdD_acces_ecriture_debut();
-void BdD_acces_ecriture_fin();
-void BdD_chargement();
-int BdD_save();
+void bdd_acces_lecture_debut();
+void bdd_acces_lecture_fin();
+void bdd_acces_ecriture_debut();
+void bdd_acces_ecriture_fin();
+void bdd_load();
+int bdd_save();
 
 #endif

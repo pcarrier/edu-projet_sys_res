@@ -13,25 +13,25 @@
 		Déclaration des types et variables du module */
 
 /* Longueur des champs pour la définition de la structure Livre */
-#define LongueurMaxTitre  50
-#define LongueurMaxNom 50
+#define livre_lmax  50
+#define adh_nmax 50
 
 typedef struct {
-	char Titre[LongueurMaxTitre + 1];	/* le titre du livre. +1 pour pouvoir gerer le '\0' à la fin des chaines */
-	char Auteur[LongueurMaxNom + 1];	/* L'auteur ou les auteurs du livre, soit son nom et prénom ou son nom d'écrivain */
-	unsigned int NombreExemplaires;	/* le nombre d'exemplaires que possède la bibliothèque */
-	unsigned int ExemplairesEmpruntes;	/* Le nombre d'exemplaires empruntés */
-	unsigned int ExemplairesDisponibles;	/* Ceux qui sont disponibles */
+	char Titre[livre_lmax + 1];	/* le titre du livre. +1 pour pouvoir gerer le '\0' à la fin des chaines */
+	char Auteur[adh_nmax + 1];	/* L'auteur ou les auteurs du livre, soit son nom et prénom ou son nom d'écrivain */
+	unsigned int livre_nbex;	/* le nombre d'exemplaires que possède la bibliothèque */
+	unsigned int livre_nbemprunts;	/* Le nombre d'exemplaires empruntés */
+	unsigned int livre_dispos;	/* Ceux qui sont disponibles */
 } Livre;
 
 /* Définition du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-#define NombreMaximumDeLivres 1000
-extern Livre Catalogue[NombreMaximumDeLivres];
+#define nb_max_livres 1000
+extern Livre Catalogue[nb_max_livres];
 
 /* Valeur contenant le nombre de livre actuellement dans le catalogue */
-extern int NombreOuvragesAuCatalogue;
+extern int cat_nb_livres;
 
 /****************************************************************
 		Code d'erreur renvoyés par les fonctions du module */

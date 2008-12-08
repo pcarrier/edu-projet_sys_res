@@ -14,11 +14,11 @@
     Déclaration des variables conformément au fichier .h */
 
 /* Déclaration de l'annuaire contenant au maximum NombreMaximumDeAdherents */
-Adherent Annuaire[NombreMaximumDAdherents];
+Adherent Annuaire[nb_max_adhs];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
-int NombreAdherentsDansAnnuaire = 0;	/* par défault, aucun adherent */
+int ann_nb_adhs = 0;	/* par défault, aucun adherent */
 
 /****************************************************************
     Ecriture des fonctions nécessaires au fonctionnement du module */
@@ -58,13 +58,13 @@ LireAnnuaire (const char *NomFichier)
 
   /* On lit au maximum NombreMaximumDeAdherents adhérents depuis le fichier */
   NombreAdherentsLus =
-    fread (Annuaire, sizeof (Adherent), NombreMaximumDAdherents, Fichier);
+    fread (Annuaire, sizeof (Adherent), nb_max_adhs, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);
 
   /* Mise a jours des variables du module et retour du résultat */
-  NombreAdherentsDansAnnuaire = NombreAdherentsLus;
+  ann_nb_adhs = NombreAdherentsLus;
 
   return NombreAdherentsLus;
 }
@@ -100,11 +100,11 @@ EcrireAnnuaire (const char *NomFichier)
     }
 
   /* Ecriture des adhérents s'il y en a dans le repertoire */
-  if (NombreAdherentsDansAnnuaire != 0)
+  if (ann_nb_adhs != 0)
     {
       NombreAdherentsEcrits =
 	fwrite (Annuaire, sizeof (Adherent),
-		NombreAdherentsDansAnnuaire, Fichier);
+		ann_nb_adhs, Fichier);
     }
 
   /* Fermeture du fichier */
