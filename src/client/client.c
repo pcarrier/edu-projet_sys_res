@@ -1,15 +1,16 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <curses.h>		/* Primitives de gestion d'écran */
+#include <unistd.h>
 #include <sys/signal.h>
 #include <sys/wait.h>
 #include <string.h>
 
-#include <reseau/fon.h>		/* primitives de la boite a outils */
-#include <reseau/protocole.h>	/* structures de données pour communication client <->serveur */
+#include <reseau/fon.h>
+#include <reseau/protocole.h>
 #include <donnees/donnees.h>
-#include "client.h"
 #include <common.h>
+#include "client.h"
 
 void client_appli (char *serveur, char *service, char *protocole);
 extern void interface_client ();
@@ -18,23 +19,10 @@ static char serveur_courant[LongMaxServeur] = SERVEUR_DEFAUT;
 static char service_courant[LongMaxService] = PORT_DEFAUT;
 static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
 
-
-/*------------------------------------------------------------------*/
-/* CLIENT															*/
-/*------------------------------------------------------------------*/
-
 char *
-client_init (int *argc, char **argv)
+client_init (int argc, char **argv)
 {
-
-  printf
-    ("-------------------------------------------------------------------------------------------------\n");
-  printf
-    ("Usage : client serveur(nom ou @IP) service (nom ou port)  protocole (tcp ou udp)\n");
-  printf
-    ("Tous les arguments sont optionnels, si omis, des valeurs par défaut sont utilisés.\n");
-  printf
-    ("-------------------------------------------------------------------------------------------------\n");
+  while ((c = get
 
   /* Permet de passer un nombre de parametre variable a l'executable */
   switch (*argc)
@@ -65,10 +53,6 @@ client_init (int *argc, char **argv)
   return "OK";
 }
 
-/*------------------------------------------------------------------*/
-/* client_ouvrir_session											*/
-/*------------------------------------------------------------------*/
-
 char *
 client_ouvrir_session ()
 {
@@ -85,15 +69,11 @@ client_ouvrir_session ()
   return "OK";
 }
 
-/*****************************************************************************/
-
 char *
 client_emprunter_livre (char *auteur, char *titre)
 {
   return "OK";
 }
-
-/*****************************************************************************/
 
 char *
 client_consulter_titre (char *titre)
@@ -107,15 +87,11 @@ client_consulter_auteur (char *auteur)
   return "OK";
 }
 
-/*****************************************************************************/
-
 char *
 client_rendre_livre (char *auteur, char *titre)
 {
   return "OK";
 }
-
-/*****************************************************************************/
 
 char *
 client_consulter_adherent (char *nom)
@@ -123,10 +99,20 @@ client_consulter_adherent (char *nom)
   return "OK";
 }
 
-/*****************************************************************************/
-
 char *
 client_fermer_session ()
 {
   return "OK";
+}
+
+int
+main (int argc, char **argv)
+{
+  int c;
+  while ((c = getopt(argc, argv, "p:P:
+  client_init (&argc, argv);
+  /* Lancement de l'interface client */
+  interface_client ();
+
+  return 0;
 }

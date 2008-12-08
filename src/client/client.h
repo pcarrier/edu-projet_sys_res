@@ -6,9 +6,9 @@
  */
 
 /*!
- * \brief Initialisation de la connexion
+ * \brief Initialisation du client
  *
- * Test
+ * Charge les paramètres
  */
 char *client_init(int *argc, char **argv);
 
