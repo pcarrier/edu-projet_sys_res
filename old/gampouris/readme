@@ -1,0 +1,51 @@
+Fichiers fournis :
+	
+- serveur.c : implémentation du serveur.
+     A COMPLETER.
+	Contient la fonction main du serveur qui se charge de 
+	l'initialisation de la partie réseau du serveur et du 
+	lancement de la boucle de traitement des requêtes des clients.
+	
+- interface_client.c : implémentation de l'interface du client.
+     A COMPLETER.
+	Contient la fonction main du client qui se charge de
+	l'initialisation de la partie réseau et du lancement de l'interface
+	qui intéragit avec l'utilisateur.
+	
+- client (.c .h) : implémentation de la partie réseau du client. 
+     A COMPLETER.
+	client.c est A COMPLETER avec TCP
+	
+- protocole.h : déclaration des types concernant le protocole.
+     FOURNI
+	Définit les structures de données pour les échanges 
+	entre les clients et le serveur. Si vous le désirez, vous
+	pouvez modifier ces structures.
+	
+- GestionLivres (.c,.h) : gestion des livres de la bibliothèque
+     FOURNI
+	Définition des structures de données et des primitives 
+	de lecture et d'écriture du fichier catalogue.
+	
+- GestionAdherents (.c,.h) : gestion des adhérents de la bibliothèque
+     FOURNI
+	Définition des structures de données et des primitives 
+	de lecture et d'écriture du fichier annuaire.
+	
+- fon (.c .h) : boîte à outils
+     FOURNI
+	Fonctions pour manipuler les sockets pour les protocoles TCP et UDP.	
+				
+- GestionDonnées.c : manipulation de la bibliothèque.
+     FOURNI
+	Permet la création de deux fichiers pour le catalogue de
+	livres et l'annuaire des adhérents.
+	L'initialisation est faite avec 5 livres et 3 adhérents.
+	Permet également la consultation de ces deux fichiers.
+	
+- Makefile : compilation automatique du projet
+     FOURNI
+	Il suffit de tapper 'make' pour (re)compiler tous les fichiers
+	nécessaires. Si vous ajoutez des fichiers sources, il faudra
+	éventuellement compléter ce fichier.
+
