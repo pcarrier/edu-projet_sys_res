@@ -14,7 +14,7 @@
     Déclaration des variables conformément au fichier .h */
 
 /* Déclaration de l'annuaire contenant au maximum nb_max_adherents */
-adherent_t Annuaire[nb_max_adhs];
+adherent_t Annuaire[ADHS_NBMAX];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
@@ -58,7 +58,7 @@ LireAnnuaire (const char *NomFichier)
 
   /* On lit au maximum nb_max_adherents adhérents depuis le fichier */
   nb_adherents_lus =
-    fread (Annuaire, sizeof (adherent_t), nb_max_adhs, Fichier);
+    fread (Annuaire, sizeof (adherent_t), ADHS_NBMAX, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);

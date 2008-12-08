@@ -6,8 +6,8 @@
 /* Définition de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-#define nb_max_adhs 50
-extern adherent_t Annuaire[nb_max_adhs];
+#define ADHS_NBMAX 50
+extern adherent_t Annuaire[ADHS_NBMAX];
 
 /* Valeur contenant le nombre d'adhérents actuellement dans l'annuaire */
 extern int ann_nb_adhs;

@@ -14,5 +14,5 @@ getline (char *prompt)
 char *
 getcommande ()
 {
-
+  
 }

@@ -1,5 +1,5 @@
 /*!
- * \mainpage Test
+ * \mainpage
  *
  * \section Intro
  *
