@@ -9,11 +9,11 @@
 #ifndef __GESTIONLIVRES_H__
 #define __GESTIONLIVRES_H__
 #include <donnees/types.h>
+#include <common.h>
 /****************************************************************
  Définition du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module */
-#define LIVRES_NBMAX 1000
 extern livre_t Catalogue[LIVRES_NBMAX];
 
 /* Valeur contenant le nombre de livre actuellement dans le catalogue */
