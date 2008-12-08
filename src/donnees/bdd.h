@@ -11,18 +11,10 @@
  * Inclusion du header donnees.h
  */
 #include "donnees.h"
-
+#include <common.h>
 /***********************************************/
 /* Définition des constantes de taille maximum */
 /***********************************************/
-/**
- * Constante représentant le nombre maximum de livre dans le catalogue.
- */
-#define LIVRES_NBMAX 1000
-/*
- * Constante représentant le nombre maximum des adhésions.
- */
-#define ADHS_NBMAX 50
 
 /**************************************/
 /* Déclaration des variables globales */
