@@ -2,7 +2,8 @@
  * \file prompt.h
  * \brief Interactions à travers un prompt
  *
- * Test
+ * Saisie de commandes à travers GNU readline, et interprétation des résultats
+ *
  */
 
 /*!
@@ -10,4 +11,4 @@
  *
  * Récupère une ligne, la place dans l'historique et la renvoie.
  */
-char *getline();
+char *getline(char *prompt);

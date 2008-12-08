@@ -3,10 +3,15 @@
 #include <readline/history.h>
 
 char *
-getline ()
+getline (char *prompt)
 {
   char *line;
-  line = readline ("> ");
+  line = readline (prompt);
   add_history (line);
   return (line);
+}
+
+char *
+getcommande () {
+
 }
