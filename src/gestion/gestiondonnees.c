@@ -127,7 +127,8 @@ main (int argc, char *argv[])
       printf ("Annuaire initialisé avec 3 adhérents\n");
 
       /* Ecriture des données */
-      //TODO : pass file as arguments to BdD_sauvegarde().
+      //Si l'écriture ne se passe pas correctement, affichage erreur puis
+      //sortie du programme avec erreur.
       if (BdD_sauvegarde (fAnnName)!=0){
       	fprintf(stderr, "Erreur lors de l'écriture de la base de données");
 	exit(1);
