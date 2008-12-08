@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <common.h>
 
 void
 client_doc_syntaxe (char *progname)
