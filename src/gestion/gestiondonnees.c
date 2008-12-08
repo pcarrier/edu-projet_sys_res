@@ -146,8 +146,6 @@ main (int argc, char *argv[])
       /* On tente de lire les données */
       if( bdd_load_catalogue (fCatName)==-1){exit(1);}
       if( bdd_load_annuaire (fAnnName)==-1){exit(1);}
-
-
      	}
       else
 	{
