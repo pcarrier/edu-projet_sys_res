@@ -135,6 +135,7 @@ main (int argc, char *argv[])
 
       /* Ecriture des données */
       //Si l'écriture ne se passe pas correctement, sortie forcée du programme avec erreur.
+      printf("%s %s", fCatName, fAnnName);
       if(bdd_save_catalogue (fCatName)==-1){exit(1);}
       if(bdd_save_annuaire (fAnnName)==-1){exit(1);}
 

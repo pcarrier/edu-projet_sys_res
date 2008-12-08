@@ -7,32 +7,49 @@
   données de la bibliothèque.
  */
 
+/**
+ * Inclusion du header donnees.h
+ */
 #include "donnees.h"
 
 /***********************************************/
 /* Définition des constantes de taille maximum */
 /***********************************************/
+/**
+ * Constante représentant le nombre maximum de livre dans le catalogue.
+ */
 #define nb_max_livres 1000
+/*
+ * Constante représentant le nombre maximum des adhésions.
+ */
 #define nb_max_adhs 50
 
 /**************************************/
 /* Déclaration des variables globales */
 /**************************************/
 
-/* Déclaration du catalogue et de sa taille maximum en nombre de livres
+/**
+ * Déclaration du catalogue et de sa taille maximum en nombre de livres
    sous optimum en gestion mémoire mais facilite votre utilisation
-   de ce module */
+   de ce module
+  */
 extern livre_t Catalogue[nb_max_livres];
 
-/* Valeur contenant le nombre de livre actuellement dans le catalogue */
+/**
+ *   Valeur contenant le nombre de livre actuellement dans le catalogue
+ */
 extern int cat_nb_livres;
 
-/* Déclaration de l'annuaire et de sa taille maximum en nombre d'adhérents
+/**
+ * Déclaration de l'annuaire et de sa taille maximum en nombre d'adhérents
    sous optimum en gestion mémoire mais facilite votre utilisation
-   de ce module */
+   de ce module
+ */
 extern adherent_t Annuaire[nb_max_adhs];
 
-/* Valeur contenant le nombre d'adhérents actuellement dans l'annuaire */
+/**
+ * Valeur contenant le nombre d'adhérents actuellement dans l'annuaire 
+*/
 extern int ann_nb_adhs;
 
 /*************************************/
