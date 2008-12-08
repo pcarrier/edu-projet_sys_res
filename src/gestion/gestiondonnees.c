@@ -149,7 +149,20 @@ main (int argc, char *argv[])
     {
 
       /* On tente de lire les données */
-      bdd_load ();
+      int bd_load_ret=bdd_load (fAnnName, fCatName);
+      
+      switch(bd_load_ret){
+      	case(RErrAnn):
+      		fprintf(stderr, "Erreur lors de la lecture de la base de données %s\n",fAnnName);
+		exit(1);
+	case(RErrCat):
+      		fprintf(stderr, "Erreur lors de la lecture  de la base de données %s.\n",fCatName);
+		exit(1);
+	case(RErrCat + RerrAnn):
+      		fprintf(stderr, "Erreur lors de la lecture des bases de données %s et %s.\n",fAnnName, fCatName);
+		exit(1);
+
+      }
       if (cat_nb_livres == 0)
 	{
 	  printf ("Aucun livre dans le catalogue\n");
