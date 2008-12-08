@@ -97,4 +97,5 @@ void BdD_sauvegarde()
 {
 	/* A COMPLETER
 	 */
+	printf("Hello sauvegarde\n");
 }

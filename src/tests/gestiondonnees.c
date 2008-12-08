@@ -6,6 +6,9 @@
 #include <string.h>
 #include "donnees/bdd.h"
 
+/*Censé etre utile à Getopt*/
+#include <ctype.h>
+#include <unistd.h>
 void Usage(const char *NomProgramme)
 {
 	fprintf(stderr, "Usage : %s [-c|-l]\n", NomProgramme);
@@ -22,10 +25,30 @@ int main(int argc, char *argv[])
 	   - le second est le debut d'une option
 	   - le dernier n'est pas le début d'une option et n'est pas vide */
 
-	if (argc != 2 || argv[1][0] != '-') {
+//	if (argc != 2 || argv[1][0] != '-') {
 		/* Usage affiche l'aide sur le programme */
-		Usage(argv[0]);
-		return 1;
+//		Usage(argv[0]);
+//		return 1;
+//	}
+	int cflag=0;
+	int lflag=0;
+	int fflag=0;
+	char * fvalue=NULL;
+	int c=0;
+	opterror=0;
+
+	while((c=getopt(argc, argv, "clf:"))!=-1)
+	{
+		switch(c){
+			case 'c':
+				cflag=1;
+			case 'l':
+				lflag=1;
+			case 'f':
+				fflag=1;
+				fvalue=optarg;
+				printf("%s", fvalue);
+		}
 	}
 
 	if (!strcmp(argv[1], "-c")) {	/* creation données */
@@ -116,7 +139,6 @@ int main(int argc, char *argv[])
 				AfficherAdherent(Annuaire[i]);
 			}
 		}
-
 	} else
 		Usage(argv[0]);
 
