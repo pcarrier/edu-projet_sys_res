@@ -9,6 +9,8 @@
 #include <ctype.h>
 #include <unistd.h>
 
+#define FANNNAME "annuaire.db"
+#define FCATNAME "catalogue.db"
 void
 Usage (const char *NomProgramme)
 {
@@ -43,24 +45,31 @@ main (int argc, char *argv[])
   int c = 0;
   opterr = 0;
 
-  while ((c = getopt (argc, argv, "clad:")) != -1)
+  while ((c = getopt (argc, argv, "clad")) != -1)
     {
       switch (c)
 	{
 	case 'c':
 	  cflag = 1;
+	  break;
 	case 'l':
 	  lflag = 1;
+	  break;
 	case 'a':
 	  fAnnFlag = 1;
 	  fAnnName = optarg;
-	  printf ("\nValeur de fAnnName : %s\n", fAnnName);
+	  break;
 	case 'd':
 	 fCatFlag=1;
 	 fCatName=optarg;
-	 printf ("\nValeur de fCatName : %s\n", fCatName);
+	 break;
 	}
     }
+    if(fCatFlag==0){fCatName=FCATNAME;}
+    if(fAnnFlag==0){fAnnName=FANNNAME;}
+	
+    printf ("\nValeur de fAnnName : %s\n", fAnnName);
+     printf ("\nValeur de fCatName : %s\n", fCatName);
 
  // if (!strcmp (argv[1], "-c"))
  if(cflag)
