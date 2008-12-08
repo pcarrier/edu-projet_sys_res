@@ -1,6 +1,8 @@
 /*!
  * \file prompt.h
  * \brief Interactions à travers un prompt
+ *
+ * Test
  */
 
 /*!
