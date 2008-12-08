@@ -109,13 +109,3 @@ EcrireCatalogue (const char *NomFichier)
   /* On retourne le nombre de livres écrits dans le fichier */
   return nb_livres_ecrits;
 }
-/*
-void afficher_livre (livre_t l)
-{
-  fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
-  fprintf (stderr, "Nombre d'exemplaires : %u\n", l.livre_nbex);
-  fprintf (stderr, "Exemplaires empruntés : %u\n", l.livre_nbemprunts);
-  fprintf (stderr, "Exemplaires disponibles : %u\n\n", l.livre_dispos);
-
-}
-*/

@@ -50,7 +50,4 @@ int LireCatalogue (const char *NomFichier);
 
 */
 int EcrireCatalogue (const char *NomFichier);
-
-void afficher_livre (livre_t l);
-
 #endif // ifndef __GESTIONLIVRES_H__
