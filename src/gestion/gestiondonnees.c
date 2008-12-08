@@ -9,6 +9,8 @@
 #include <ctype.h>
 #include <unistd.h>
 
+#define FANNNAME "annuaire.db"
+#define FCATNAME "catalogue.db"
 void
 Usage (const char *NomProgramme)
 {
@@ -43,26 +45,31 @@ main (int argc, char *argv[])
   int c = 0;
   opterr = 0;
 
-  while ((c = getopt (argc, argv, "clad:")) != -1)
+  while ((c = getopt (argc, argv, "cla:d:")) != -1)
     {
       switch (c)
 	{
 	case 'c':
 	  cflag = 1;
+	  break;
 	case 'l':
 	  lflag = 1;
+	  break;
 	case 'a':
 	  fAnnFlag = 1;
 	  fAnnName = optarg;
-	  printf ("\nValeur de fAnnName : %s\n", fAnnName);
+	  break;
 	case 'd':
 	 fCatFlag=1;
 	 fCatName=optarg;
-	 printf ("\nValeur de fCatName : %s\n", fCatName);
+	 break;
 	}
     }
+   //On attribue les valeur par défaut si les noms n'ont pas été donnés en paramètre.
+    if(fCatFlag==0){fCatName=FCATNAME;}
+    if(fAnnFlag==0){fAnnName=FANNNAME;}
+	
 
- // if (!strcmp (argv[1], "-c"))
  if(cflag)
     {				/* creation données */
       strcpy (Catalogue[0].Titre, "Da Vinci Code");
@@ -123,6 +130,7 @@ main (int argc, char *argv[])
       printf ("Annuaire initialisé avec 3 adhérents\n");
 
       /* Ecriture des données */
+      //TODO : pass file as arguments to BdD_sauvegarde().
       BdD_sauvegarde ();
 
 	/*----------------------------------------------------*/
