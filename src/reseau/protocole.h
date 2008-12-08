@@ -30,7 +30,7 @@ enum retour_e
   operation_impossible = -1,
   inexistant = 0,
   trouve = 1
-}
+};
 
 /*!
  * Requêtes du client au serveur
