@@ -106,7 +106,7 @@ int
 BdD_sauvegarde (char * annuaire)
 {
   BdD_acces_lecture_debut();
-  file=fopen(annuaire,"w");
+  FILE * file=fopen(annuaire,"w");
 
   int nbItemEcrits = fwrite(&Annuaire, sizeof(Annuaire) , NombreAdherentsDansAnnuaire, file);
 
