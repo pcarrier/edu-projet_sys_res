@@ -134,20 +134,9 @@ main (int argc, char *argv[])
       printf ("Annuaire initialisé avec 3 adhérents\n");
 
       /* Ecriture des données */
-      //Si l'écriture ne se passe pas correctement, affichage erreur puis
-      //sortie du programme avec erreur.
-      int bdd_save_ret = bdd_save (fAnnName, fCatName);
-      switch (bdd_save_ret)
-	{
-	case (ParametresIncorects):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données : paramètres incorects.\n");
-	  exit (1);
-	case (OuvertureFichierImpossible):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données : ouverture impossible\n");
-	  exit (1);
-	}
+      //Si l'écriture ne se passe pas correctement, sortie forcée du programme avec erreur.
+      if(bdd_save_catalogue (fCatName)==-1){exit(1);}
+      if(bdd_save_annuaire (fAnName)==-1){exit(1)};
 
 	/*----------------------------------------------------*/
       /* lecture catalogue */
@@ -155,19 +144,11 @@ main (int argc, char *argv[])
   else if (lflag)
     {
       /* On tente de lire les données */
-      int bd_load_ret = bdd_load (fAnnName, fCatName);
+      if( bdd_load_catalogue (fCatName)==-1){exit(1);}
+      if( bdd_load_annuaire (fAnnName)==-1){exit(1);}
 
-      switch (bd_load_ret)
-	{
-	case (ParametresIncorects):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données : paramètres incorects.\n");
-	  exit (1);
-	case (OuvertureFichierImpossible):
-	  fprintf (stderr,
-		   "Erreur lors de l'écriture de la base de données : ouverture impossible\n");
-	  exit (1);
-	}
+
+     	}
       else
 	{
 	  printf ("%d livre(s) dans le catalogue\n\n", cat_nb_livres);
