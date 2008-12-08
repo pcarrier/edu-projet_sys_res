@@ -23,6 +23,8 @@
 #include <reseau/protocole.h>	/* Types pour la communication client <-> serveur */
 #include <common.h>
 
+#include <ctype.h>
+#include <unistd.h>
 void serveur_appli (char *service, char *protocole);	/* programme serveur */
 
 static char service_courant[LongMaxService] = PORT_DEFAUT;
@@ -32,10 +34,22 @@ static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
 /* SERVEUR															*/
 /*------------------------------------------------------------------*/
 
+void Usage(){
+  printf
+    ("-------------------------------------------------------------------------------------------------\n");
+  printf
+    ("Usage : %s serveur(nom ou @IP) service (nom ou port)  protocole (tcp ou udp)\n",
+     argv[0]);
+  printf
+    ("Tous les arguments sont optionnels, si omis, des valeurs par défaut sont utilisés.\n");
+  printf
+    ("-------------------------------------------------------------------------------------------------\n");
+
+}
 int
 serveur_init (int *argc, char *argv[])
 {
-  printf ("%d\n", *argc);
+  // printf ("%d\n", *argc);
   /* Permet de passer un nombre de parametre variable a l'executable */
   switch (*argc)
     {
@@ -128,15 +142,6 @@ int
 main (int argc, char **argv)
 {
 
-  printf
-    ("-------------------------------------------------------------------------------------------------\n");
-  printf
-    ("Usage : %s serveur(nom ou @IP) service (nom ou port)  protocole (tcp ou udp)\n",
-     argv[0]);
-  printf
-    ("Tous les arguments sont optionnels, si omis, des valeurs par défaut sont utilisés.\n");
-  printf
-    ("-------------------------------------------------------------------------------------------------\n");
 
   /* Initialisation de la partie réseau du client */
   serveur_init (&argc, argv);
