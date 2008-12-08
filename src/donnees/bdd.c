@@ -114,7 +114,7 @@ bdd_load_annuaire (char * annuaire)
     return RErrAnn;
   }
 
-  int nbItemLu = fread(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
+  fread(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
 
   fclose(file);
   bdd_acces_lecture_fin();
@@ -136,7 +136,7 @@ bdd_load_catalogue (char * catalogue)
     return RErrCat;
   }
 
-  int nbItemLu = fread(&Catalogue, sizeof(Catalogue) , cat_nb_livres, file);
+  fread(&Catalogue, sizeof(Catalogue) , cat_nb_livres, file);
 
   fclose(file);
   bdd_acces_lecture_fin();
@@ -162,7 +162,7 @@ bdd_save_annuaire (char * annuaire)
   bdd_acces_ecriture_debut();
   FILE * file=fopen(annuaire,"w+b");
 
-  int nbItemEcrits = fwrite(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
+  int nbItemEcrits = (int) fwrite(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
 
   fclose(file);
   bdd_acces_ecriture_fin();
@@ -183,7 +183,7 @@ bdd_save_catalogue (char * catalogue){
   bdd_acces_ecriture_debut();
   FILE * file=fopen(catalogue,"w+b");
 
-  int nbItemE = fwrite(&Catalogue, sizeof(Catalogue), cat_nb_livres, file);
+  int nbItemE = (int) fwrite(&Catalogue, sizeof(Catalogue), cat_nb_livres, file);
 
   fclose(file);
   bdd_acces_ecriture_fin();
