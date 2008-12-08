@@ -46,14 +46,14 @@ LireAnnuaire (const char *NomFichier)
 
   /* Tests des paramètres: pointeur NULL ou chaîne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
-    return ParametresIncorrects;
+    return bdd_err_params_incorrects;
 
   /* Tentative d'ouverture du fichier en lecture binaire et vérification */
   Fichier = fopen (NomFichier, "rb");
   if (Fichier == NULL)
     {
       /* Impossible d'ouvrir le fichier */
-      return OuvertureFichierImpossible;
+      return bdd_err_fopen_impossible;
     }
 
   /* On lit au maximum nb_max_adherents adhérents depuis le fichier */
@@ -89,14 +89,14 @@ EcrireAnnuaire (const char *NomFichier)
 
   /* Tests des paramètres: pointeur NULL ou chaîne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
-    return ParametresIncorrects;
+    return bdd_err_params_incorrects;
 
   /* Tentative d'ouverture du fichier en écriture binaire et vérification */
   Fichier = fopen (NomFichier, "wb");
   if (Fichier == NULL)
     {
       /* Impossible d'ouvrir le fichier */
-      return OuvertureFichierImpossible;
+      return bdd_err_fopen_impossible;
     }
 
   /* Ecriture des adhérents s'il y en a dans le repertoire */
