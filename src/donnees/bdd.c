@@ -94,11 +94,55 @@ bdd_acces_ecriture_fin ()
    variables globales cat_nb_livres et
    ann_nb_adhs)
 */
-void
-bdd_load ()
+int
+bdd_load (char * annuaire, char * catalogue){
+  int retAnnuaire = bdd_load_annuaire(annuaire);
+  int retCatalogue = bdd_load_catalogue(catalogue);
+
+  return retAnnuaire + retCatalogue
+ 
+}
+
+
+int
+bdd_load_annuaire (char * annuaire)
 {
-  /* A COMPLETER
-   */
+  bdd_acces_lecture_debut();
+  FILE * file=fopen(annuaire,"r");
+
+  if (file == NULL){
+    return RErrAnn;
+  }
+
+  int nbItemLu = fread(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
+
+  fclose(file);
+  bdd_acces_lecture_fin();
+  printf ("Fichier Chargé\n");
+
+  return 0;
+}
+
+
+
+
+int
+bdd_load_catalogue (char * catalogue)
+{
+  bdd_acces_lecture_debut();
+  FILE * file=fopen(catalogue,"r");
+
+  if (file == NULL){
+    return RErrCat;
+  }
+
+  int nbItemLu = fread(&Catalogue, sizeof(Catalogue) , cat_nb_livr, file);
+
+  fclose(file);
+  bdd_acces_lecture_fin();
+  printf ("Fichier Chargé\n");
+
+  return 0;
 }
 
 /* Sauvegarde des données depuis la mémoire vers le ou les fichiers
@@ -115,13 +159,13 @@ bdd_save(char * annuaire, char * catalogue){
 int
 bdd_save_annuaire (char * annuaire)
 {
-  bdd_acces_lecture_debut();
+  bdd_acces_ecriture_debut();
   FILE * file=fopen(annuaire,"w");
 
   int nbItemEcrits = fwrite(&Annuaire, sizeof(Annuaire) , ann_nb_adhs, file);
 
   fclose(file);
-  bdd_acces_lecture_fin();
+  bdd_acces_ecriture_fin();
   printf ("Fichié Sauvegardé\n");
 
   if (nbItemEcrits != ann_nb_adhs){
@@ -134,13 +178,13 @@ bdd_save_annuaire (char * annuaire)
 
 int
 bdd_save_catalogue (char * catalogue){
-  bdd_acces_lecture_debut();
+  bdd_acces_ecriture_debut();
   FILE * file=fopen(catalogue,"w");
 
   int nbItemEcrits = fwrite(&Catalogue, sizeof(Catalogue), cat_nb_livre, file);
 
   fclose(file);
-  bdd_acces_lecture_fin();
+  bdd_acces_ecriture_fin();
   printf ("Fichié Sauvegardé\n");
 
   if (nbItemEcrits != cat_nb_livre){
