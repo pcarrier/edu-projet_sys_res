@@ -4,10 +4,10 @@ void
 client_doc_syntaxe (char *progname)
 {
   fprintf (stderr, "Usage: %s [-p port] [-t] [host]\n"
-		   "  -p port: utiliser le port p plutot que " PORT_DEFAUT "\n",
-		   "  -u: utiliser TCP plutot que UDP ;\n",
-		   "  host: hote a utiliser au lieu de " SERVEUR_DEFAUT "\n",
-		   progname);
+	   "  -p port: utiliser le port p plutot que " PORT_DEFAUT "\n",
+	   "  -u: utiliser TCP plutot que UDP ;\n",
+	   "  host: hote a utiliser au lieu de " SERVEUR_DEFAUT "\n",
+	   progname);
 }
 
 /*!
@@ -17,7 +17,7 @@ void
 client_doc_commandes ()
 {
   fprintf (stdout, "[Commandes disponibles]\n"
-	   "  ouvrir, fermer, titre, auteur, emprunter, rendre, quitter\n");
+	   "  ouvrir, fermer, titre, auteur, emprunter, rendre, adherent, quitter\n");
 }
 
 /*!
@@ -32,7 +32,6 @@ client_doc_ouvrir ()
 /*!
  * \brief Affichage de la syntaxe de fermeture de session
  */
-
 void
 client_doc_fermer ()
 {
@@ -52,6 +51,17 @@ client_doc_emprunt ()
 }
 
 /*!
+ * \brief Affichage de la syntaxe de retour de livre
+ */
+void
+client_doc_retour ()
+{
+  fprintf (stdout, "[retour]\n"
+	   "  Usage: retour a l\n"
+	   "  L'adhérent de référence 'a' retourne le livre de référence 'l'.\n");
+}
+
+/*!
  * \brief Affichage de la syntaxe de la consultation d'auteur
  */
 void
@@ -59,7 +69,7 @@ client_doc_livre ()
 {
   fprintf (stdout, "[titre]\n"
 	   "  Usage: titre t\n"
-	   "  Affiche les informations du livre de titre 't'.\n");
+	   "  Affiche les informations sur livre de titre 't'.\n");
 }
 
 /*!
@@ -70,26 +80,26 @@ client_doc_auteur ()
 {
   fprintf (stdout, "[auteur]\n"
 	   "  Usage: auteur a\n"
-	   "  Liste les titres ayant pour auteur 'a'.\n");
-
-
-/*!
- * \brief Affichage de la syntaxe de retour de livre
- */
-  void client_doc_retour ()
-  {
-    fprintf (stdout, "[retour]\n" "  Usage: ");
+	   "  Liste les titres dont l'auteur a pour nom 'a'.\n");
+}
 
 /*!
  * \brief Affichage de la syntaxe de la consultation d'un adhérent
  */
-    void client_doc_adherent ();
-
+void
+client_doc_adherent ()
+{
+  fprintf (stdout, "[adherent]\n"
+	   "  Usage: adherent a\n"
+	   "  Affiche les informations sur l'adhérent ayant pour nom 'a'.\n");
+}
 
 /*!
- * \brief Affichage de la syntaxe d'ouverture de session
+ * \brief Affichage de la syntaxe de fermeture de session
  */
-    void client_doc_session ()
-    {
-      return;
-    }
+void
+client_doc_quitter ()
+{
+  fprintf (stdout, "[quitter]\n"
+	   "  Usage: quitter\n" "  Quitte le logiciel\n");
+}
