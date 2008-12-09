@@ -41,9 +41,9 @@ client_consulter_titre (char *titre)
 {
   prot_requete_t req;
   req.operation = op_consulter_titre;
-  req.param = titre;
+  strncpy (req.param, titre, PARAM_LMAX);
   client_envoyer_requete (&req);
-  return("TODO\n");
+  return "TODO\n";
 }
 
 char *
