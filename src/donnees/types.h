@@ -4,7 +4,7 @@
 /* Définition des constantes de taille maximum */
 /***********************************************/
 
-#define LIVRE_LMAX  50
+#define LIVRE_LMAX 50
 #define ADH_NMAX 50
 #define PRETS_NBMAX 5
 
@@ -25,13 +25,17 @@ typedef struct
 {
   char nom[ADH_NMAX + 1];	/*nom */
   char prenom[ADH_NMAX + 1];	/*prenom */
-  unsigned int nb_prets;		/* le nombre de prêts */
+  unsigned int nb_prets;	/* le nombre de prêts */
   char prets[PRETS_NBMAX][LIVRE_LMAX + 1];	/* la liste des titres empruntés */
 } adherent_t;
 
 
 /****************************************************************
 		Code d'erreur renvoyés par les fonctions du module */
-typedef enum { bdd_err_params_incorrects = -1, bdd_err_fopen_impossible = -2 } bdd_erreur_e;
+typedef enum
+{
+  bdd_err_params_incorrects = -1,
+  bdd_err_fopen_impossible = -2
+} bdd_erreur_e;
 
 #endif
