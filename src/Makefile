@@ -24,10 +24,10 @@ CFLAGS += -I.
 
 # Si la ligne suivante est décommentée, du code de debug est compilé
 # dans fon.c. Il permet d'observer les messages.
-CPPFLAGS += -DDEBUG
+#CPPFLAGS += -DDEBUG
 
 # Permet de compiler la solution (enseignants seulement)
-CPPFLAGS += -DSOLUTION
+#CPPFLAGS += -DSOLUTION
 
 # Compilateur à utiliser
 CC=gcc
@@ -60,7 +60,7 @@ gestiondonnees.bin : $(SOURCES_GestionDonnees:%.c=%.o)
 	$(CC) $(LDFLAGS) $(SOURCES_GestionDonnees:%.c=%.o) -o $@ $(LIBS)
 	
 clean : 
-	rm -f ${PROGS} *.o depends.mk
+	rm -f ${PROGS} *.o */*.o depends.mk
 
 distclean : clean
 	rm -f depends.mk
