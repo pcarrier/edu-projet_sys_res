@@ -1,10 +1,3 @@
-/****************************************************************
-
-	Corps du module des données bdd.c
-	Auteur: Dominique Vaufreydaz, Vincent Danjean
-
-*****************************************************************/
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -15,10 +8,6 @@
 #include <common.h>
 #include <gestion/gestionlivres.h>
 #include <gestion/gestionadherents.h>
-
-/****************************************************************
-    Définition des variables conformément au fichier .h 
-*/
 
 /* Déclaration du catalogue contenant au maximum LIVRES_NBMAX */
 livre_t Catalogue[LIVRES_NBMAX];
