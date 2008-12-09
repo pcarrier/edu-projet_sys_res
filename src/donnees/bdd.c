@@ -10,19 +10,9 @@
 #include <gestion/gestionlivres.h>
 #include <gestion/gestionadherents.h>
 
-/* Déclaration du catalogue contenant au maximum LIVRES_NBMAX */
-livre_t Catalogue[LIVRES_NBMAX];
-
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
 int cat_nb_livres = 0;		/* par défault, aucun livre */
-
-/* Déclaration de l'annuaire contenant au maximum nb_max_adherents */
-//adherent_t Annuaire[ADHS_NBMAX];
-
-/* Variable contenant le nombre d'adhérents courant dans l'annuaire
-   Cette valeur doit rester cohérente avec la capacité de l'annuaire */
-//int ann_nb_adhs = 0;          /* par défault, aucun adherent */
 
 /****************************************************************
     Implémentation des fonctions du module
@@ -94,9 +84,9 @@ bdd_acces_ecriture_fin ()
 int
 bdd_load_annuaire (char *annuaire)
 {
-  bdd_acces_lecture_debut ();
+  //bdd_acces_lecture_debut ();
   bdd_erreur_e retAnnuaire = LireAnnuaire (annuaire);
-  bdd_acces_lecture_fin ();
+  //bdd_acces_lecture_fin ();
 
   if (retAnnuaire < 0)
     {
@@ -107,7 +97,6 @@ bdd_load_annuaire (char *annuaire)
     {
       return 0;
     }
-  bdd_acces_lecture_fin ();
 }
 
 
@@ -116,9 +105,9 @@ bdd_load_annuaire (char *annuaire)
 int
 bdd_load_catalogue (char *catalogue)
 {
-  bdd_acces_lecture_debut ();
+  //bdd_acces_lecture_debut ();
   bdd_erreur_e retCatalogue = LireCatalogue (catalogue);
-  bdd_acces_lecture_fin ();
+  //bdd_acces_lecture_fin ();
 
   if (retCatalogue < 0)
     {
@@ -129,7 +118,6 @@ bdd_load_catalogue (char *catalogue)
     {
       return 0;
     }
-  bdd_acces_lecture_fin ();
 
 }
 
@@ -139,9 +127,9 @@ bdd_load_catalogue (char *catalogue)
 int
 bdd_save_annuaire (char *annuaire)
 {
-  bdd_acces_ecriture_debut ();
+  //bdd_acces_ecriture_debut ();
   bdd_erreur_e retAnnuaire = EcrireAnnuaire (annuaire);
-  bdd_acces_ecriture_fin ();
+  //bdd_acces_ecriture_fin ();
 
   if (retAnnuaire < 0)
     {
@@ -152,7 +140,6 @@ bdd_save_annuaire (char *annuaire)
     {
       return 0;
     }
-
 }
 
 
@@ -161,9 +148,9 @@ bdd_save_annuaire (char *annuaire)
 int
 bdd_save_catalogue (char *catalogue)
 {
-  bdd_acces_ecriture_debut ();
+  //bdd_acces_ecriture_debut ();
   bdd_erreur_e retCatalogue = EcrireCatalogue (catalogue);
-  bdd_acces_ecriture_fin ();
+  //bdd_acces_ecriture_fin ();
 
   if (retCatalogue < 0)
     {
