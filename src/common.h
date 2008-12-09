@@ -12,10 +12,4 @@
 #define ADHS_NBMAX 50
 #define LIVRES_NBMAX 1000
 
-typedef enum
-{
-  sock_tcp,
-  sock_udp
-} socktype_e;
-
 #endif

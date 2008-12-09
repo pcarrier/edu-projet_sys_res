@@ -58,6 +58,12 @@ typedef struct
   adherent_t adh;		///< Adhérent si la requête le requiert
 } reponse_t;
 
+typedef enum
+{
+  sock_tcp,
+  sock_udp
+} socktype_e;
+
 /*!
  * Paramètres de l'application
  *
