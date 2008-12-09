@@ -2,7 +2,7 @@
  * \file prompt.h
  * \brief Interactions à travers une invite de commandes
  *
- * Saisie de commandes à travers GNU readline puis parsage
+ * Saisie de commandes à travers GNU readline et aide au parsing
  *
  */
 
@@ -31,5 +31,16 @@ void fancy_prompt (char prompt[PROMPT_SIZE]);
  *
  */
 char *lire_commande ();
+
+/*!
+ * \brief Récupérer le premier token
+ *
+ * Sépare la chaîne en placant un caractère de fin au premier espace trouvé,
+ * retourne la position suivante.
+ *
+ */
+char *
+extraire_parametre (char * c);
+
 
 #endif

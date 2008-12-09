@@ -82,69 +82,62 @@ int
 client_main_loop ()
 {
   int boucler = 1;
-  char *commande;
+  char *commande, *suite;
   while (boucler && (commande = lire_commande ()))
     {
-      if (!strncmp (commande, "quitter", 7))
+      suite = extraire_parametre(commande);
+      if (!strcmp (commande, "quitter"))
 	boucler = 0;
-      else if (!strncmp (commande, "aide", 4))
+      else if (!strcmp (commande, "aide"))
 	{
-	  if (strlen (commande) > 5)
-	    {
-	      commande = commande + 5;
-	      if (!strncmp (commande, "quitter", 7))
-		client_doc_quitter ();
-	      else if (!strncmp (commande, "aide", 4))
-		client_doc_aide ();
-	      else if (!strncmp (commande, "ouvrir", 6))
-		client_doc_ouvrir ();
-	      else if (!strncmp (commande, "fermer", 6))
-		client_doc_fermer ();
-	      else if (!strncmp (commande, "titre", 5))
-		client_doc_titre ();
-	      else if (!strncmp (commande, "auteur", 6))
-		client_doc_auteur ();
-	      else if (!strncmp (commande, "emprunter", 9))
-		client_doc_emprunter ();
-	      else if (!strncmp (commande, "rendre", 6))
-		client_doc_rendre ();
-	      else if (!strncmp (commande, "adherent", 8))
-		client_doc_adherent ();
-	      else
-		client_doc_commandes ();
-	    }
+	  extraire_parametre(suite);
+	  if (!strcmp (suite, "quitter"))
+	    client_doc_quitter ();
+	  else if (!strcmp (suite, "aide"))
+	    client_doc_aide ();
+	  else if (!strcmp (suite, "ouvrir"))
+	    client_doc_ouvrir ();
+	  else if (!strcmp (suite, "fermer"))
+	    client_doc_fermer ();
+	  else if (!strcmp (suite, "titre"))
+	    client_doc_titre ();
+	  else if (!strcmp (suite, "auteur"))
+	    client_doc_auteur ();
+	  else if (!strcmp (suite, "emprunter"))
+	    client_doc_emprunter ();
+	  else if (!strcmp (suite, "rendre"))
+	    client_doc_rendre ();
+	  else if (!strcmp (suite, "adherent"))
+	    client_doc_adherent ();
 	  else
-	    {
-	      client_doc_commandes ();
-	    }
+	    client_doc_commandes ();
 	}
-      else if (!strncmp (commande, "ouvrir", 6))
-	{
-	  printf ("%s", client_ouvrir_session ());
-	}
-      else if (!strncmp (commande, "fermer", 6))
+      else if (!strcmp (commande, "ouvrir"))
+	printf ("%s", client_ouvrir_session ());
+      else if (!strcmp (commande, "fermer"))
 	{
 	  printf ("%s", client_fermer_session ());
 	}
-      else if (!strncmp (commande, "titre", 5))
+      else if (!strcmp (commande, "titre"))
 	{
 	}
-      else if (!strncmp (commande, "auteur", 6))
+      else if (!strcmp (commande, "auteur"))
 	{
 	}
-      else if (!strncmp (commande, "emprunter", 9))
+      else if (!strcmp (commande, "emprunter"))
 	{
 	}
-      else if (!strncmp (commande, "rendre", 6))
+      else if (!strcmp (commande, "rendre"))
 	{
 	}
-      else if (!strncmp (commande, "adherent", 8))
+      else if (!strcmp (commande, "adherent"))
 	{
 	}
       else
 	{
 	  fprintf (stderr, "Commande inconnue ! Voir 'aide'.\n");
 	}
+      free(commande);
     }
   return 1;
 }

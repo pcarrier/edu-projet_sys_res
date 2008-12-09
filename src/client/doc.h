@@ -36,17 +36,17 @@ void client_doc_fermer ();
 /*!
  * \brief Affichage de la syntaxe de l'emprunt de livre
  */
-void client_doc_emprunt ();
+void client_doc_emprunter ();
 
 /*!
  * \brief Affichage de la syntaxe de retour de livre
  */
-void client_doc_retour ();
+void client_doc_rendre ();
 
 /*!
  * \brief Affichage de la syntaxe de la consultation d'auteur
  */
-void client_doc_livre ();
+void client_doc_titre ();
 
 /*!
  * \brief Affichage de la syntaxe de la consultation d'auteur

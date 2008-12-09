@@ -41,7 +41,7 @@ client_doc_fermer ()
 }
 
 void
-client_doc_emprunt ()
+client_doc_emprunter ()
 {
   fprintf (stdout, "[emprunter]\n"
 	   "  Usage: emprunter a l\n"
@@ -49,7 +49,7 @@ client_doc_emprunt ()
 }
 
 void
-client_doc_retour ()
+client_doc_rendre ()
 {
   fprintf (stdout, "[retour]\n"
 	   "  Usage: retour a l\n"
@@ -57,7 +57,7 @@ client_doc_retour ()
 }
 
 void
-client_doc_livre ()
+client_doc_titre ()
 {
   fprintf (stdout, "[titre]\n"
 	   "  Usage: titre t\n"
