@@ -22,7 +22,8 @@
 #include <reseau/fon.h>		/* Primitives de la boite a outils */
 #include <reseau/protocole.h>	/* Types pour la communication client <-> serveur */
 #include <common.h>
-
+#include <gestion/gestionadherents.h>
+#include <gestion/gestionlivres.h>
 #include <ctype.h>
 #include <unistd.h>
 void serveur_appli (char *service, char *protocole);	/* programme serveur */
