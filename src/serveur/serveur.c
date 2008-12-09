@@ -25,6 +25,7 @@
 #include <common.h>
 #include <donnees/bdd.h>
 #include "traitement.h"
+#include "serveur.h"
 #include <gestion/gestionadherents.h>
 #include <gestion/gestionlivres.h>
 #include <ctype.h>
@@ -35,6 +36,7 @@ void serveur_appli (char *service, char *protocole);	/* programme serveur */
 //static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
 prot_params_t prot_params;
 
+dbfiles files_conf;
 /*------------------------------------------------------------------*/
 /* SERVEUR															*/
 /*------------------------------------------------------------------*/
@@ -42,9 +44,11 @@ prot_params_t prot_params;
 void
 serveur_doc_syntaxe (char *progname)
 {
-  fprintf (stderr, "Usage : %s [-p port] [-t]\n"
+  fprintf (stderr, "Usage : %s [-p port] [-t] [-a filename] [-d filename]\n"
 	   "-p port: utiliser le port p plutot que " PORT_DEFAUT "\n"
-	   "-t utiliser TPC plutot que UDP\n", progname);
+	   "-t utiliser TPC plutot que UDP\n"
+	   "-a utiliser un fichier annuaire différent que celui par défaut\n"
+	   "-d utiliser un ficher caatalogue différent que celui par défaut.\n",progname);
 }
 
 /*------------------------------------------------------------------*/
@@ -69,7 +73,7 @@ traitement_serveur ()
   //Pour le fork()
   int pid_fils;
 
-  livre_t livres_results[LIVRES_NBMAX];
+  livre_t livres_results[RESULT_LMAX];
   //Si on fait du tcp...
   if (prot_params.type == sock_tcp)
     {
@@ -99,9 +103,9 @@ traitement_serveur ()
 		    case (op_consulter_auteur):
 
 		      rep_client.code =
-			trait_consulter_auteur (rqt_client.param,
+			trait_consulter_auteur (files_conf.fichierCatalogue,rqt_client.param,
 						livres_results);
-		      rep_client.livres = livres_results;
+		      rep_client.livres = (livre_t*) livres_results;
 
 		      for (i = 0; i < LIVRES_NBMAX; i++)
 			{
@@ -110,20 +114,23 @@ traitement_serveur ()
 		      break;
 		    case (op_consulter_titre):
 		      rep_client.code =
-			trait_consulter_titre (rqt_client.param,
+			trait_consulter_titre (files_conf.fichierCatalogue,rqt_client.param,
 					       livres_results);
-		      rep_client.livres = livres_results;
+		      rep_client.livres = (livre_t*) livres_results;
 
 		      for (i = 0; i < LIVRES_NBMAX; i++)
 			{
 			  afficher_livre (livres_results[i]);
 			}
 		      break;
+		    case (op_ping):
+		      rep_client.code=ret_pong;
 		    default:
 		      rep_client.code = ret_operation_impossible;
 		      break;
 		    }
-		  h_writes (clientfd, &rep_client, sizeof (rep_client));
+		  h_writes (clientfd, (char *) (&rep_client),
+			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
 	    }
@@ -208,7 +215,10 @@ main (int argc, char **argv)
   int c, tflag = 0;
   prot_params.port = PORT_DEFAUT;
 
-  while ((c = getopt (argc, argv, "tp:")) != -1)
+
+  files_conf.fichierAnnuaire=F_ANN_NAME;
+  files_conf.fichierCatalogue=F_CAT_NAME;
+  while ((c = getopt (argc, argv, "tp:a:d")) != -1)
     {
       switch (c)
 	{
@@ -217,6 +227,12 @@ main (int argc, char **argv)
 	  break;
 	case 'p':
 	  prot_params.port = optarg;
+	  break;
+	 case 'a':
+	  files_conf.fichierAnnuaire = optarg;
+	  break;
+	 case 'd':
+	  files_conf.fichierCatalogue= optarg;
 	  break;
 	case '?':
 	  if (optopt == 'p')
