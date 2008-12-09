@@ -4,14 +4,13 @@
 #include <donnees/types.h>
 #include <reseau/protocole.h>
 
-livre_t *
-trait_consulter_titre(char * nom_livre){
+void
+trait_consulter_titre(char * nom_livre, livre_t * tab_result){
   //on bloque le fichier de lecture
   bdd_acces_lecture_debut();
   bdd_load_catalogue();
   //on débloque le fichier de lecture
   bdd_acces_lecture_fin();
-  livre_t tab_result[RESULT_LMAX];
   int j = 0;
 
   for (int i = 0 ; i < cat_nb_livre ; i++){
@@ -22,17 +21,15 @@ trait_consulter_titre(char * nom_livre){
       j++;
     }
   }
-  return tab_result;
 }
 
-livre_t *
-trait_consulter_auteur(char * nom_auteur){
+void
+trait_consulter_auteur(char * nom_auteur, livre_t * tab_result){
   //on bloque le fichier de lecture
   bdd_acces_lecture_debut();
   bdd_acces_catalogue();
   //on débloque le fichier de lecture
   bdd_acces_lecture_fin();
-  livre_t tab_result[RESULT_LMAX];
   int j = 0;
   
   for (int i = 0 ; i < cat_nb_livre ; i++){
@@ -43,5 +40,4 @@ trait_consulter_auteur(char * nom_auteur){
       j++;
     }
   }
-  return tab_result;
 }
