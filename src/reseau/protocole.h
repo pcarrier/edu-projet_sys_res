@@ -1,4 +1,5 @@
-#ifndef __PROTOCOLE_H__
+#ifndef
+ __PROTOCOLE_H__
 #define __PROTOCOLE_H__
 
 #include <donnees/donnees.h>
@@ -47,7 +48,7 @@ typedef struct
 				  - Titre de livre
 				  - Nom d'adhérent
 				*/
-} requete_t;
+} prot_requete_t;
 
 /*!
  * \brief Réponses du serveur au client

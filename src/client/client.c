@@ -6,13 +6,13 @@
 #include <sys/wait.h>
 #include <string.h>
 
-#include <reseau/fon.h>
 #include <reseau/protocole.h>
 #include <donnees/donnees.h>
 #include <common.h>
 #include "client.h"
 #include "doc.h"
 #include "prompt.h"
+#include "reseau.h"
 
 prot_params_t prot_params;
 int client_socket = 0;
@@ -37,7 +37,12 @@ client_emprunter_livre (char *auteur, char *titre)
 char *
 client_consulter_titre (char *titre)
 {
-  return "OK\n";
+  char param[PARAM_LMAX];
+  prot_requete_t req;
+  req.operation = op_consulter_titre;
+  strncpy(param,titre,PARAM_LMAX);
+  req.param = param;
+  client_envoyer_requete (req);
 }
 
 char *
@@ -65,18 +70,8 @@ client_fermer_session ()
     {
       return "UDP -> pas de fermeture de session !\n";
     }
-  h_close(client_socket);
+  client_fermer_socket();
   return("Fini.\n");
-}
-
-void
-client_creer_socket ()
-{
-  struct sockaddr_in sa;
-  client_socket = h_socket (AF_INET, (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
-  adr_socket (prot_params.port, prot_params.host, (prot_params.type == sock_tcp) ? "tcp" : "udp", &sa, CLIENT);
-  /* h_bind (client_socket, &sa); */
-  h_connect (client_socket, &sa);
 }
 
 int
