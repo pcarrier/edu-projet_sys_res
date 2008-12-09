@@ -11,6 +11,7 @@
 
 typedef enum
   {
-    TCP;
-    UDO;
-  }
+    TCP,
+    UDP
+  }socktype_e;
+
