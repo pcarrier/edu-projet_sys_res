@@ -24,7 +24,7 @@ CFLAGS += -I.
 
 # Si la ligne suivante est décommentée, du code de debug est compilé
 # dans fon.c. Il permet d'observer les messages.
-CPPFLAGS += -DDEBUG
+#CPPFLAGS += -DDEBUG
 
 # Permet de compiler la solution (enseignants seulement)
 CPPFLAGS += -DSOLUTION

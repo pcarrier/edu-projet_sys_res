@@ -5,7 +5,6 @@
 #include <sys/signal.h>
 #include <sys/wait.h>
 #include <string.h>
-#include <assert.h>
 
 #include <reseau/fon.h>
 #include <reseau/protocole.h>
@@ -23,10 +22,10 @@ client_ouvrir_session ()
 {
   if (prot_params.type == sock_udp)
     {
-      return "TCP -> pas d'ouverture de session !\n";
+      return "UDP -> pas d'ouverture de session !\n";
     }
-
-  return "OK\n";
+  client_creer_socket ();
+  return("Fini.\n");
 }
 
 char *
@@ -66,19 +65,18 @@ client_fermer_session ()
     {
       return "UDP -> pas de fermeture de session !\n";
     }
-  return "OK\n";
+  h_close(client_socket);
+  return("Fini.\n");
 }
 
-int
+void
 client_creer_socket ()
 {
   struct sockaddr_in sa;
   client_socket = h_socket (AF_INET, (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
   adr_socket (prot_params.port, prot_params.host, (prot_params.type == sock_tcp) ? "tcp" : "udp", &sa, CLIENT);
-  h_bind (client_socket, &sa);
+  /* h_bind (client_socket, &sa); */
   h_connect (client_socket, &sa);
-  h_writes(client_socket,"a",1);
-  return 1;
 }
 
 int
@@ -179,10 +177,10 @@ main (int argc, char **argv)
     }
   if (tflag)
     prot_params.type = sock_tcp;
-  else
+  else {
     prot_params.type = sock_udp;
-
-  assert (client_creer_socket ());
-  assert (client_main_loop ());
+    client_creer_socket();
+  }
+  client_main_loop ();
   return EXIT_SUCCESS;
 }
