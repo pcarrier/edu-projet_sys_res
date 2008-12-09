@@ -25,6 +25,11 @@ char *client_ouvrir_session ();
 char *client_fermer_session ();
 
 /**
+ * Envoi d'un ping
+ */
+char *client_ping ();
+
+/**
  * Emprunt d'un livre
  */
 char *client_emprunter_livre (char *auteur, char *titre);
