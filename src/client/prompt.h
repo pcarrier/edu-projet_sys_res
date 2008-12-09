@@ -14,6 +14,22 @@
  *
  * Récupère une ligne, la place dans l'historique et la renvoie.
  */
-char *getline (char *prompt);
+char *lire_ligne (char *prompt);
+
+/*!
+ * \brief Formate l'invite de commande
+ *
+ * Affiche l'hôte, le port et le protocole.
+ *
+ */
+void fancy_prompt (char prompt[PROMPT_SIZE]);
+
+/*!
+ * \brief Lire une commande
+ *
+ * Formate l'invite de commande puis retourne une ligne obtenue avec ce prompt
+ *
+ */
+char *lire_commande ();
 
 #endif

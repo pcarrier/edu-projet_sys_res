@@ -20,6 +20,11 @@ char *client_init (int argc, char **argv);
 char *client_ouvrir_session ();
 
 /**
+ * Fermeture d'une session
+ */
+char *client_fermer_session ();
+
+/**
  * Emprunt d'un livre
  */
 char *client_emprunter_livre (char *auteur, char *titre);
@@ -45,8 +50,16 @@ char *client_rendre_livre (char *auteur, char *titre);
 char *client_consulter_adherent (char *nom);
 
 /**
- * Fermeture d'une session
+ * Création du socket
  */
-char *client_fermer_session ();
+int client_creer_socket ();
+
+/**
+ * \brief Boucle principale du client
+ *
+ * Lit les commandes et les exécute
+ *
+ */
+int client_main_loop ();
 
 #endif
