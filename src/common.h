@@ -11,5 +11,7 @@
 #define F_CAT_NAME "catalogue.db"
 #define ADHS_NBMAX 50
 #define LIVRES_NBMAX 1000
+#define PARAM_LMAX 50
+#define RESULT_LMAX 10
 
 #endif

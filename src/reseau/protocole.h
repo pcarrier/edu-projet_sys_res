@@ -1,20 +1,14 @@
-/*
- *  types_communication.h
- *  MIAGE2
- *
- *  Created by Vania Marangozova-Martin on 23/11/06.
- *  Modified by Vincent Danjean 4/12/06.
- *  Copyright 2006-2007 UJF
- *
- */
-#include "donnees/donnees.h"
+#ifndef __PROTOCOLE_H__
+#define __PROTOCOLE_H__
 
-//types des operations sur la bibliotheque
-#define PARAM_LMAX 50
-#define RESULT_LMAX 10
+#include <donnees/donnees.h>
 
 /*!
- * Opérations disponibles dans le protocole
+ * \brief Opérations disponibles dans le protocole
+ *
+ * L'opérations est le premier élément communiqué au serveur
+ * lors d'une requête.
+ *
  */
 typedef enum
 {
@@ -26,17 +20,24 @@ typedef enum
 } prot_op_e;
 
 /*!
- * Erreurs disponibles dans le protocole
+ * \brief Codes de retour disponibles dans le protocole
+ *
+ * Le code de retour est le premier élément communiqué au
+ * serveur lors d'une requête.
+ *
  */
 typedef enum
 {
-  ret_operation_impossible = -1,
-  ret_inexistant = 0,
-  ret_trouve = 1
+  ret_operation_impossible = -2,
+  ret_inexistant = -1,
+  ret_trouve = 0
 } prot_ret_e;
 
 /*!
- * Requêtes du client au serveur
+ * \brief Requêtes du client au serveur
+ *
+ * Les requêtes sont composées d'une opération et d'un paramètre.
+ *
  */
 typedef struct
 {
@@ -49,7 +50,12 @@ typedef struct
 } requete_t;
 
 /*!
- * Réponses du serveur au client
+ * \brief Réponses du serveur au client
+ *
+ * Les réponses du serveur sont composées d'un code de retour,
+ * d'un tableau de livres et d'un adhérent. Si la requête ne nécessite
+ * pas un élément, la valeur NULL est utilisée.
+ *
  */
 typedef struct
 {
@@ -64,10 +70,12 @@ typedef enum
   sock_udp
 } socktype_e;
 
-/*!
- * Paramètres de l'application
- *
-typedef struct
+
+type struct
 {
-}
-*/
+  string host,
+  socktype type,
+  string port
+} params_t;
+
+#endif
