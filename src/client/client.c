@@ -14,6 +14,7 @@
 #include "client.h"
 #include "doc.h"
 #include "prompt.h"
+#include "reseau.h"
 
 prot_params_t prot_params;
 int client_socket = 0;
