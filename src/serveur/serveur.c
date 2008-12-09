@@ -146,62 +146,6 @@ traitement_serveur ()
     {
       printf (" en udp.\n");
     }
-/* A COMPLETER */
-
-#if 0				/* Code non compilé jusqu'au #endif correspondant */
-
-  /* Vous aurez probablement une partie de votre code
-     qui ressemblera au code suivant: */
-
-  requete_t requete;
-  /* ... */
-
-  /* Suivant la requête demandée, on prend un verrou
-     sur la base de données (sur les fichiers) :
-     - en lecture si on fait juste de la consultation
-     - en écriture si on fait des modifications
-     On charge ensuite la base de donnée
-   */
-  switch (requete.type)
-    {
-    case Consulter_Auteur:
-    case Consulter_Titre:
-    case Consulter_adherent_t:
-      /* accès en lecture uniquement */
-      bdd_acces_lecture_debut ();
-      bdd_load ();
-      break;
-    case Emprunter:
-    case Rendre:
-      /* accès en écriture */
-      bdd_acces_ecriture_debut ();
-      bdd_load ();
-      break;
-    }
-  /* ... traitement de la requète, préparation de la réponse ... */
-
-  /* Suivant l'action demandée, on relâche le verrou
-     sur la base de données (sur les fichiers) après
-     avoir sauver la base de données si nécessaire
-   */
-  switch (requete.type)
-    {
-    case Consulter_Auteur:
-    case Consulter_Titre:
-    case Consulter_adherent_t:
-      /* accès en lecture uniquement */
-      bdd_acces_lecture_fin ();
-      break;
-    case Emprunter:
-    case Rendre:
-      /* accès en écriture */
-      bdd_sauvegarde ();
-      bdd_acces_ecriture_fin ();
-      break;
-    }
-  /* ... */
-#endif /* fin du code non compilé */
-
 }
 
 /*----------------------------------------------------------*/
