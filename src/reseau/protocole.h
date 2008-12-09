@@ -17,7 +17,8 @@ typedef enum
   op_consulter_titre = 1,
   op_emprunter = 2,
   op_rendre = 3,
-  op_consulter_adherent = 4
+  op_consulter_adherent = 4,
+  op_ping = 42
 } prot_op_e;
 
 /*!
@@ -31,7 +32,8 @@ typedef enum
 {
   ret_operation_impossible = -2,
   ret_inexistant = -1,
-  ret_trouve = 0
+  ret_trouve = 0,
+  ret_pong = 42
 } prot_ret_e;
 
 typedef enum
