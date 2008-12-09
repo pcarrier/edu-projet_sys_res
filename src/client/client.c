@@ -31,6 +31,33 @@ client_ouvrir_session ()
 }
 
 char *
+client_fermer_session ()
+{
+  if (prot_params.type == sock_udp)
+    {
+      return "UDP -> pas de fermeture de session !\n";
+    }
+  client_fermer_socket ();
+  return ("Fini.\n");
+}
+
+char *
+client_pong ()
+{
+  prot_requete_t req;
+  prot_reponse_t rep;
+  req.operation = op_ping;
+  client_envoyer_requete (&req);
+  rep = client_recevoir_reponse();
+  if(rep.code == ret_pong) {
+    return "Pong !\n";
+  else if(rep.code == ret_inexistant)
+    return("Inexistant !?\n");
+  else
+    return("Opération impossible !\n");
+}
+
+char *
 client_emprunter_livre (char *auteur, char *titre)
 {
   return "OK\n";
@@ -117,17 +144,6 @@ client_rendre_livre (char *auteur, char *titre)
   return "OK\n";
 }
 
-char *
-client_fermer_session ()
-{
-  if (prot_params.type == sock_udp)
-    {
-      return "UDP -> pas de fermeture de session !\n";
-    }
-  client_fermer_socket ();
-  return ("Fini.\n");
-}
-
 int
 client_main_loop ()
 {
@@ -165,17 +181,11 @@ client_main_loop ()
       else if (!strcmp (commande, "ouvrir"))
 	printf ("%s", client_ouvrir_session ());
       else if (!strcmp (commande, "fermer"))
-	{
-	  printf ("%s", client_fermer_session ());
-	}
+	printf ("%s", client_fermer_session ());
       else if (!strcmp (commande, "titre"))
-	{
-	  printf ("%s", client_consulter_titre (suite));
-	}
+	printf ("%s", client_consulter_titre (suite));
       else if (!strcmp (commande, "auteur"))
-	{
-	  printf ("%s", client_consulter_auteur (suite));
-	}
+	printf ("%s", client_consulter_auteur (suite));
       else if (!strcmp (commande, "emprunter"))
 	{
 	}
@@ -183,9 +193,9 @@ client_main_loop ()
 	{
 	}
       else if (!strcmp (commande, "adherent"))
-	{
-	  printf ("%s", client_consulter_adherent (suite));
-	}
+	printf ("%s", client_consulter_adherent (suite));
+      else if (!strcmp (commande, "ping"))
+	printf ("%s", client_ping());
       else
 	{
 	  fprintf (stderr, "Commande inconnue ! Voir 'aide'.\n");
