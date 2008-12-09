@@ -3,6 +3,7 @@
 
 #include <donnees/donnees.h>
 #include <common.h>
+
 /*!
  * \brief Opérations disponibles dans le protocole
  *
@@ -33,6 +34,12 @@ typedef enum
   ret_trouve = 0
 } prot_ret_e;
 
+typedef enum
+{
+  sock_tcp,
+  sock_udp
+} socktype_e;
+
 /*!
  * \brief Requêtes du client au serveur
  *
@@ -47,7 +54,7 @@ typedef struct
 				  - Titre de livre
 				  - Nom d'adhérent
 				*/
-} requete_t;
+} prot_requete_t;
 
 /*!
  * \brief Réponses du serveur au client
@@ -63,13 +70,6 @@ typedef struct
   livre_t livres[RESULT_LMAX];	///< Livres si la requête le requiert
   adherent_t adh;		///< Adhérent si la requête le requiert
 } prot_reponse_t;
-
-typedef enum
-{
-  sock_tcp,
-  sock_udp
-} socktype_e;
-
 
 typedef struct
 {

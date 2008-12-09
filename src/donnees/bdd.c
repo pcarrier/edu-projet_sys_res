@@ -14,10 +14,6 @@
    Cette valeur doit rester cohérente avec la capacité du catalogue */
 int cat_nb_livres = 0;		/* par défault, aucun livre */
 
-/* Variable contenant le nombre d'adhérents courant dans l'annuaire
-   Cette valeur doit rester cohérente avec la capacité de l'annuaire */
-//int ann_nb_adhs = 0;          /* par défault, aucun adherent */
-
 /****************************************************************
     Implémentation des fonctions du module
 */
