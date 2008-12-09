@@ -1,4 +1,12 @@
-#include <stdio.h>
+/**
+ * \file doc.h
+ *
+ * \brief Commandes de documentation du client
+ * 
+ */
+
+#ifndef __CLIENT_DOC_H__
+#define __CLIENT_DOC_H__
 
 /*!
  * \brief Affichage de la syntaxe du programme
@@ -53,3 +61,5 @@ void client_doc_adherent ();
  * \brief Affichage de la syntaxe de fermeture de session
  */
 void client_doc_quitter ();
+
+#endif

@@ -1,10 +1,13 @@
 /**
  * \file client.h
  *
- * Fonctions de communication avec le serveur
+ * \brief Fonctions de communication avec le serveur
  *
  * Chaque fonction renvoie le message à afficher sur le client
  */
+
+#ifndef __CLIENT_H__
+#define __CLIENT_H__
 
 /**
  * Charge les paramètres
@@ -45,3 +48,5 @@ char *client_consulter_adherent (char *nom);
  * Fermeture d'une session
  */
 char *client_fermer_session ();
+
+#endif

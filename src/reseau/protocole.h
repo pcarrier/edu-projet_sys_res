@@ -23,7 +23,7 @@ typedef enum
   op_emprunter = 2,
   op_rendre = 3,
   op_consulter_adherent = 4
-} operation_e;
+} prot_op_e;
 
 /*!
  * Erreurs disponibles dans le protocole
@@ -33,14 +33,14 @@ typedef enum
   ret_operation_impossible = -1,
   ret_inexistant = 0,
   ret_trouve = 1
-} retour_e;
+} prot_ret_e;
 
 /*!
  * Requêtes du client au serveur
  */
 typedef struct
 {
-  operation_e operation;	///<  Opération à effectuer
+  prot_op_e operation;		///<  Opération à effectuer
   char param[PARAM_LMAX];	/*!< Paramètre de l'opération, suivant le contexte :
 				  - Nom d'auteur
 				  - Titre de livre
@@ -53,10 +53,16 @@ typedef struct
  */
 typedef struct
 {
-  retour_e code;		///< Code de retour
+  prot_ret_e code;		///< Code de retour
   livre_t livres[RESULT_LMAX];	///< Livres si la requête le requiert
   adherent_t adh;		///< Adhérent si la requête le requiert
-} reponse_t;
+} prot_reponse_t;
+
+typedef enum
+{
+  sock_tcp,
+  sock_udp
+} socktype_e;
 
 /*!
  * Paramètres de l'application
