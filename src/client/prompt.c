@@ -32,3 +32,18 @@ lire_commande ()
   fancy_prompt (prompt);
   return lire_ligne (prompt);
 }
+
+char *
+extraire_parametre (char * c)
+{
+  char *p = c;
+  while(*p != '\0') {
+    if (*p == ' ') {
+      *p = '\0';
+      ++p;
+      return p;
+    }
+    ++p;
+  }
+  return p;
+}
