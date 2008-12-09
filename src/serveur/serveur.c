@@ -68,7 +68,7 @@ traitement_serveur ()
   //Pour le fork()
   int pid_fils;
 
-  livre_t livre_result;
+  livre_t livre_result[LIVRES_NBMAX];
   //Si on fait du tcp...
   if (prot_params.type == sock_tcp)
     {
@@ -91,8 +91,11 @@ traitement_serveur ()
 		  printf ("Recu operation de type : %c \n", rqt_client.operation);
 		  switch(rqt_client.operation){
 			  case(op_consulter_auteur):
-				  livre_result= trait_consulter_auteur(rqt_client.param);
-				  afficher_livre(livre_result);
+				  trait_consulter_auteur(rqt_client.param, &livre_result);
+				  for(int i=0; i<LIVRES_NBMAX; i++)
+				  {
+				  	afficher_livre(livre_result);
+				  }
 				  break;
 			  default:
 				  break;
