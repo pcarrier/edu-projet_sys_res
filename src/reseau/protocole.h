@@ -68,7 +68,7 @@ typedef struct
 {
   prot_ret_e code;		///< Code de retour
   livre_t livres[RESULT_LMAX];	///< Livres si la requête le requiert
-  adherent_t adhs[RESULT_LMAX;	///< Adhérent si la requête le requiert
+  adherent_t adhs[RESULT_LMAX];	///< Adhérent si la requête le requiert
 } prot_reponse_t;
 
 typedef struct
