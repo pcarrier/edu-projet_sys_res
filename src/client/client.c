@@ -72,9 +72,12 @@ client_fermer_session ()
 int
 client_creer_socket ()
 {
-  //sockadr_in *adr = malloc(sizeof(sockadr_in));
-  //socket = h_socket(AF_INET, (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
-  //h_bind(socket, 
+  struct sockaddr_in sa;
+  client_socket = h_socket (AF_INET, (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
+  adr_socket (prot_params.port, prot_params.host, (prot_params.type == sock_tcp) ? "tcp" : "udp", &sa, CLIENT);
+  h_bind (client_socket, &sa);
+  h_connect (client_socket, &sa);
+  h_writes(client_socket,"a",1);
   return 1;
 }
 
