@@ -115,18 +115,18 @@ main (int argc, char *argv[])
 
       strcpy (Annuaire[0].nom, "Martin");
       strcpy (Annuaire[0].prenom, "Daniel");
-      Annuaire[0].nbPrets = 1;
-      strcpy (Annuaire[0].Prets[0], "Le Soleil des Scorta");
+      Annuaire[0].nb_prets = 1;
+      strcpy (Annuaire[0].prets[0], "Le Soleil des Scorta");
       ann_nb_adhs++;
 
       strcpy (Annuaire[1].nom, "Vinoux");
       strcpy (Annuaire[1].prenom, "Cyrille");
-      Annuaire[1].nbPrets = 0;
+      Annuaire[1].nb_prets = 0;
       ann_nb_adhs++;
 
       strcpy (Annuaire[2].nom, "Guillard");
       strcpy (Annuaire[2].prenom, "Myriam");
-      Annuaire[2].nbPrets = 2;
+      Annuaire[2].nb_prets = 2;
       strcpy (Annuaire[2].prets[0], "Un long dimanche de fiançailles");
       strcpy (Annuaire[2].prets[1], "Da Vinci Code");
       ann_nb_adhs++;

@@ -1,17 +1,16 @@
-#ifndef __BDD_H__
-#define __BDD_H__
-
 /*
   Ce fichier contient les déclarations publiques nécessaires
   pour que le serveur puisse charger, manipuler et sauver les
   données de la bibliothèque.
  */
 
-/**
- * Inclusion du header donnees.h
- */
+#ifndef __BDD_H__
+#define __BDD_H__
+
+
 #include "donnees.h"
 #include <common.h>
+
 /***********************************************/
 /* Définition des constantes de taille maximum */
 /***********************************************/
