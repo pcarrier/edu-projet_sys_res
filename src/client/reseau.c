@@ -8,9 +8,12 @@ struct sockaddr_in sa;
 void
 client_creer_socket ()
 {
-  client_socket = h_socket (AF_INET, (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
-  adr_socket (prot_params.port, prot_params.host, (prot_params.type == sock_tcp) ? "tcp" : "udp", &sa, CLIENT);
-  if(prot_params.type == sock_udp)
+  client_socket =
+    h_socket (AF_INET,
+	      (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
+  adr_socket (prot_params.port, prot_params.host,
+	      (prot_params.type == sock_tcp) ? "tcp" : "udp", &sa, CLIENT);
+  if (prot_params.type == sock_udp)
     h_bind (client_socket, &sa);
   h_connect (client_socket, &sa);
 }
@@ -18,26 +21,27 @@ client_creer_socket ()
 void
 client_fermer_socket ()
 {
-  h_close(client_socket);
+  h_close (client_socket);
 }
 
 void
-client_envoyer_requete(prot_requete_t * req)
+client_envoyer_requete (prot_requete_t * req)
 {
-  if(prot_params.type == sock_udp)
+  if (prot_params.type == sock_udp)
     {
     }
   else
-    h_writes(client_socket,(char*)req,sizeof(prot_requete_t));
+    h_writes (client_socket, (char *) req, sizeof (prot_requete_t));
 }
 
 prot_reponse_t
-client_recevoir_reponse() {
+client_recevoir_reponse ()
+{
   prot_reponse_t rep;
-  if(prot_params.type == sock_udp)
-    {  
+  if (prot_params.type == sock_udp)
+    {
     }
   else
-    h_reads(client_socket,(char*)(&rep),sizeof(prot_reponse_t));
+    h_reads (client_socket, (char *) (&rep), sizeof (prot_reponse_t));
   return rep;
 }

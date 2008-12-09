@@ -48,13 +48,13 @@ client_ping ()
   prot_reponse_t rep;
   req.operation = op_ping;
   client_envoyer_requete (&req);
-  rep = client_recevoir_reponse();
-  if(rep.code == ret_pong)
+  rep = client_recevoir_reponse ();
+  if (rep.code == ret_pong)
     return "Pong !\n";
-  else if(rep.code == ret_inexistant)
-    return("Inexistant !?\n");
+  else if (rep.code == ret_inexistant)
+    return ("Inexistant !?\n");
   else
-    return("Opération impossible !\n");
+    return ("Opération impossible !\n");
 }
 
 char *
@@ -64,12 +64,14 @@ client_emprunter_livre (char *auteur, char *titre)
 }
 
 void
-client_afficher_livres (livre_t *livres) {
+client_afficher_livres (livre_t * livres)
+{
   livre_t *livre_courant = livres;
-  while(livre_courant->titre[0] != '\0') {
-    afficher_livre(*livre_courant);
-    ++livre_courant;
-  }
+  while (livre_courant->titre[0] != '\0')
+    {
+      afficher_livre (*livre_courant);
+      ++livre_courant;
+    }
 }
 
 char *
@@ -80,15 +82,16 @@ client_consulter_titre (char *titre)
   req.operation = op_consulter_titre;
   strncpy (req.param, titre, PARAM_LMAX);
   client_envoyer_requete (&req);
-  rep = client_recevoir_reponse();
-  if (rep.code == ret_trouve) {
-    client_afficher_livres (rep.livres);
-    return "Fin des résultats\n";
-  }
-  else if(rep.code == ret_inexistant)
-    return("Aucun résultat !\n");
+  rep = client_recevoir_reponse ();
+  if (rep.code == ret_trouve)
+    {
+      client_afficher_livres (rep.livres);
+      return "Fin des résultats\n";
+    }
+  else if (rep.code == ret_inexistant)
+    return ("Aucun résultat !\n");
   else
-    return("Opération impossible !\n");
+    return ("Opération impossible !\n");
 }
 
 char *
@@ -99,24 +102,27 @@ client_consulter_auteur (char *auteur)
   req.operation = op_consulter_auteur;
   strncpy (req.param, auteur, PARAM_LMAX);
   client_envoyer_requete (&req);
-  rep = client_recevoir_reponse();
-  if(rep.code == ret_trouve) {
-    client_afficher_livres (rep.livres);
-    return "Fin des résultats\n";
-  }
-  else if(rep.code == ret_inexistant)
-    return("Aucun résultat !\n");
+  rep = client_recevoir_reponse ();
+  if (rep.code == ret_trouve)
+    {
+      client_afficher_livres (rep.livres);
+      return "Fin des résultats\n";
+    }
+  else if (rep.code == ret_inexistant)
+    return ("Aucun résultat !\n");
   else
-    return("Opération impossible !\n");
+    return ("Opération impossible !\n");
 }
 
 void
-client_afficher_adherents (adherent_t *adherents) {
+client_afficher_adherents (adherent_t * adherents)
+{
   adherent_t *adherent_courant = adherents;
-  while(adherent_courant->nom[0] != '\0') {
-    afficher_adherent(*adherent_courant);
-    ++adherent_courant;
-  }
+  while (adherent_courant->nom[0] != '\0')
+    {
+      afficher_adherent (*adherent_courant);
+      ++adherent_courant;
+    }
 }
 
 char *
@@ -127,15 +133,16 @@ client_consulter_adherent (char *nom)
   req.operation = op_consulter_adherent;
   strncpy (req.param, nom, PARAM_LMAX);
   client_envoyer_requete (&req);
-  rep = client_recevoir_reponse();
-  if(rep.code == ret_trouve) {
-    client_afficher_adherents (rep.adhs);
-    return "Fin des résultats\n";
-  }
-  else if(rep.code == ret_inexistant)
-    return("Aucun adhérent à ce nom !\n");
+  rep = client_recevoir_reponse ();
+  if (rep.code == ret_trouve)
+    {
+      client_afficher_adherents (rep.adhs);
+      return "Fin des résultats\n";
+    }
+  else if (rep.code == ret_inexistant)
+    return ("Aucun adhérent à ce nom !\n");
   else
-    return("Opération impossible !\n");
+    return ("Opération impossible !\n");
 }
 
 char *
@@ -195,7 +202,7 @@ client_main_loop ()
       else if (!strcmp (commande, "adherent"))
 	printf ("%s", client_consulter_adherent (suite));
       else if (!strcmp (commande, "ping"))
-	printf ("%s", client_ping());
+	printf ("%s", client_ping ());
       else
 	{
 	  fprintf (stderr, "Commande inconnue ! Voir 'aide'.\n");

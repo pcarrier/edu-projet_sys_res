@@ -34,16 +34,18 @@ lire_commande ()
 }
 
 char *
-extraire_parametre (char * c)
+extraire_parametre (char *c)
 {
   char *p = c;
-  while(*p != '\0') {
-    if (*p == ' ') {
-      *p = '\0';
+  while (*p != '\0')
+    {
+      if (*p == ' ')
+	{
+	  *p = '\0';
+	  ++p;
+	  return p;
+	}
       ++p;
-      return p;
     }
-    ++p;
-  }
   return p;
 }
