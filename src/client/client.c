@@ -5,14 +5,15 @@
 #include <sys/signal.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <assert.h>
 
+#include <reseau/fon.h>
 #include <reseau/protocole.h>
 #include <donnees/donnees.h>
 #include <common.h>
 #include "client.h"
 #include "doc.h"
 #include "prompt.h"
-#include "reseau.h"
 
 prot_params_t prot_params;
 int client_socket = 0;
@@ -22,7 +23,7 @@ client_ouvrir_session ()
 {
   if (prot_params.type == sock_udp)
     {
-      return "UDP -> pas d'ouverture de session !\n";
+      return "TCP -> pas d'ouverture de session !\n";
     }
   client_creer_socket ();
   return ("Fini.\n");

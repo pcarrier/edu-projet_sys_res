@@ -52,7 +52,7 @@ char *client_consulter_adherent (char *nom);
 /**
  * Création du socket
  */
-void client_creer_socket ();
+int client_creer_socket ();
 
 /**
  * \brief Boucle principale du client

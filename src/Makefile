@@ -1,7 +1,7 @@
 PROGS=gestiondonnees.bin client.bin serveur.bin
 
-SOURCES_client=reseau/fon.c donnees/donnees.c client/client.c client/doc.c client/prompt.c client/reseau.c
-SOURCES_serveur=reseau/fon.c donnees/bdd.c gestion/gestionlivres.c gestion/gestionadherents.c serveur/serveur.c
+SOURCES_client=reseau/fon.c client/client.c client/doc.c client/prompt.c donnees/donnees.c
+SOURCES_serveur=reseau/fon.c serveur/serveur.c donnees/bdd.c gestion/gestionlivres.c gestion/gestionadherents.c
 SOURCES_GestionDonnees=donnees/bdd.c donnees/donnees.c gestion/gestiondonnees.c gestion/gestionlivres.c gestion/gestionadherents.c
 SOURCES=$(SOURCES_client) $(SOURCES_serveur) $(SOURCES_projet)
 
@@ -24,7 +24,7 @@ CFLAGS += -I.
 
 # Si la ligne suivante est décommentée, du code de debug est compilé
 # dans fon.c. Il permet d'observer les messages.
-#CPPFLAGS += -DDEBUG
+CPPFLAGS += -DDEBUG
 
 # Permet de compiler la solution (enseignants seulement)
 CPPFLAGS += -DSOLUTION
