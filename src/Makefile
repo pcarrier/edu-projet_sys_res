@@ -18,7 +18,7 @@ CFLAGS += -O2
 # DÈtection d'un maximum d'erreurs
 CFLAGS += -Wall
 # On ne crée pas le programme tant qu'il y a des erreurs
-#CFLAGS += -Werror
+CFLAGS += -Werror
 # On fait tout d'ici...
 CFLAGS += -I.
 
