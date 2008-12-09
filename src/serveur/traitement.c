@@ -21,6 +21,8 @@ trait_consulter_titre(char * nom_livre, livre_t * tab_result){
       j++;
     }
   }
+  strcpy(tab_result[j].titre, "");
+  
 }
 
 void
@@ -36,8 +38,12 @@ trait_consulter_auteur(char * nom_auteur, livre_t * tab_result){
     //on recherche la chaine de caractère reçue en paramètre parmis tous les noms d'auteurs
     //si une occurence est trouvé, elle est rajoutée au tableau de résultat
     if ((strcasestr(Catalogue[i].auteur, nom_auteur) != NULL) || (strcasestr(nom_auteur, Catalogue[i].auteur) != NULL)){
-      tab_result[j];
+      tab_result[j] = Catalogue[i];
       j++;
     }
   }
+  strcpy(tab_result[j].titre, "");
 }
+
+void
+trait_consulter_
