@@ -24,6 +24,7 @@
 
 #include <common.h>
 #include <donnees/bdd.h>
+#include <donnees/donnees.h>
 #include "traitement.h"
 #include "serveur.h"
 #include <gestion/gestionadherents.h>
