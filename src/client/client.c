@@ -36,30 +36,83 @@ client_emprunter_livre (char *auteur, char *titre)
   return "OK\n";
 }
 
+void
+client_afficher_livres (livre_t *livres) {
+  livre_t *livre_courant = livres;
+  while(livre_courant->titre[0] != '\0') {
+    afficher_livre(*livre_courant);
+    ++livre_courant;
+  }
+}
+
 char *
 client_consulter_titre (char *titre)
 {
   prot_requete_t req;
+  prot_reponse_t rep;
   req.operation = op_consulter_titre;
   strncpy (req.param, titre, PARAM_LMAX);
   client_envoyer_requete (&req);
-  return "TODO\n";
+  rep = client_recevoir_reponse();
+  if(rep.code == ret_trouve) {
+    client_afficher_livres (rep.livres);
+    return "Fin des résultats\n";
+  }
+  else if(rep.code == ret_inexistant)
+    return("Aucun résultat !\n");
+  else
+    return("Opération impossible !\n");
 }
 
 char *
 client_consulter_auteur (char *auteur)
 {
-  return "OK\n";
+  prot_requete_t req;
+  prot_reponse_t rep;
+  req.operation = op_consulter_auteur;
+  strncpy (req.param, auteur, PARAM_LMAX);
+  client_envoyer_requete (&req);
+  rep = client_recevoir_reponse();
+  if(rep.code == ret_trouve) {
+    client_afficher_livres (rep.livres);
+    return "Fin des résultats\n";
+  }
+  else if(rep.code == ret_inexistant)
+    return("Aucun résultat !\n");
+  else
+    return("Opération impossible !\n");
 }
 
-char *
-client_rendre_livre (char *auteur, char *titre)
-{
-  return "OK\n";
+void
+client_afficher_adherents (adherent_t *adherents) {
+  adherent_t *adherent_courant = adherents;
+  while(adherent_courant->nom[0] != '\0') {
+    afficher_adherent(*adherent_courant);
+    ++adherent_courant;
+  }
 }
 
 char *
 client_consulter_adherent (char *nom)
+{
+  prot_requete_t req;
+  prot_reponse_t rep;
+  req.operation = op_consulter_adherent;
+  strncpy (req.param, nom, PARAM_LMAX);
+  client_envoyer_requete (&req);
+  rep = client_recevoir_reponse();
+  if(rep.code == ret_trouve) {
+    client_afficher_adherents (rep.adhs);
+    return "Fin des résultats\n";
+  }
+  else if(rep.code == ret_inexistant)
+    return("Aucun adhérent à ce nom !\n");
+  else
+    return("Opération impossible !\n");
+}
+
+char *
+client_rendre_livre (char *auteur, char *titre)
 {
   return "OK\n";
 }
@@ -117,9 +170,11 @@ client_main_loop ()
 	}
       else if (!strcmp (commande, "titre"))
 	{
+	  printf ("%s", client_consulter_titre (suite));
 	}
       else if (!strcmp (commande, "auteur"))
 	{
+	  printf ("%s", client_consulter_auteur (suite));
 	}
       else if (!strcmp (commande, "emprunter"))
 	{
@@ -129,6 +184,7 @@ client_main_loop ()
 	}
       else if (!strcmp (commande, "adherent"))
 	{
+	  printf ("%s", client_consulter_adherent (suite));
 	}
       else
 	{
