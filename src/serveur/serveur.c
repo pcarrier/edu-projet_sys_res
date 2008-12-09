@@ -65,10 +65,11 @@ traitement_serveur ()
 
   //Pour récupérer les opérations
   prot_requete_t rqt_client;
+  prot_reponse_t rep_client;
   //Pour le fork()
   int pid_fils;
 
-  livre_t livre_result[LIVRES_NBMAX];
+  livre_t livres_results[LIVRES_NBMAX];
   //Si on fait du tcp...
   if (prot_params.type == sock_tcp)
     {
@@ -86,24 +87,43 @@ traitement_serveur ()
 	  pid_fils = fork ();
 	  if (pid_fils == 0)
 	    {
-	      while (h_reads (clientfd, (char *) (&rqt_client), sizeof(rqt_client))>0)
+	      while (h_reads
+		     (clientfd, (char *) (&rqt_client),
+		      sizeof (rqt_client)) > 0)
 		{
-		  printf ("Recu operation de type : %c \n", rqt_client.operation);
-		  switch(rqt_client.operation){
-			  case(op_consulter_auteur):
-				  trait_consulter_auteur(rqt_client.param, &livre_result);
-				  for(int i=0; i<LIVRES_NBMAX; i++)
-				  {
-				  	afficher_livre(livre_result);
-				  }
-				  break;
-			  default:
-				  break;
-		  } 
-			/*
-			 * TO DO APPELS A traitements.c
-			 */
-		 	// h_writes (client, &buffer, 1);
+		  int i;
+		  printf ("Recu operation de type : %c \n",
+			  rqt_client.operation);
+		  switch (rqt_client.operation)
+		    {
+		    case (op_consulter_auteur):
+
+		      rep_client.code =
+			trait_consulter_auteur (rqt_client.param,
+						livres_results);
+		      rep_client.livres = livres_results;
+
+		      for (i = 0; i < LIVRES_NBMAX; i++)
+			{
+			  afficher_livre (livres_results[i]);
+			}
+		      break;
+		    case (op_consulter_titre):
+		      rep_client.code =
+			trait_consulter_titre (rqt_client.param,
+					       livres_results);
+		      rep_client.livres = livres_results;
+
+		      for (i = 0; i < LIVRES_NBMAX; i++)
+			{
+			  afficher_livre (livres_results[i]);
+			}
+		      break;
+		    default:
+		      rep_client.code = ret_operation_impossible;
+		      break;
+		    }
+		  h_writes (clientfd, &rep_client, sizeof (rep_client));
 		}
 	      h_close (clientfd);
 	    }
