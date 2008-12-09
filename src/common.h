@@ -1,3 +1,6 @@
+#ifndef __COMMON_H__
+#define __COMMON_H__
+
 #define PORT_DEFAUT "1111"
 #define PROTOCOLE_DEFAUT "udp"
 #define SERVEUR_DEFAUT "localhost"
@@ -10,8 +13,9 @@
 #define LIVRES_NBMAX 1000
 
 typedef enum
-  {
-    TCP,
-    UDP
-  }socktype_e;
+{
+  sock_tcp,
+  sock_udp
+} socktype_e;
 
+#endif
