@@ -23,28 +23,28 @@ char *
 client_init (int argc, char **argv)
 {
   /*  while ((c = get ()))
-    switch (*argc)
-      {
-	break;
-	strcpy (serveur_courant, argv[1]);
-	break;
-	strcpy (serveur_courant, argv[1]);
-	strcpy (service_courant, argv[2]);
-	break;
-	strcpy (serveur_courant, argv[1]);
-	strcpy (service_courant, argv[2]);
-	strcpy (protocole_courant, argv[3]);
-	break;
-      default:
-	printf
-	  ("Usage:client serveur(nom ou @IP)  service (nom ou port)  protocole (tcp ou udp)\n");
-	exit (1);
-      }
-  printf ("Utilisation de serveur : %s\n", serveur_courant);
-  printf ("Utilisation de service : %s\n", service_courant);
-  printf ("Utilisation de protocole : %s\n\n", protocole_courant);
-  return "OK";
-  */
+     switch (*argc)
+     {
+     break;
+     strcpy (serveur_courant, argv[1]);
+     break;
+     strcpy (serveur_courant, argv[1]);
+     strcpy (service_courant, argv[2]);
+     break;
+     strcpy (serveur_courant, argv[1]);
+     strcpy (service_courant, argv[2]);
+     strcpy (protocole_courant, argv[3]);
+     break;
+     default:
+     printf
+     ("Usage:client serveur(nom ou @IP)  service (nom ou port)  protocole (tcp ou udp)\n");
+     exit (1);
+     }
+     printf ("Utilisation de serveur : %s\n", serveur_courant);
+     printf ("Utilisation de service : %s\n", service_courant);
+     printf ("Utilisation de protocole : %s\n\n", protocole_courant);
+     return "OK";
+   */
 }
 
 char *
@@ -104,26 +104,33 @@ main (int argc, char **argv)
 {
   int c, hflag = 0, tflag = 0, index;
   char *port, *serveur, *protocole;
-  while ((c = getopt (argc, argv, "hp:t")) != -1) {
-    switch (c) {
-    case 't':
-      tflag = 1;
-      break;
-    case 'h':
-      hflag = 1;
-      break;
-    case 'p':
-      port = optarg;
-      break;
-    case '?':
-      return EXIT_FAILURE;
+  if (argc = 1)
+    client_doc_syntaxe (argv[0]);
+  while ((c = getopt (argc, argv, "hp:t")) != -1)
+    {
+      switch (c)
+	{
+	case 't':
+	  tflag = 1;
+	  break;
+	case 'h':
+	  hflag = 1;
+	  break;
+	case 'p':
+	  port = optarg;
+	  break;
+	case '?':
+	  return EXIT_FAILURE;
+	}
     }
-  }
   for (index = optind; index < argc; index++)
     serveur = argv[index];
-  if(hflag)
-    client_doc_syntaxe(argv[0]);
-  if(tflag)
+  if (hflag)
+    {
+      client_doc_syntaxe (argv[0]);
+      return EXIT_SUCCESS;
+    }
+  if (tflag)
     protocole = "tcp";
   else
     protocole = "udp";
