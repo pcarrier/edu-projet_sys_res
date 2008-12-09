@@ -1,6 +1,8 @@
 #ifndef __TRAIT_H_
 #define __TRAIT_H_
 
+#include <reseau/protocole.h>
+
 /** 
  * Cette fonction remplit un tableau (le second paramètre passé)
  * en recherchant les occurences du premier paramètre dans le nom des livres.
