@@ -55,16 +55,51 @@ extern int ann_nb_adhs;
 /*************************************/
 /* Fonctions exportées par le module */
 /*************************************/
-
+/**
+ * Tentative de lecture du fichier serveur.lock
+ * si fail alors le fichier est en utilisation sinon la méthoode accède
+ * et verrouille le fichier
+ **/ 
 void bdd_acces_lecture_debut ();
+/**
+ * si l'accès au seveur.lock échoue, alors on quite la méthode
+ * sinon la méthode dévérrouille le fichier serveur.lock
+ **/
 void bdd_acces_lecture_fin ();
+/**
+ * Tentative d'ouverture du fichier serveur.lock en écriture
+ * s'il y a un échec alors le fichier est en utilisation sinon la methode accède
+ * et verrouille le fichier
+ **/
 void bdd_acces_ecriture_debut ();
+/**
+ * si l'accès au seveur.lock échoue, alors on quite la méthode
+ * sinon la méthode dévérrouille le fichier serveur.lock
+ **/
 void bdd_acces_ecriture_fin ();
-int bdd_load (char *a, char *b);
+/** 
+ * Charge le fichier annuaire 
+ * Reçoit en paramètre un pointeur vers le nom du fichier,
+ * si une erreur est detectée elle sera affichée, et un code d'erreur (-1) sera envoyé
+ */
 int bdd_load_annuaire (char *a);
+/** 
+ * Charge le fichier catalogue
+ * Reçoit en paramètre un pointeur vers le nom du fichier,
+ * si une erreur est detectée elle sera affichée, et un code d'erreur (-1) sera envoyé
+ */
 int bdd_load_catalogue (char *b);
-int bdd_save (char *a, char *b);
+/** 
+ * Enregistre le fichier Annuaire
+ *  Reçoit en paramètre un pointeur vers le nom du fichier,
+ * si une erreur est detectée elle sera affichée, et un code d'erreur (-1) sera envoyé
+ */
 int bdd_save_annuaire (char *a);
+/** 
+ * Enregistre le fichier Catalogue
+ *  Reçoit en paramètre un pointeur vers le nom du fichier,
+ * si une erreur est detectée elle sera affichée, et un code d'erreur (-1) sera envoyé
+*/
 int bdd_save_catalogue (char *b);
 
 
