@@ -1,3 +1,4 @@
+#include <time.h>
 #include <reseau/fon.h>
 #include <reseau/protocole.h>
 
@@ -43,5 +44,20 @@ client_recevoir_reponse ()
     }
   else
     h_reads (client_socket, (char *) (&rep), sizeof (prot_reponse_t));
+  return rep;
+}
+
+prot_reponse_t
+client_traiter (prot_requete_t * req, double *delai)
+{
+  struct timespec debut, fin;
+  prot_reponse_t rep;
+  clock_gettime (CLOCK_MONOTONIC, &debut);
+  client_envoyer_requete (req);
+  rep = client_recevoir_reponse ();
+  clock_gettime (CLOCK_MONOTONIC, &fin);
+  *delai =
+    (fin.tv_sec - debut.tv_sec) +
+    ((fin.tv_nsec - debut.tv_nsec) / 1000000000);
   return rep;
 }

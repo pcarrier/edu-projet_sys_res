@@ -9,30 +9,24 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
-/**
- * Charge les paramètres
- */
-char *client_init (int argc, char **argv);
+#include <reseau/protocole.h>
 
 /**
  * Ouverture de session
  */
-char *client_ouvrir_session ();
+void client_ouvrir_session ();
 
 /**
  * Fermeture d'une session
  */
-char *client_fermer_session ();
+void client_fermer_session ();
+
+int client_gerer_code (prot_ret_e retour, double delai);
 
 /**
  * Envoi d'un ping
  */
-char *client_ping ();
-
-/**
- * Emprunt d'un livre
- */
-char *client_emprunter_livre (char *auteur, char *titre);
+void client_ping ();
 
 /**
  * Affichage d'un tableau de livre dont la
@@ -43,12 +37,12 @@ void client_afficher_livres (livre_t * livres);
 /**
  * Consultation d'un livre
  */
-char *client_consulter_titre (char *titre);
+void client_consulter_titre (char *titre);
 
 /**
  * Consultation d'un auteur
  */
-char *client_consulter_auteur (char *auteur);
+void client_consulter_auteur (char *auteur);
 
 /**
  * Affichage d'un tableau d'adhérents dont la
@@ -57,16 +51,20 @@ char *client_consulter_auteur (char *auteur);
 
 void client_afficher_adherents (adherent_t * adherents);
 
+/**
+ * Emprunt d'un livre
+ */
+void client_emprunter_livre (char *adherent, char *titre);
 
 /**
  * Retour d'un livre
  */
-char *client_rendre_livre (char *auteur, char *titre);
+void client_rendre_livre (char *adherent, char *titre);
 
 /**
  * Consultation d'un adhérent
  */
-char *client_consulter_adherent (char *nom);
+void client_consulter_adherent (char *nom);
 
 /**
  * \brief Boucle principale du client

@@ -19,48 +19,61 @@
 prot_params_t prot_params;
 int client_socket = 0;
 
-char *
+void
 client_ouvrir_session ()
 {
   if (prot_params.type == sock_udp)
     {
-      return "TCP -> pas d'ouverture de session !\n";
+      fprintf (stderr, "TCP -> pas d'ouverture de session !\n");
     }
   client_creer_socket ();
-  return ("Fini.\n");
+  printf ("Fini.\n");
 }
 
-char *
+void
 client_fermer_session ()
 {
   if (prot_params.type == sock_udp)
     {
-      return "UDP -> pas de fermeture de session !\n";
+      fprintf (stderr, "UDP -> pas de fermeture de session !\n");
     }
   client_fermer_socket ();
-  return ("Fini.\n");
+  printf ("Fini.\n");
 }
 
-char *
+int
+client_gerer_code (prot_ret_e retour, double delai)
+{
+  if (retour == ret_trouve)
+    {
+      printf ("Réponse après %e sec :\n", delai);
+      return 1;
+    }
+  if (retour == ret_pong)
+    {
+      printf ("Pong (%e sec) !\n", delai);
+      return 1;
+    }
+  if (retour == ret_inexistant)
+    {
+      fprintf (stderr, "Inexistant (%e sec) !\n", delai);
+      return 0;
+    }
+  fprintf (stderr, "Opération impossible (%e sec)!\n", delai);
+  return 0;
+}
+
+
+void
 client_ping ()
 {
   prot_requete_t req;
   prot_reponse_t rep;
+  double delai;
   req.operation = op_ping;
-  client_envoyer_requete (&req);
-  rep = client_recevoir_reponse ();
-  if (rep.code == ret_pong)
-    return "Pong !\n";
-  else if (rep.code == ret_inexistant)
-    return ("Inexistant !?\n");
-  else
-    return ("Opération impossible !\n");
-}
-
-char *
-client_emprunter_livre (char *auteur, char *titre)
-{
-  return "OK\n";
+  rep = client_traiter (&req, &delai);
+  if (!client_gerer_code (rep.code, delai))
+    return;
 }
 
 void
@@ -74,44 +87,32 @@ client_afficher_livres (livre_t * livres)
     }
 }
 
-char *
+void
 client_consulter_titre (char *titre)
 {
   prot_requete_t req;
   prot_reponse_t rep;
+  double delai;
   req.operation = op_consulter_titre;
   strncpy (req.param, titre, PARAM_LMAX);
-  client_envoyer_requete (&req);
-  rep = client_recevoir_reponse ();
-  if (rep.code == ret_trouve)
-    {
-      client_afficher_livres (rep.livres);
-      return "Fin des résultats\n";
-    }
-  else if (rep.code == ret_inexistant)
-    return ("Aucun résultat !\n");
-  else
-    return ("Opération impossible !\n");
+  rep = client_traiter (&req, &delai);
+  if (!client_gerer_code (rep.code, delai))
+    return;
+  client_afficher_livres (rep.livres);
 }
 
-char *
+void
 client_consulter_auteur (char *auteur)
 {
   prot_requete_t req;
   prot_reponse_t rep;
+  double delai;
   req.operation = op_consulter_auteur;
   strncpy (req.param, auteur, PARAM_LMAX);
-  client_envoyer_requete (&req);
-  rep = client_recevoir_reponse ();
-  if (rep.code == ret_trouve)
-    {
-      client_afficher_livres (rep.livres);
-      return "Fin des résultats\n";
-    }
-  else if (rep.code == ret_inexistant)
-    return ("Aucun résultat !\n");
-  else
-    return ("Opération impossible !\n");
+  rep = client_traiter (&req, &delai);
+  if (!client_gerer_code (rep.code, delai))
+    return;
+  client_afficher_livres (rep.livres);
 }
 
 void
@@ -125,30 +126,30 @@ client_afficher_adherents (adherent_t * adherents)
     }
 }
 
-char *
+void
 client_consulter_adherent (char *nom)
 {
   prot_requete_t req;
   prot_reponse_t rep;
+  double delai;
   req.operation = op_consulter_adherent;
   strncpy (req.param, nom, PARAM_LMAX);
-  client_envoyer_requete (&req);
-  rep = client_recevoir_reponse ();
-  if (rep.code == ret_trouve)
-    {
-      client_afficher_adherents (rep.adhs);
-      return "Fin des résultats\n";
-    }
-  else if (rep.code == ret_inexistant)
-    return ("Aucun adhérent à ce nom !\n");
-  else
-    return ("Opération impossible !\n");
+  rep = client_traiter (&req, &delai);
+  if (!client_gerer_code (rep.code, delai))
+    return;
+  client_afficher_adherents (rep.adhs);
 }
 
-char *
-client_rendre_livre (char *auteur, char *titre)
+void
+client_emprunter_livre (char *adherent, char *titre)
 {
-  return "OK\n";
+  printf ("OK\n");
+}
+
+void
+client_rendre_livre (char *adherent, char *titre)
+{
+  printf ("OK\n");
 }
 
 int
@@ -186,13 +187,13 @@ client_main_loop ()
 	    client_doc_commandes ();
 	}
       else if (!strcmp (commande, "ouvrir"))
-	printf ("%s", client_ouvrir_session ());
+	client_ouvrir_session ();
       else if (!strcmp (commande, "fermer"))
-	printf ("%s", client_fermer_session ());
+	client_fermer_session ();
       else if (!strcmp (commande, "titre"))
-	printf ("%s", client_consulter_titre (suite));
+	client_consulter_titre (suite);
       else if (!strcmp (commande, "auteur"))
-	printf ("%s", client_consulter_auteur (suite));
+	client_consulter_auteur (suite);
       else if (!strcmp (commande, "emprunter"))
 	{
 	}
@@ -200,9 +201,9 @@ client_main_loop ()
 	{
 	}
       else if (!strcmp (commande, "adherent"))
-	printf ("%s", client_consulter_adherent (suite));
+	client_consulter_adherent (suite);
       else if (!strcmp (commande, "ping"))
-	printf ("%s", client_ping ());
+	client_ping ();
       else
 	{
 	  fprintf (stderr, "Commande inconnue ! Voir 'aide'.\n");
