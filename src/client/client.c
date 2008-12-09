@@ -25,7 +25,7 @@ client_ouvrir_session ()
       return "UDP -> pas d'ouverture de session !\n";
     }
   client_creer_socket ();
-  return("Fini.\n");
+  return ("Fini.\n");
 }
 
 char *
@@ -38,11 +38,10 @@ char *
 client_consulter_titre (char *titre)
 {
   prot_requete_t req;
-  char param[PARAM_LMAX];
   req.operation = op_consulter_titre;
-  strncpy(param,titre,PARAM_LMAX);
-  req.param = param;
-  client_envoyer_requete (req);
+  req.param = titre;
+  client_envoyer_requete (&req);
+  return("TODO\n");
 }
 
 char *
@@ -70,8 +69,8 @@ client_fermer_session ()
     {
       return "UDP -> pas de fermeture de session !\n";
     }
-  client_fermer_socket();
-  return("Fini.\n");
+  client_fermer_socket ();
+  return ("Fini.\n");
 }
 
 int
@@ -81,12 +80,12 @@ client_main_loop ()
   char *commande, *suite;
   while (boucler && (commande = lire_commande ()))
     {
-      suite = extraire_parametre(commande);
+      suite = extraire_parametre (commande);
       if (!strcmp (commande, "quitter"))
 	boucler = 0;
       else if (!strcmp (commande, "aide"))
 	{
-	  extraire_parametre(suite);
+	  extraire_parametre (suite);
 	  if (!strcmp (suite, "quitter"))
 	    client_doc_quitter ();
 	  else if (!strcmp (suite, "aide"))
@@ -133,7 +132,7 @@ client_main_loop ()
 	{
 	  fprintf (stderr, "Commande inconnue ! Voir 'aide'.\n");
 	}
-      free(commande);
+      free (commande);
     }
   return 1;
 }
@@ -172,10 +171,11 @@ main (int argc, char **argv)
     }
   if (tflag)
     prot_params.type = sock_tcp;
-  else {
-    prot_params.type = sock_udp;
-    client_creer_socket();
-  }
+  else
+    {
+      prot_params.type = sock_udp;
+      client_creer_socket ();
+    }
   client_main_loop ();
   return EXIT_SUCCESS;
 }
