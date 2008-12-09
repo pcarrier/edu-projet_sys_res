@@ -13,5 +13,6 @@
 #define LIVRES_NBMAX 1000
 #define PARAM_LMAX 50
 #define RESULT_LMAX 10
+#define PROMPT_SIZE 30
 
 #endif

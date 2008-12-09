@@ -20,6 +20,11 @@ char *client_init (int argc, char **argv);
 char *client_ouvrir_session ();
 
 /**
+ * Fermeture d'une session
+ */
+char *client_fermer_session ();
+
+/**
  * Emprunt d'un livre
  */
 char *client_emprunter_livre (char *auteur, char *titre);
@@ -43,10 +48,5 @@ char *client_rendre_livre (char *auteur, char *titre);
  * Consultation d'un adhérent
  */
 char *client_consulter_adherent (char *nom);
-
-/**
- * Fermeture d'une session
- */
-char *client_fermer_session ();
 
 #endif

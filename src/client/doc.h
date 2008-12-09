@@ -11,26 +11,22 @@
 /*!
  * \brief Affichage de la syntaxe du programme
  */
-void
-client_doc_syntaxe (char *progname);
+void client_doc_syntaxe (char *progname);
 
 /*!
  * \brief Affichage de la liste des commandes
  */
-void
-client_doc_commandes ();
+void client_doc_commandes ();
 
 /*!
  * \brief Affichage de la syntaxe d'ouverture de session
  */
-void
-client_doc_ouvrir ();
+void client_doc_ouvrir ();
 
 /*!
  * \brief Affichage de la syntaxe de fermeture de session
  */
-void
-client_doc_fermer ();
+void client_doc_fermer ();
 
 /*!
  * \brief Affichage de la syntaxe de l'emprunt de livre

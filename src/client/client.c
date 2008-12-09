@@ -5,6 +5,7 @@
 #include <sys/signal.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <assert.h>
 
 #include <reseau/fon.h>
 #include <reseau/protocole.h>
@@ -12,6 +13,7 @@
 #include <common.h>
 #include "client.h"
 #include "doc.h"
+#include "prompt.h"
 
 prot_params_t prot_params;
 
@@ -22,7 +24,7 @@ client_ouvrir_session ()
 {
   if (prot_params.type == sock_udp)
     {
-      return "Vous êtes en UDP, pas d'ouverture de session requise !\n";
+      return "TCP -> pas d'ouverture de session !\n";
     }
 
   return "OK";
@@ -63,9 +65,24 @@ client_fermer_session ()
 {
   if (prot_params.type == sock_udp)
     {
-      return "Vous êtes en UDP, pas de fermeture de session requise !\n";
+      return "UDP -> pas de fermeture de session !\n";
     }
   return "OK";
+}
+
+int
+client_creer_socket ()
+{
+}
+
+int
+client_main_loop ()
+{
+  while (1)
+    {
+      lire_commande ();
+    }
+  return EXIT_SUCCESS;
 }
 
 int
@@ -104,6 +121,8 @@ main (int argc, char **argv)
     prot_params.type = sock_tcp;
   else
     prot_params.type = sock_udp;
-  printf("%s,%i,%s\n",prot_params.host,prot_params.type,prot_params.port);
+
+  assert (client_creer_socket ());
+  assert (client_main_loop ());
   return EXIT_SUCCESS;
 }
