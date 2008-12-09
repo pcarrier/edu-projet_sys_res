@@ -102,29 +102,27 @@ client_fermer_session ()
 int
 main (int argc, char **argv)
 {
-  int c, tflag = 0, index;
+  int c, hflag = 0, tflag = 0, index;
   char *port, *serveur, *protocole;
-  while ((c = getopt (argc, argv, "p:t")) != -1) {
+  while ((c = getopt (argc, argv, "hp:t")) != -1) {
     switch (c) {
     case 't':
       tflag = 1;
+      break;
+    case 'h':
+      hflag = 1;
       break;
     case 'p':
       port = optarg;
       break;
     case '?':
-      if (optopt == 'p')
-	fprintf (stderr, "Option -%c requiert un argument.\n", optopt);
-      else if (isprint (optopt))
-	fprintf (stderr, "Option '-%c' inconnue.\n", optopt);
-      else
-	fprintf (stderr,
-		 "Caractère d'option '\\x%x'.\n inconne.", optopt);
       return EXIT_FAILURE;
     }
   }
   for (index = optind; index < argc; index++)
     serveur = argv[index];
+  if(hflag)
+    client_doc_syntaxe(argv[0]);
   if(tflag)
     protocole = "tcp";
   else
