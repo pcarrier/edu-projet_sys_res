@@ -2,7 +2,7 @@
 #define __PROTOCOLE_H__
 
 #include <donnees/donnees.h>
-
+#include <common.h>
 /*!
  * \brief Opérations disponibles dans le protocole
  *
@@ -71,7 +71,7 @@ typedef enum
 } socktype_e;
 
 
-type struct
+typedef struct
 {
   string host,
   socktype type,
