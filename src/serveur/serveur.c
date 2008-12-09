@@ -70,9 +70,9 @@ traitement_serveur ()
       int client;
       struct sockaddr_in addr_client;
       client=h_accept(sockfd, &addr_client);
-      char buffer="\0";
+      char buffer='\0';
 
-      while(buffer!="\n")
+      while(buffer!='\n')
       {
       h_reads(client, &buffer, 1);
       printf("Recu : %c \n", buffer);
