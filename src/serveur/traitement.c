@@ -5,6 +5,8 @@
 #include <reseau/protocole.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 
 prot_ret_e
 trait_consulter_titre(char * catalogue, char * nom_livre, livre_t * tab_result){
@@ -20,7 +22,7 @@ trait_consulter_titre(char * catalogue, char * nom_livre, livre_t * tab_result){
     for (i = 0 ; i < cat_nb_livre ; i++){
       //on recherche la chaine de caractère reçue en paramètre parmis tous les noms de livres
       //si une occurence est trouvée, elle est rajoutée au tableau de résultat
-      if (strcasestr (Catalogue[i].titre, nom_livre) != NULL){
+      if (strcasestr (Catalogue[i].titre, nom_livre) != 0 ){
 	tab_result[j] = Catalogue[i];
 	j++;
       }
@@ -52,7 +54,7 @@ trait_consulter_auteur(char * catalogue, char * nom_auteur, livre_t * tab_result
     for (i = 0; i < cat_nb_livre ; i++){
       //on recherche la chaine de caractère reçue en paramètre parmis tous les noms d'auteurs
       //si une occurence est trouvé, elle est rajoutée au tableau de résultat
-      if ((strcasestr(Catalogue[i].auteur, nom_auteur) != NULL) || (strcasestr(nom_auteur, Catalogue[i].auteur) != NULL)){
+      if ((strcasestr(Catalogue[i].auteur, nom_auteur) != 0) || (strcasestr(nom_auteur, Catalogue[i].auteur) != 0)){
 	tab_result[j] = Catalogue[i];
 	j++;
       }
