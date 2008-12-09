@@ -61,7 +61,7 @@ client_doc_titre ()
 {
   fprintf (stdout, "[titre]\n"
 	   "  Usage: titre t\n"
-	   "  Affiche les informations sur livre de titre 't'.\n");
+	   "  Affiche les informations sur les livres dont le titre contient 't'.\n");
 }
 
 void
@@ -69,7 +69,7 @@ client_doc_auteur ()
 {
   fprintf (stdout, "[auteur]\n"
 	   "  Usage: auteur a\n"
-	   "  Liste les titres dont l'auteur a pour nom 'a'.\n");
+	   "  Affiche les informations sur les livres dont l'auteur a un nom contenant 'a'.\n");
 }
 
 void
@@ -77,7 +77,7 @@ client_doc_adherent ()
 {
   fprintf (stdout, "[adherent]\n"
 	   "  Usage: adherent a\n"
-	   "  Affiche les informations sur l'adhérent ayant pour nom 'a'.\n");
+	   "  Affiche les informations sur les adhérents dont le nom contient 'a'.\n");
 }
 
 void
