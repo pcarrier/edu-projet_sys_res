@@ -73,9 +73,9 @@ typedef enum
 
 typedef struct
 {
-  string host,
-  socktype type,
-  string port
+  char * host;
+  socktype_e type;
+  char * port;
 } params_t;
 
 #endif
