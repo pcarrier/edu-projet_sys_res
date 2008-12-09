@@ -88,9 +88,9 @@ bdd_acces_ecriture_fin ()
 int
 bdd_load_annuaire (char *annuaire)
 {
-  bdd_acces_lecture_debut ();
+  //bdd_acces_lecture_debut ();
   bdd_erreur_e retAnnuaire = LireAnnuaire (annuaire);
-  bdd_acces_lecture_fin ();
+  //bdd_acces_lecture_fin ();
 
   if (retAnnuaire < 0)
     {
@@ -101,7 +101,6 @@ bdd_load_annuaire (char *annuaire)
     {
       return 0;
     }
-  bdd_acces_lecture_fin ();
 }
 
 
@@ -110,9 +109,9 @@ bdd_load_annuaire (char *annuaire)
 int
 bdd_load_catalogue (char *catalogue)
 {
-  bdd_acces_lecture_debut ();
+  //bdd_acces_lecture_debut ();
   bdd_erreur_e retCatalogue = LireCatalogue (catalogue);
-  bdd_acces_lecture_fin ();
+  //bdd_acces_lecture_fin ();
 
   if (retCatalogue < 0)
     {
@@ -123,7 +122,6 @@ bdd_load_catalogue (char *catalogue)
     {
       return 0;
     }
-  bdd_acces_lecture_fin ();
 
 }
 
@@ -133,9 +131,9 @@ bdd_load_catalogue (char *catalogue)
 int
 bdd_save_annuaire (char *annuaire)
 {
-  bdd_acces_ecriture_debut ();
+  //bdd_acces_ecriture_debut ();
   bdd_erreur_e retAnnuaire = EcrireAnnuaire (annuaire);
-  bdd_acces_ecriture_fin ();
+  //bdd_acces_ecriture_fin ();
 
   if (retAnnuaire < 0)
     {
@@ -146,7 +144,6 @@ bdd_save_annuaire (char *annuaire)
     {
       return 0;
     }
-
 }
 
 
@@ -155,9 +152,9 @@ bdd_save_annuaire (char *annuaire)
 int
 bdd_save_catalogue (char *catalogue)
 {
-  bdd_acces_ecriture_debut ();
+  //bdd_acces_ecriture_debut ();
   bdd_erreur_e retCatalogue = EcrireCatalogue (catalogue);
-  bdd_acces_ecriture_fin ();
+  //bdd_acces_ecriture_fin ();
 
   if (retCatalogue < 0)
     {
