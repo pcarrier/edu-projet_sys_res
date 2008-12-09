@@ -64,10 +64,10 @@ typedef enum
   sock_udp
 } socktype_e;
 
-/*!
- * Paramètres de l'application
- *
-typedef struct
+
+type struct
 {
-}
-*/
+  string host,
+  socktype type,
+  string port
+} params_t;
