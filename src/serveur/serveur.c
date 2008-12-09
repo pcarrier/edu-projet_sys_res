@@ -87,8 +87,8 @@ traitement_serveur ()
 	    {
 	      while (h_reads (client, &rqt_client, sizeof(rqt_client))>0)
 		{
-		  printf ("Recu operation de type : %c \n", rqt_client.prot_op_e);
-		  switch(rqt_client.prot_op_e){
+		  printf ("Recu operation de type : %c \n", rqt_client.operation);
+		  switch(rqt_client.operation){
 			  case(op_consulter_auteur):
 				  break;
 			  default:
@@ -97,7 +97,7 @@ traitement_serveur ()
 			/*
 			 * TO DO APPELS A traitements.c
 			 */
-		  h_writes (client, &buffer, 1);
+		 	// h_writes (client, &buffer, 1);
 		}
 	      h_close (client);
 	    }
