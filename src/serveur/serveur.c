@@ -35,7 +35,7 @@ static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
 /*------------------------------------------------------------------*/
 
 void serveur_doc_syntaxe(char *progname){
-	fprintf(stderr, "Usage : %s [-p port] [-t port]\n"
+	fprintf(stderr, "Usage : %s [-p port] [-t]\n"
 			"-p port: utiliser le port p plutot que " PORT_DEFAUT "\n"
 			"-t utiliser TPC plutot que UDP\n", progname);
 }
@@ -155,15 +155,20 @@ main (int argc, char **argv)
 
   while(c=getopt(argc, argv, "t:p:")!=1)
   {
+      	 protocole_courant="udp";
+
 	  switch(c){
 		  case('t'):
-			  break;
+      			protocole_courant="tcp";
+			break;
 		  case('p'):
-			  break;
+      			service_courant =optarg;
+			break;
 	  }
   }
+  printf("Port %s , Protocole : %s \n", service_courant, protocole_courant); 
   /* Initialisation de la partie réseau du client */
-  serveur_init (&argc, argv);
+  //serveur_init (&argc, argv);
   /* Lancement de l'interface client */
   traitement_serveur ();
 
