@@ -37,8 +37,8 @@ client_emprunter_livre (char *auteur, char *titre)
 char *
 client_consulter_titre (char *titre)
 {
-  char param[PARAM_LMAX];
   prot_requete_t req;
+  char param[PARAM_LMAX];
   req.operation = op_consulter_titre;
   strncpy(param,titre,PARAM_LMAX);
   req.param = param;
