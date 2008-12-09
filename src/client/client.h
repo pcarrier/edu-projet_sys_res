@@ -38,7 +38,7 @@ char *client_emprunter_livre (char *auteur, char *titre);
  * Affichage d'un tableau de livre dont la
  * fin est indiquée par un marqueur de titre vide
  */
-void client_afficher_livres (livre_t *livres);
+void client_afficher_livres (livre_t * livres);
 
 /**
  * Consultation d'un livre
@@ -55,7 +55,7 @@ char *client_consulter_auteur (char *auteur);
  * fin est indiquée par un marqueur de nom vide
  */
 
-void client_afficher_adherents (adherent_t *adherents);
+void client_afficher_adherents (adherent_t * adherents);
 
 
 /**

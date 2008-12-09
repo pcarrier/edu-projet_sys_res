@@ -39,8 +39,7 @@ char *lire_commande ();
  * retourne la position suivante.
  *
  */
-char *
-extraire_parametre (char * c);
+char *extraire_parametre (char *c);
 
 
 #endif
