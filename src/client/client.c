@@ -11,55 +11,20 @@
 #include <donnees/donnees.h>
 #include <common.h>
 #include "client.h"
+#include "doc.h"
 
-void client_appli (char *serveur, char *service, char *protocole);
-extern void interface_client ();
+prot_params_t prot_params;
 
-static char serveur_courant[SERV_LMAX] = SERVEUR_DEFAUT;
-static char service_courant[PORT_LMAX] = PORT_DEFAUT;
-static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
-
-char *
-client_init (int argc, char **argv)
-{
-  /*  while ((c = get ()))
-     switch (*argc)
-     {
-     break;
-     strcpy (serveur_courant, argv[1]);
-     break;
-     strcpy (serveur_courant, argv[1]);
-     strcpy (service_courant, argv[2]);
-     break;
-     strcpy (serveur_courant, argv[1]);
-     strcpy (service_courant, argv[2]);
-     strcpy (protocole_courant, argv[3]);
-     break;
-     default:
-     printf
-     ("Usage:client serveur(nom ou @IP)  service (nom ou port)  protocole (tcp ou udp)\n");
-     exit (1);
-     }
-     printf ("Utilisation de serveur : %s\n", serveur_courant);
-     printf ("Utilisation de service : %s\n", service_courant);
-     printf ("Utilisation de protocole : %s\n\n", protocole_courant);
-     return "OK";
-   */
-}
+/*void client_appli (char *serveur, char *service, char *protocole);*/
 
 char *
 client_ouvrir_session ()
 {
-  if (!strcmp (protocole_courant, "udp"))
+  if (prot_params.type == sock_udp)
     {
-      return "Vous êtes en UDP, pas d'ouverture de session requise\n";
+      return "Vous êtes en UDP, pas d'ouverture de session requise !\n";
     }
-  else if (!strcmp (protocole_courant, "tcp"))
-    {
-      printf ("???");
-    }
-  else
-    return "Protocole non connu.\n";
+
   return "OK";
 }
 
@@ -96,6 +61,10 @@ client_consulter_adherent (char *nom)
 char *
 client_fermer_session ()
 {
+  if (prot_params.type == sock_udp)
+    {
+      return "Vous êtes en UDP, pas de fermeture de session requise !\n";
+    }
   return "OK";
 }
 
@@ -103,9 +72,10 @@ int
 main (int argc, char **argv)
 {
   int c, hflag = 0, tflag = 0, index;
-  char *port, *serveur, *protocole;
-  if (argc = 1)
+  if (argc == 1)
     client_doc_syntaxe (argv[0]);
+  prot_params.host = SERVEUR_DEFAUT;
+  prot_params.port = PORT_DEFAUT;
   while ((c = getopt (argc, argv, "hp:t")) != -1)
     {
       switch (c)
@@ -117,22 +87,23 @@ main (int argc, char **argv)
 	  hflag = 1;
 	  break;
 	case 'p':
-	  port = optarg;
+	  prot_params.port = optarg;
 	  break;
 	case '?':
 	  return EXIT_FAILURE;
 	}
     }
   for (index = optind; index < argc; index++)
-    serveur = argv[index];
+    prot_params.host = argv[index];
   if (hflag)
     {
       client_doc_syntaxe (argv[0]);
       return EXIT_SUCCESS;
     }
   if (tflag)
-    protocole = "tcp";
+    prot_params.type = sock_tcp;
   else
-    protocole = "udp";
+    prot_params.type = sock_udp;
+  printf("%s,%i,%s\n",prot_params.host,prot_params.type,prot_params.port);
   return EXIT_SUCCESS;
 }
