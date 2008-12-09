@@ -36,11 +36,11 @@ client_emprunter_livre (char *auteur, char *titre)
   return "OK\n";
 }
 
-char *
+void
 client_afficher_livres (livre_t *livres) {
-  livre_t *livre_courant;
+  livre_t *livre_courant = livres;
   while(livre_courant->titre[0] != '\0') {
-    afficher_livre(livre_courant);
+    afficher_livre(*livre_courant);
     ++livre_courant;
   }
 }
@@ -54,13 +54,13 @@ client_consulter_titre (char *titre)
   strncpy (req.param, titre, PARAM_LMAX);
   client_envoyer_requete (&req);
   rep = client_recevoir_reponse();
-  if(rep.code = ret_trouve) {
+  if(rep.code == ret_trouve) {
     client_afficher_livres (rep.livres);
     return "Fin des résultats\n";
   }
-  else if(rep.code = ret_inexistant)
+  else if(rep.code == ret_inexistant)
     return("Aucun résultat !\n");
-  else if(rep.code = ret_operation_impossible)
+  else
     return("Opération impossible !\n");
 }
 
@@ -73,21 +73,21 @@ client_consulter_auteur (char *auteur)
   strncpy (req.param, auteur, PARAM_LMAX);
   client_envoyer_requete (&req);
   rep = client_recevoir_reponse();
-  if(rep.code = ret_trouve) {
+  if(rep.code == ret_trouve) {
     client_afficher_livres (rep.livres);
     return "Fin des résultats\n";
   }
-  else if(rep.code = ret_inexistant)
+  else if(rep.code == ret_inexistant)
     return("Aucun résultat !\n");
-  else if(rep.code = ret_operation_impossible)
+  else
     return("Opération impossible !\n");
 }
 
-char *
+void
 client_afficher_adherents (adherent_t *adherents) {
-  adherent_t *adherent_courant;
+  adherent_t *adherent_courant = adherents;
   while(adherent_courant->nom[0] != '\0') {
-    afficher_adherent(adherent_courant);
+    afficher_adherent(*adherent_courant);
     ++adherent_courant;
   }
 }
@@ -101,13 +101,13 @@ client_consulter_adherent (char *nom)
   strncpy (req.param, nom, PARAM_LMAX);
   client_envoyer_requete (&req);
   rep = client_recevoir_reponse();
-  if(rep.code = ret_trouve) {
-    client_afficher_adherents (rep.adherents);
+  if(rep.code == ret_trouve) {
+    client_afficher_adherents (rep.adhs);
     return "Fin des résultats\n";
   }
-  else if(rep.code = ret_inexistant)
+  else if(rep.code == ret_inexistant)
     return("Aucun adhérent à ce nom !\n");
-  else if(rep.code = ret_operation_impossible)
+  else
     return("Opération impossible !\n");
 }
 
