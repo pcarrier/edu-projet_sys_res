@@ -15,7 +15,16 @@ void
 client_doc_commandes ()
 {
   fprintf (stdout, "[Commandes disponibles]\n"
-	   "  ouvrir, fermer, titre, auteur, emprunter, rendre, adherent, quitter\n");
+	   "  aide, ouvrir, fermer, titre, auteur, emprunter, rendre, adherent, quitter\n"
+	   "\nVoir aide aide\n");
+}
+
+void
+client_doc_aide ()
+{
+  fprintf (stdout, "[aide]\n"
+	   "  Usage: aide [c]\n"
+	   "  Affiche cette aide ou l'aide de la commande de nom c si précisée.\n");
 }
 
 void
@@ -35,7 +44,7 @@ void
 client_doc_emprunt ()
 {
   fprintf (stdout, "[emprunter]\n"
-	   "  Usage : emprunter a l\n"
+	   "  Usage: emprunter a l\n"
 	   "  L'adhérent de référence 'a' emprunte le livre de référence 'l'.\n");
 }
 

@@ -14,6 +14,11 @@
 void client_doc_syntaxe (char *progname);
 
 /*!
+ * \brief Affichage de la syntaxe de l'aide
+ */
+void client_doc_aide ();
+
+/*!
  * \brief Affichage de la liste des commandes
  */
 void client_doc_commandes ();

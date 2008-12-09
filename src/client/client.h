@@ -49,4 +49,17 @@ char *client_rendre_livre (char *auteur, char *titre);
  */
 char *client_consulter_adherent (char *nom);
 
+/**
+ * Création du socket
+ */
+int client_creer_socket ();
+
+/**
+ * \brief Boucle principale du client
+ *
+ * Lit les commandes et les exécute
+ *
+ */
+int client_main_loop ();
+
 #endif
