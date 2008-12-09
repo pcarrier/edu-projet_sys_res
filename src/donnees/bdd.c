@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "bdd.h"
+#include "types.h"
 #include <common.h>
 #include <gestion/gestionlivres.h>
 #include <gestion/gestionadherents.h>
@@ -21,7 +22,7 @@ adherent_t Annuaire[ADHS_NBMAX];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
-//int ann_nb_adhs = 0;		/* par défault, aucun adherent */
+//int ann_nb_adhs = 0;          /* par défault, aucun adherent */
 
 /****************************************************************
     Implémentation des fonctions du module
@@ -29,7 +30,7 @@ adherent_t Annuaire[ADHS_NBMAX];
 /*Fonction de traitement du code de retour des fonctions d'acces aux fichiers.
  * Son header est donné ici et non dans le .h afin de cacher sa visibilité aux autres modules.
  */
-void traiteRetour(bdd_erreur_e err, char * filename);
+void traiteRetour (bdd_erreur_e err, char *filename);
 
 
 #define LOCK_FILENAME "serveur.lock"
@@ -94,15 +95,18 @@ int
 bdd_load_annuaire (char *annuaire)
 {
   bdd_acces_lecture_debut ();
-  int retAnnuaire = LireAnnuaire (annuaire);
+  bdd_erreur_e retAnnuaire = LireAnnuaire (annuaire);
   bdd_acces_lecture_fin ();
 
-  if (retAnnuaire < 0){
-    traiteRetour(retAnnuaire,annuaire);
-    return -1;
-  }else{
-    return 0;
-  }
+  if (retAnnuaire < 0)
+    {
+      traiteRetour (retAnnuaire, annuaire);
+      return -1;
+    }
+  else
+    {
+      return 0;
+    }
   bdd_acces_lecture_fin ();
 }
 
@@ -113,15 +117,18 @@ int
 bdd_load_catalogue (char *catalogue)
 {
   bdd_acces_lecture_debut ();
-  int retCatalogue = LireCatalogue (catalogue);
+  bdd_erreur_e retCatalogue = LireCatalogue (catalogue);
   bdd_acces_lecture_fin ();
 
-  if (retCatalogue < 0){
-    traiteRetour(retCatalogue, catalogue);
-    return -1;
-  }else{
-    return 0;
-  }
+  if (retCatalogue < 0)
+    {
+      traiteRetour (retCatalogue, catalogue);
+      return -1;
+    }
+  else
+    {
+      return 0;
+    }
   bdd_acces_lecture_fin ();
 
 }
@@ -133,15 +140,18 @@ int
 bdd_save_annuaire (char *annuaire)
 {
   bdd_acces_ecriture_debut ();
-  int retAnnuaire = EcrireAnnuaire (annuaire);
+  bdd_erreur_e retAnnuaire = EcrireAnnuaire (annuaire);
   bdd_acces_ecriture_fin ();
 
-  if (retAnnuaire < 0){
-    traiteRetour(retAnnuaire, annuaire);
-    return -1;
-  }else{
-    return 0;
-  }  
+  if (retAnnuaire < 0)
+    {
+      traiteRetour (retAnnuaire, annuaire);
+      return -1;
+    }
+  else
+    {
+      return 0;
+    }
 
 }
 
@@ -152,26 +162,31 @@ int
 bdd_save_catalogue (char *catalogue)
 {
   bdd_acces_ecriture_debut ();
-  int retCatalogue = EcrireCatalogue (catalogue);
+  bdd_erreur_e retCatalogue = EcrireCatalogue (catalogue);
   bdd_acces_ecriture_fin ();
 
-  if (retCatalogue < 0){
-    traiteRetour(retCatalogue, catalogue);
-    return -1;
-  }else{
-    return 0;
-  }
+  if (retCatalogue < 0)
+    {
+      traiteRetour (retCatalogue, catalogue);
+      return -1;
+    }
+  else
+    {
+      return 0;
+    }
 }
 
-void traiteRetour(bdd_err_e err, char * filename){
-	switch(err){
-		case(bdd_err_params_incorrects):
-			printf("Paramètres incorrects lors de l'accès au fichier %s.\n",filename);
-			break;
-		case(bdd_err_fopen_impossible):
-			printf("Ouverture du fichier %s impossible.\n",filename);
-			break;	
-	}
+void
+traiteRetour(bdd_erreur_e err, char* filename)
+{
+  switch (err)
+    {
+    case (bdd_err_params_incorrects):
+      printf ("Paramètres incorrects lors de l'accès au fichier %s.\n",
+	      filename);
+      break;
+    case (bdd_err_fopen_impossible):
+      printf ("Ouverture du fichier %s impossible.\n", filename);
+      break;
+    }
 }
-
-

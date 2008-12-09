@@ -39,9 +39,9 @@ void serveur_doc_syntaxe(char *progname){
 			"-p port: utiliser le port p plutot que " PORT_DEFAUT "\n"
 			"-t utiliser TPC plutot que UDP\n", progname);
 }
-
+/*
 void
-/*Usage ()
+Usage ()
 {
   printf
     ("-------------------------------------------------------------------------------------------------\n");
@@ -53,13 +53,15 @@ void
   printf
     ("-------------------------------------------------------------------------------------------------\n");
 
-}*/
+}
+*/
 
+/*
 int
 serveur_init (int *argc, char *argv[])
 {
   // printf ("%d\n", *argc);
-  /* Permet de passer un nombre de parametre variable a l'executable */
+  // Permet de passer un nombre de parametre variable a l'executable /
   switch (*argc)
     {
     case 1:
@@ -79,7 +81,7 @@ serveur_init (int *argc, char *argv[])
   printf ("Utilisation de protocole : %s\n\n", protocole_courant);
   return 0;
 }
-
+*/
 /*------------------------------------------------------------------*/
 void
 traitement_serveur ()
@@ -153,16 +155,16 @@ main (int argc, char **argv)
   int c;
   char * portValue=NULL;
 
-  while(c=getopt(argc, argv, "t:p:")!=1)
+  while((c=getopt(argc, argv, "t:p:"))!=1)
   {
-      	 protocole_courant="udp";
+      	 strcpy(protocole_courant,"udp");
 
 	  switch(c){
 		  case('t'):
-      			protocole_courant="tcp";
+      			strcpy(protocole_courant,"tcp");
 			break;
 		  case('p'):
-      			service_courant =optarg;
+      			strcpy(service_courant ,optarg);
 			break;
 	  }
   }
