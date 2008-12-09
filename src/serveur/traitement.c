@@ -17,8 +17,8 @@ trait_consulter_titre(char * catalogue, char * nom_livre, livre_t * tab_result){
   bdd_acces_lecture_fin();
   
   if (retour == 0){
-    int j = 0;
     int i;
+    int j = 0;
     for (i = 0 ; i < cat_nb_livres ; i++){
       //on recherche la chaine de caractère reçue en paramètre parmis tous les noms de livres
       //si une occurence est trouvée, elle est rajoutée au tableau de résultat
@@ -49,8 +49,8 @@ trait_consulter_auteur(char * catalogue, char * nom_auteur, livre_t * tab_result
   bdd_acces_lecture_fin();
 
   if (retour == 0){
-    int j = 0;
     int i;
+    int j = 0;
     for (i = 0; i < cat_nb_livres ; i++){
       //on recherche la chaine de caractère reçue en paramètre parmis tous les noms d'auteurs
       //si une occurence est trouvé, elle est rajoutée au tableau de résultat
@@ -60,6 +60,36 @@ trait_consulter_auteur(char * catalogue, char * nom_auteur, livre_t * tab_result
       }
     }
     strcpy(tab_result[j].titre, "");
+    if (j == 0){
+      return ret_inexistant;
+    }else{
+      return ret_trouve;
+    }
+  }else{
+    return ret_operation_impossible;
+  }
+}
+
+prot_ret_e
+trait_consulter_adherent(char * annuaire, char * nom, adherent_t * tab_result){
+  //on bloque le fichier de lecture
+  bdd_acces_lecture_debut();
+  int retour = bdd_load_annuaire(annuaire);
+  //on débloque le fichier de lecture
+  bdd_acces_lecture_fin();
+
+  if (retour == 0){
+    int i;
+    int j = 0;
+    for (i = 0 ; i < ann_nb_adhs ; i++){
+      //on recherche la chaine de caractère reçue en paramètre parmis tous les nom d'adhérents
+      //si une occurence est trouvée, elle est rajoutée au tablea de résultat
+      if (strstr(Annuaire.nom, nom) != 0){
+	tab_result[j] = Annuaire;
+	j++;
+      }
+    }
+    strcopy(tab_result[j].nom, "");
     if (j == 0){
       return ret_inexistant;
     }else{
