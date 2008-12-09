@@ -1,8 +1,8 @@
 /*!
  * \file prompt.h
- * \brief Interactions à travers un prompt
+ * \brief Interactions à travers une invite de commandes
  *
- * Saisie de commandes à travers GNU readline, et interprétation des résultats
+ * Saisie de commandes à travers GNU readline puis parsage
  *
  */
 

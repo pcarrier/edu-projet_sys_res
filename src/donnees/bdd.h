@@ -11,18 +11,10 @@
  * Inclusion du header donnees.h
  */
 #include "donnees.h"
-
+#include <common.h>
 /***********************************************/
 /* Définition des constantes de taille maximum */
 /***********************************************/
-/**
- * Constante représentant le nombre maximum de livre dans le catalogue.
- */
-#define nb_max_livres 1000
-/*
- * Constante représentant le nombre maximum des adhésions.
- */
-#define nb_max_adhs 50
 
 /**************************************/
 /* Déclaration des variables globales */
@@ -33,7 +25,7 @@
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module
   */
-extern livre_t Catalogue[nb_max_livres];
+extern livre_t Catalogue[LIVRES_NBMAX];
 
 /**
  *   Valeur contenant le nombre de livre actuellement dans le catalogue
@@ -45,7 +37,7 @@ extern int cat_nb_livres;
    sous optimum en gestion mémoire mais facilite votre utilisation
    de ce module
  */
-extern adherent_t Annuaire[nb_max_adhs];
+extern adherent_t Annuaire[ADHS_NBMAX];
 
 /**
  * Valeur contenant le nombre d'adhérents actuellement dans l'annuaire 

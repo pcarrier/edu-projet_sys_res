@@ -15,9 +15,9 @@
 void client_appli (char *serveur, char *service, char *protocole);
 extern void interface_client ();
 
-static char serveur_courant[LongMaxServeur] = SERVEUR_DEFAUT;
-static char service_courant[LongMaxService] = PORT_DEFAUT;
-static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
+static char serveur_courant[SERV_LMAX] = SERVEUR_DEFAUT;
+static char service_courant[PORT_LMAX] = PORT_DEFAUT;
+static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
 
 char *
 client_init (int argc, char **argv)

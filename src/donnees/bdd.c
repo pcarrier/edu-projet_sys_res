@@ -1,10 +1,3 @@
-/****************************************************************
-
-	Corps du module des données bdd.c
-	Auteur: Dominique Vaufreydaz, Vincent Danjean
-
-*****************************************************************/
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -16,19 +9,15 @@
 #include <gestion/gestionlivres.h>
 #include <gestion/gestionadherents.h>
 
-/****************************************************************
-    Définition des variables conformément au fichier .h 
-*/
-
-/* Déclaration du catalogue contenant au maximum nb_max_livres */
-livre_t Catalogue[nb_max_livres];
+/* Déclaration du catalogue contenant au maximum LIVRES_NBMAX */
+livre_t Catalogue[LIVRES_NBMAX];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
 int cat_nb_livres = 0;		/* par défault, aucun livre */
 
 /* Déclaration de l'annuaire contenant au maximum nb_max_adherents */
-adherent_t Annuaire[nb_max_adhs];
+adherent_t Annuaire[ADHS_NBMAX];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
@@ -40,7 +29,7 @@ adherent_t Annuaire[nb_max_adhs];
 /*Fonction de traitement du code de retour des fonctions d'acces aux fichiers.
  * Son header est donné ici et non dans le .h afin de cacher sa visibilité aux autres modules.
  */
-void traiteRetour(ErreurAcces err, char * filename);
+void traiteRetour(bdd_erreur_e err, char * filename);
 
 
 #define LOCK_FILENAME "serveur.lock"
@@ -174,12 +163,12 @@ bdd_save_catalogue (char *catalogue)
   }
 }
 
-void traiteRetour(ErreurAcces err, char * filename){
+void traiteRetour(bdd_err_e err, char * filename){
 	switch(err){
-		case(ParametresIncorrects):
+		case(bdd_err_params_incorrects):
 			printf("Paramètres incorrects lors de l'accès au fichier %s.\n",filename);
 			break;
-		case(OuvertureFichierImpossible):
+		case(bdd_err_fopen_impossible):
 			printf("Ouverture du fichier %s impossible.\n",filename);
 			break;	
 	}

@@ -27,21 +27,21 @@
 #include <unistd.h>
 void serveur_appli (char *service, char *protocole);	/* programme serveur */
 
-static char service_courant[LongMaxService] = PORT_DEFAUT;
-static char protocole_courant[LongNomProtocole] = PROTOCOLE_DEFAUT;
+static char service_courant[PORT_LMAX] = PORT_DEFAUT;
+static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
 
 /*------------------------------------------------------------------*/
 /* SERVEUR															*/
 /*------------------------------------------------------------------*/
 
 void serveur_doc_syntaxe(char *progname){
-	fprintf(stderr, "Usage : %s [-p port] [-t]\n"
+	fprintf(stderr, "Usage : %s [-p port] [-t port]\n"
 			"-p port: utiliser le port p plutot que " PORT_DEFAUT "\n"
 			"-t utiliser TPC plutot que UDP\n", progname);
 }
 
 void
-Usage ()
+/*Usage ()
 {
   printf
     ("-------------------------------------------------------------------------------------------------\n");
@@ -53,7 +53,7 @@ Usage ()
   printf
     ("-------------------------------------------------------------------------------------------------\n");
 
-}
+}*/
 
 int
 serveur_init (int *argc, char *argv[])
@@ -150,8 +150,18 @@ traitement_serveur ()
 int
 main (int argc, char **argv)
 {
+  int c;
+  char * portValue=NULL;
 
-
+  while(c=getopt(argc, argv, "t:p:")!=1)
+  {
+	  switch(c){
+		  case('t'):
+			  break;
+		  case('p'):
+			  break;
+	  }
+  }
   /* Initialisation de la partie réseau du client */
   serveur_init (&argc, argv);
   /* Lancement de l'interface client */

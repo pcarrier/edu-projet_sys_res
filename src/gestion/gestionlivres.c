@@ -11,8 +11,8 @@
 /****************************************************************
     Déclaration des variables conformément au fichier .h */
 
-/* Déclaration du catalogue contenant au maximum nb_max_livres */
-livre_t Catalogue[nb_max_livres];
+/* Déclaration du catalogue contenant au maximum LIVRES_NBMAX */
+livre_t Catalogue[LIVRES_NBMAX];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
@@ -44,18 +44,18 @@ LireCatalogue (const char *NomFichier)
 
   /* Tests des paramètres: pointeur NULL ou chaåne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
-    return ParametresIncorrects;
+    return bdd_err_params_incorrects;
 
   /* Tentative d'ouverture du fichier en lecture binaire et vérification */
   Fichier = fopen (NomFichier, "rb");
   if (Fichier == NULL)
     {
       /* Impossible d'ouvrir le fichier */
-      return OuvertureFichierImpossible;
+      return bdd_err_fopen_impossible;
     }
 
-  /* On lit au maximum nb_max_livres livres depuis le fichier */
-  nb_livres_lus = fread (Catalogue, sizeof (livre_t), nb_max_livres, Fichier);
+  /* On lit au maximum LIVRES_NBMAX livres depuis le fichier */
+  nb_livres_lus = fread (Catalogue, sizeof (livre_t), LIVRES_NBMAX, Fichier);
 
   /* Fermeture du fichier */
   fclose (Fichier);
@@ -86,14 +86,14 @@ EcrireCatalogue (const char *NomFichier)
 
   /* Tests des paramètres: pointeur NULL ou chaîne vide */
   if (NomFichier == NULL || NomFichier[0] == '\0')
-    return ParametresIncorrects;
+    return bdd_err_params_incorrects;
 
   /* Tentative d'ouverture du fichier en écriture binaire et vérification */
   Fichier = fopen (NomFichier, "wb");
   if (Fichier == NULL)
     {
       /* Impossible d'ouvrir le fichier */
-      return OuvertureFichierImpossible;
+      return bdd_err_fopen_impossible;
     }
 
   /* Ecriture des livres s'il y en a dans le catalogue */
@@ -109,13 +109,3 @@ EcrireCatalogue (const char *NomFichier)
   /* On retourne le nombre de livres écrits dans le fichier */
   return nb_livres_ecrits;
 }
-/*
-void afficher_livre (livre_t l)
-{
-  fprintf (stderr, "Titre: %s\nAuteur(s): %s\n", l.Titre, l.Auteur);
-  fprintf (stderr, "Nombre d'exemplaires : %u\n", l.livre_nbex);
-  fprintf (stderr, "Exemplaires empruntés : %u\n", l.livre_nbemprunts);
-  fprintf (stderr, "Exemplaires disponibles : %u\n\n", l.livre_dispos);
-
-}
-*/
