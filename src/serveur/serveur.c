@@ -32,8 +32,9 @@
 
 void serveur_appli (char *service, char *protocole);	/* programme serveur */
 
-static char port_courant[PORT_LMAX] = PORT_DEFAUT;
-static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
+//static char port_courant[PORT_LMAX] = PORT_DEFAUT;
+//static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
+prot_params_t prot_params;
 
 /*------------------------------------------------------------------*/
 /* SERVEUR															*/
@@ -114,6 +115,7 @@ traitement_serveur ()
 int
 main (int argc, char **argv)
 {
+
   int c, tflag = 0, index;
   while ((c = getopt (argc, argv, "p:t")) != -1) {
     switch (c) {
@@ -121,7 +123,7 @@ main (int argc, char **argv)
       tflag = 1;
       break;
     case 'p':
-      strcpy(port_courant, optarg);
+      strcpy(prot_params.port, optarg);
       break;
     case '?':
       if (optopt == 'p')
@@ -135,11 +137,11 @@ main (int argc, char **argv)
     }
   }
   if(tflag)
-    strcpy(protocole_courant, "tcp");
+   prot_params.type=sock_tcp;
   else
-    strcpy(protocole_courant, "udp");
+   prot_params.type=sock_udp;
 
-  printf("Port %s , Protocole : %s \n", port_courant, protocole_courant); 
+  printf("Port %i , Protocole : %i \n", prot_params.type, prot_params.port); 
   /* Initialisation de la partie réseau du client */
   //serveur_init (&argc, argv);
   /* Lancement de l'interface client */
