@@ -56,29 +56,52 @@ traitement_serveur ()
   //sockaddr serveur
   struct sockaddr_in sa;
   char hostname[26];
+  //On récupère le hostname
+  gethostname (hostname, 25);
+
+  //Socket client file descriptor
+  int clientfd;
+  struct sockaddr_in addr_client;
+
+  //Pour récupérer les opérations
+  prot_requete_t rqt_client;
+  //Pour le fork()
+  int pid_fils;
+
+  //Si on fait du tcp...
   if (prot_params.type == sock_tcp)
     {
-      gethostname(hostname,25);
-      //Création de la socket
+      //Création de la socket serveur
       sockfd = h_socket (AF_INET, SOCK_STREAM);
       //Renseignement des adresses de la socket
       adr_socket (prot_params.port, hostname, "tcp", &sa, SERVEUR);
       //Association...
       h_bind (sockfd, &sa);
-
-      h_listen(sockfd, 10);
-      int client;
-      struct sockaddr_in addr_client;
-      client=h_accept(sockfd, &addr_client);
-      char buffer='\0';
-
-      while(buffer!='\n')
-      {
-      h_reads(client, &buffer, 1);
-      printf("Recu : %c \n", buffer);
-      h_writes(client, &buffer, 1);
-      }
-      h_close(client); 
+      //On passe en mode écoute
+      h_listen (sockfd, 10);
+      while (1)
+	{
+	  clientfd = h_accept (sockfd, &addr_client);
+	  pid_fils = fork ();
+	  if (pid_fils == 0)
+	    {
+	      while (h_reads (client, &rqt_client, sizeof(rqt_client))>0)
+		{
+		  printf ("Recu operation de type : %c \n", rqt_client.prot_op_e);
+		  switch(rqt_client.prot_op_e){
+			  case(op_consulter_auteur):
+				  break;
+			  default:
+				  break;
+		  } 
+			/*
+			 * TO DO APPELS A traitements.c
+			 */
+		  h_writes (client, &buffer, 1);
+		}
+	      h_close (client);
+	    }
+	}
     }
 
   printf ("Serveur lancé sur le port %s ", prot_params.port);

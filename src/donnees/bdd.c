@@ -18,7 +18,7 @@ livre_t Catalogue[LIVRES_NBMAX];
 int cat_nb_livres = 0;		/* par défault, aucun livre */
 
 /* Déclaration de l'annuaire contenant au maximum nb_max_adherents */
-adherent_t Annuaire[ADHS_NBMAX];
+//adherent_t Annuaire[ADHS_NBMAX];
 
 /* Variable contenant le nombre d'adhérents courant dans l'annuaire
    Cette valeur doit rester cohérente avec la capacité de l'annuaire */
