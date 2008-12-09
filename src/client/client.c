@@ -42,14 +42,14 @@ client_fermer_session ()
 }
 
 char *
-client_pong ()
+client_ping ()
 {
   prot_requete_t req;
   prot_reponse_t rep;
   req.operation = op_ping;
   client_envoyer_requete (&req);
   rep = client_recevoir_reponse();
-  if(rep.code == ret_pong) {
+  if(rep.code == ret_pong)
     return "Pong !\n";
   else if(rep.code == ret_inexistant)
     return("Inexistant !?\n");
@@ -81,7 +81,7 @@ client_consulter_titre (char *titre)
   strncpy (req.param, titre, PARAM_LMAX);
   client_envoyer_requete (&req);
   rep = client_recevoir_reponse();
-  if(rep.code == ret_trouve) {
+  if (rep.code == ret_trouve) {
     client_afficher_livres (rep.livres);
     return "Fin des résultats\n";
   }

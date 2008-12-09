@@ -105,7 +105,7 @@ traitement_serveur ()
 		      rep_client.code =
 			trait_consulter_auteur (files_conf.fichierCatalogue,rqt_client.param,
 						livres_results);
-		      rep_client.livres = (livre_t*) livres_results;
+		     // rep_client.livres = (livre_t*) livres_results;
 
 		      for (i = 0; i < LIVRES_NBMAX; i++)
 			{
@@ -116,7 +116,7 @@ traitement_serveur ()
 		      rep_client.code =
 			trait_consulter_titre (files_conf.fichierCatalogue,rqt_client.param,
 					       livres_results);
-		      rep_client.livres = (livre_t*) livres_results;
+		      //rep_client.livres = (livre_t*) livres_results;
 
 		      for (i = 0; i < LIVRES_NBMAX; i++)
 			{
