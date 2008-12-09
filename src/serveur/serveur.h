@@ -3,5 +3,10 @@
 /**
  * Affiche l'aide sur les paramètres à donner au serveur l'ors du démarage.
  */
-void serveur_doc_syntaxe(char * prorgamme);
+void serveur_doc_syntaxe (char *prorgamme);
+typedef struct
+{
+  char *  fichierAnnuaire;
+  char  * fichierCatalogue;
+} dbfiles;
 #endif
