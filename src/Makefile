@@ -33,7 +33,7 @@ CFLAGS += -I.
 CC=gcc
 
 # Bibliothèques à utiliser
-LIBS = -ltermcap -lcurses -lreadline -lhistory
+LIBS = -ltermcap -lcurses -lreadline -lhistory -lrt
 # Bibliothèques supplémentaires spécifiques à SunOS/Solaris
 LIBS_SunOS = -lnsl -lsocket
 # Bibliothèques supplémentaires spécifiques à Linux
