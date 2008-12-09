@@ -25,6 +25,7 @@
 
 #include <ctype.h>
 #include <unistd.h>
+
 void serveur_appli (char *service, char *protocole);	/* programme serveur */
 
 static char service_courant[PORT_LMAX] = PORT_DEFAUT;
