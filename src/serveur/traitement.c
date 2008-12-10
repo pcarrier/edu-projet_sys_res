@@ -146,40 +146,35 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 
   if (retour_ann == 0 && retour_cat == 0)
     {
+      //recherche du numéro de l'adhérent dans la liste d'adhérents
       int i;
       for (i = 0; i < ann_nb_adhs; i++)
 	{
-	  if (!strcmp(Annuaire[i].nom,nom_adh))
+	  if (!strcmp (Annuaire[i].nom, nom_adh))
+	    {
+	      break;
+	    }
+	}
+      //recherche du numéro du livre dans la liste de livres
+      int j;
+      for (j = 0; j < cat_nb_livres; j++)
+	{
+	  if (!strcmp (Catalogue[j].titre, nom_livre))
 	    {
 	      break;
 	    }
 	}
 
-      int j;
-      for (j = 0; j < cat_nb_livres; j++)
-	{
-	  if (!strcmp(Catalogue[j].titre,nom_livre))
-	    {
-	      break;
-	    }
-	}
-      int k = 0;
-      while (k != PRETS_NBMAX)
-	{
-	  if (strcmp (Annuaire[i].prets[k], "") == 0)
-	    {
-	      break;
-	    }
-	  k++;
-	}
-      if (i == ann_nb_adhs || j == cat_nb_livres || Catalogue[j].livre_dispos == 0 || k == PRETS_NBMAX)
+      if (i == ann_nb_adhs || j == cat_nb_livres
+	  || Catalogue[j].livre_dispos == 0
+	  || Annuaire[i].nb_prets == PRETS_NBMAX)
 	{
 	  return ret_operation_impossible;
 	}
       else
 	{
 	  Annuaire[i].nb_prets++;
-	  strcpy (Annuaire[i].prets[k], nom_livre);
+	  strcpy (Annuaire[i].prets[Annuaire[i].nb_prets], nom_livre);
 	  Catalogue[j].livre_dispos--;
 	  Catalogue[j].livre_nbemprunts++;
 
@@ -191,7 +186,7 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 	  if (retour_sauv_ann == 0 && retour_sauv_cat == 0)
 	    {
 	      return ret_succes;
-	      printf("%s a emprunté le livre : %s\n", nom_adh, nom_livre);
+	      printf ("%s a emprunté le livre : %s\n", nom_adh, nom_livre);
 	    }
 	  else
 	    {
@@ -225,7 +220,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
       int i;
       for (i = 0; i < ann_nb_adhs; i++)
 	{
-	  if (!strcmp(Annuaire[i].nom, nom_adh))
+	  if (!strcmp (Annuaire[i].nom, nom_adh))
 	    {
 	      break;
 	    }
@@ -235,7 +230,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
       int j;
       for (j = 0; j < Annuaire[i].nb_prets; j++)
 	{
-	  if (!strcmp(Annuaire[i].prets[j], nom_livre))
+	  if (!strcmp (Annuaire[i].prets[j], nom_livre))
 	    {
 	      break;
 	    }
@@ -245,14 +240,15 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
       int k;
       for (k = 0; k < cat_nb_livres; k++)
 	{
-	  if (!strcmp(Catalogue[k].titre, nom_livre))
+	  if (!strcmp (Catalogue[k].titre, nom_livre))
 	    {
 	      break;
 	    }
 	}
 
 
-      if (i == ann_nb_adhs || j == Annuaire[i].nb_prets || Annuaire[i].nb_prets == 0 || k == cat_nb_livres)
+      if (i == ann_nb_adhs || j == Annuaire[i].nb_prets
+	  || Annuaire[i].nb_prets == 0 || k == cat_nb_livres)
 	{
 	  return ret_operation_impossible;
 	}
@@ -282,7 +278,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 	  if (retour_sauv_ann == 0 && retour_sauv_cat == 0)
 	    {
 	      return ret_succes;
-	      printf("%s a rendu le livre : %s\n", nom_adh, nom_livre);
+	      printf ("%s a rendu le livre : %s\n", nom_adh, nom_livre);
 	    }
 	  else
 	    {
