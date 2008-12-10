@@ -56,7 +56,7 @@ traitement_serveur ()
   //Pour récupérer les opérations
   prot_requete_t rqt_client;
   prot_reponse_t rep_client;
-  prot_ret_e  rqt_status;
+  prot_ret_e rqt_status;
   //Pour le fork()
   int pid_fils;
   //Si on fait du tcp...
@@ -81,73 +81,75 @@ traitement_serveur ()
 		      sizeof (prot_requete_t)) > 0)
 		{
 		  affiche_requete_informations (rqt_client);
-		  rqt_status=traite_requete(rqt_client,&rep_client);
-		  affiche_requete_status(rqt_status);
-		  h_writes (clientfd, (char *) (&rep_client),sizeof (rep_client));
+		  rqt_status = traite_requete (rqt_client, &rep_client);
+		  affiche_requete_status (rqt_status);
+		  h_writes (clientfd, (char *) (&rep_client),
+			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
 	      return exit (EXIT_SUCCESS);
 	    }
 	}
-    }else if (prot_params.type == sock_tcp){
-	printf("Protocol udp non encore implémenté");
+    }
+  else if (prot_params.type == sock_tcp)
+    {
+      printf ("Protocol udp non encore implémenté");
     }
 
 }
 
 
-prot_ret_e traite_requete(prot_requete_t rqt_client, prot_reponse_t * rep_client){
- livre_t livres_results[RESULT_LMAX];
- adherent_t adh_results[RESULT_LMAX];
- 
- switch (rqt_client.operation)
-		    {
-		    case (op_consulter_auteur):
+prot_ret_e
+traite_requete (prot_requete_t rqt_client, prot_reponse_t * rep_client)
+{
+  livre_t livres_results[RESULT_LMAX];
+  adherent_t adh_results[RESULT_LMAX];
 
-		      (*rep_client).code =
-			trait_consulter_auteur (files_conf.fichier_catalogue,
-						rqt_client.param,
-						livres_results);
-		      memcpy ((*rep_client).livres, livres_results,
-			      sizeof (livre_t) * RESULT_LMAX);
-		      break;
-		    case (op_consulter_titre):
-		      (*rep_client).code =
-			trait_consulter_titre (files_conf.fichier_catalogue,
-					       rqt_client.param,
-					       livres_results);
-		      memcpy ((*rep_client).livres, livres_results,
-			      sizeof (livre_t) * RESULT_LMAX);
-		      break;
-		    case (op_consulter_adherent):
-		      (*rep_client).code =
-			trait_consulter_adherent (files_conf.fichier_annuaire,
-						  rqt_client.param,
-						  adh_results);
+  switch (rqt_client.operation)
+    {
+    case (op_consulter_auteur):
 
-		      memcpy ((*rep_client).adhs, adh_results,
-			      sizeof (adherent_t) * RESULT_LMAX);
-		      break;
-		    case (op_emprunter):
-		      (*rep_client).code =
-			trait_emprunter (files_conf.fichier_annuaire,
+      (*rep_client).code =
+	trait_consulter_auteur (files_conf.fichier_catalogue,
+				rqt_client.param, livres_results);
+      memcpy ((*rep_client).livres, livres_results,
+	      sizeof (livre_t) * RESULT_LMAX);
+      break;
+    case (op_consulter_titre):
+      (*rep_client).code =
+	trait_consulter_titre (files_conf.fichier_catalogue,
+			       rqt_client.param, livres_results);
+      memcpy ((*rep_client).livres, livres_results,
+	      sizeof (livre_t) * RESULT_LMAX);
+      break;
+    case (op_consulter_adherent):
+      (*rep_client).code =
+	trait_consulter_adherent (files_conf.fichier_annuaire,
+				  rqt_client.param, adh_results);
+
+      memcpy ((*rep_client).adhs, adh_results,
+	      sizeof (adherent_t) * RESULT_LMAX);
+      break;
+    case (op_emprunter):
+      (*rep_client).code =
+	trait_emprunter (files_conf.fichier_annuaire,
+			 files_conf.fichier_catalogue, rqt_client.param);
+      break;
+    case (op_rendre):
+      (*rep_client).code = trait_rendre (files_conf.fichier_annuaire,
 					 files_conf.fichier_catalogue,
 					 rqt_client.param);
-		      break;
-		    case (op_rendre):
-		      (*rep_client).code = trait_rendre(files_conf.fichier_annuaire,
-				      		     files_conf.fichier_catalogue,
-						     rqt_client.param);
-		      break;
-		    case (op_ping):
-		      (*rep_client).code = ret_pong;
-		      break;
-		    default:
-		      (*rep_client).code = ret_operation_impossible;
-		      break;
-		    }
- 	return (*rep_client).code;
+      break;
+    case (op_ping):
+      (*rep_client).code = ret_pong;
+      break;
+    default:
+      (*rep_client).code = ret_operation_impossible;
+      break;
+    }
+  return (*rep_client).code;
 }
+
 /*----------------------------------------------------------*/
 /* MAIN : lancement du serveur                               */
 /*----------------------------------------------------------*/

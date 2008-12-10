@@ -164,7 +164,7 @@ bdd_save_catalogue (char *catalogue)
 }
 
 void
-traiteRetour(bdd_erreur_e err, char* filename)
+traiteRetour (bdd_erreur_e err, char *filename)
 {
   switch (err)
     {

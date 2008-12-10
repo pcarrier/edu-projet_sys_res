@@ -50,7 +50,7 @@ extern int ann_nb_adhs;
  * Tentative de lecture du fichier serveur.lock
  * si fail alors le fichier est en utilisation sinon la méthoode accède
  * et verrouille le fichier
- **/ 
+ **/
 void bdd_acces_lecture_debut ();
 /**
  * si l'accès au seveur.lock échoue, alors on quite la méthode

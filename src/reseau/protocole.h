@@ -52,10 +52,10 @@ typedef struct
 {
   prot_op_e operation;		///<  Opération à effectuer
   char param[PARAM_LMAX];	/*!< Paramètre de l'opération, suivant le contexte :
-				  - Nom d'auteur
-				  - Titre de livre
-				  - Nom d'adhérent
-				*/
+				   - Nom d'auteur
+				   - Titre de livre
+				   - Nom d'adhérent
+				 */
 } prot_requete_t;
 
 /*!
@@ -75,10 +75,10 @@ typedef struct
 
 typedef struct
 {
-  char * host;
+  char *host;
   socktype_e type;
-  char * port;
-  int connecte;
+  char *port;
+  int utilisable;
 } prot_params_t;
 
 #endif
