@@ -71,7 +71,9 @@
  *
  * Nous avons choisi d'automatiser la génération de documentation à l'aide
  * de doxygen. Nous n'avons pas pris le temps d'adapter tous les commentaires
- * du code fourni à la syntaxe de cet outil.
+ * du code fourni à la syntaxe de cet outil, ni d'écrire beaucoup de commentaires
+ * pour notre code. Cependant, nous le considérons comme facilement analysable
+ * à l'heure actuelle.
  *
  * \subsection indent Normes de présentation
  *
@@ -93,6 +95,9 @@
  * de commandes concerne l'historique de readline.
  *
  * \section defauts Défauts
+ *
+ * Quelques fonctions et constantes fournies ne sont plus utilisées.
+ * Nous n'avons pas pris le temps de tout nettoyer.
  *
  * Les données transmises ne sont pas initialisées, donc une quantité
  * considérable de mémoire non-initialisée est envoyée au client
