@@ -12,37 +12,41 @@
 #include <reseau/protocole.h>
 
 /**
- * Ouverture de session
+ * \brief Ouverture de session
  */
 void client_ouvrir_session ();
 
 /**
- * Fermeture d'une session
+ * \brief Fermeture d'une session
  */
 void client_fermer_session ();
 
 /**
- * Envoi d'un ping
+ * \brief Envoi d'un ping
  */
 void client_ping ();
 
 /**
+ * \brief Affichage de livres
+ *
  * Affichage d'un tableau de livre dont la
  * fin est indiquée par un marqueur de titre vide
  */
 void client_afficher_livres (livre_t * livres);
 
 /**
- * Consultation d'un livre
+ * \brief Demande de consultation d'un livre
  */
 void client_consulter_titre (char *titre);
 
 /**
- * Consultation d'un auteur
+ * \brief Demande de consultation d'un auteur
  */
 void client_consulter_auteur (char *auteur);
 
 /**
+ * \brief Affichage d'adhérents
+ *
  * Affichage d'un tableau d'adhérents dont la
  * fin est indiquée par un marqueur de nom vide
  */
@@ -50,24 +54,25 @@ void client_consulter_auteur (char *auteur);
 void client_afficher_adherents (adherent_t * adherents);
 
 /**
- * Emprunt d'un livre
+ * \brief Demande d'emprunt d'un livre
  */
 void client_emprunter_livre (char *adherent, char *titre);
 
 /**
- * Retour d'un livre
+ * \brief Demande de retour d'un livre
  */
 void client_rendre_livre (char *adherent, char *titre);
 
 /**
- * Consultation d'un adhérent
+ * \brief Demande de consultation d'un adhérent
  */
 void client_consulter_adherent (char *nom);
 
 /**
  * \brief Boucle principale du client
  *
- * Lit les commandes et les exécute
+ * Lit les commandes, en extrait le(s) paramètres
+ * et exécute le code correspondant.
  *
  */
 int client_main_loop ();

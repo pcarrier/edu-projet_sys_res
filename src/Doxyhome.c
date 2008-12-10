@@ -43,9 +43,13 @@
  *
  * \section methodologie Méthode de travail
  *
- * \subsection planning Planning de travail
+ * \subsection planning Planning
  *
- * 
+ * Nous souhaitions répondre au cahier des charges de base mardi soir,
+ * après nous être d'abord focalisés sur la gestion des données,
+ * puis les interactions client-serveur, afin de consacrer le temps restant
+ * à l'UDP et à l'utilisation d'un pool de serveur.
+ * Ces objectifs ont été réalisés à l'exception du pool.
  *
  * \subsection repartition Répartition des tâches
  *
@@ -109,8 +113,8 @@
  *
  * Le protocole transmet systématiquement d'énormes structures, quelle que soit
  * la quantité d'informations à transmettre. On gagnerait à transmettre l'opération
- * ou le code de retour dans un entier, puis le paramètre jusqu'au '\0' pour les
+ * ou le code de retour dans un entier, puis le paramètre jusqu'au \'\0\' pour les
  * requêtes, la taille des résultats suivie de chaque résultat sous la forme
- * valeur '\0' valeur '\0' .. valeur "\0" (par exemple) pour les réponses.
+ * valeur '\\0' valeur '\\0' ... valeur "\0" (par exemple) pour les réponses.
  *
  */
