@@ -90,10 +90,8 @@ traitement_serveur ()
 	      return exit (EXIT_SUCCESS);
 	    }
 	}
-    }
-  else if (prot_params.type == sock_tcp)
-    {
-      printf ("Protocol udp non encore implémenté");
+    }else if (prot_params.type == sock_udp){
+	printf("Protocol udp non encore implémenté");
     }
 
 }
