@@ -135,7 +135,9 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 {
 
   char *nom_adh = params;
-  char *nom_livre = params + strlen (nom_adh) + 1;
+  char *nom_livre = params + strlen (params) + 2;
+
+  printf("trait : %s, %s.\n", nom_adh, nom_livre);
 
   //on bloque le fichier de lecture
   bdd_acces_lecture_debut ();
