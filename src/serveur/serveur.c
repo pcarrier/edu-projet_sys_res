@@ -111,6 +111,15 @@ traitement_serveur ()
 			  afficher_livre (livres_results[i]);
 			}
 		      break;
+		    case(op_consulter_adherents):
+		      rep_client.code = ret_operation_impossible;
+		      break;
+		    case(op_emprunter):
+		      rep_client.code = ret_operation_impossible; 
+		      break;
+		     case(op_rendre):
+		      rep_client.code = ret_operation_impossible;
+		      break;
 		    case (op_ping):
 		      rep_client.code = ret_pong;
 		      break;
