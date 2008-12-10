@@ -20,7 +20,7 @@ lire_ligne (char *prompt)
 }
 
 void
-fancy_prompt (char prompt[PROMPT_SIZE])
+fancy_prompt ()
 {
   snprintf (prompt, PROMPT_SIZE - 1, "%s:%s(%s)> ", prot_params.host,
 	    prot_params.port, (prot_params.type == sock_tcp) ? "tcp" : "udp");
@@ -29,7 +29,6 @@ fancy_prompt (char prompt[PROMPT_SIZE])
 char *
 lire_commande ()
 {
-  fancy_prompt (prompt);
   return lire_ligne (prompt);
 }
 

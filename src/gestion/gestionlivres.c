@@ -16,7 +16,7 @@ livre_t Catalogue[LIVRES_NBMAX];
 
 /* Variable contenant le nombre d'ouvrage courant dans le catalogue
    Cette valeur doit rester cohérente avec la capacité du catalogue */
-//int cat_nb_livres = 0;		/* par défault, aucun livre */
+//int cat_nb_livres = 0;                /* par défault, aucun livre */
 
 /****************************************************************
     Ecriture des fonctions nécessaires au fonctionnement du module */

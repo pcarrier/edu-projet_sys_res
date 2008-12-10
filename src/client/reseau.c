@@ -57,7 +57,7 @@ client_traiter (prot_requete_t * req, double *delai)
   rep = client_recevoir_reponse ();
   clock_gettime (CLOCK_MONOTONIC, &fin);
   *delai =
-    (fin.tv_sec - debut.tv_sec) +
-    ((fin.tv_nsec - debut.tv_nsec) / 1000000000);
+    1000 * (fin.tv_sec - debut.tv_sec) +
+    (fin.tv_nsec - debut.tv_nsec) / 1000000;
   return rep;
 }

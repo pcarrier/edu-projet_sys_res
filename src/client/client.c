@@ -46,20 +46,20 @@ client_gerer_code (prot_ret_e retour, double delai)
 {
   if (retour == ret_trouve)
     {
-      printf ("Réponse après %e sec :\n", delai);
+      printf ("Réponse après %e ms :\n", delai);
       return 1;
     }
   if (retour == ret_pong)
     {
-      printf ("Pong (%e sec) !\n", delai);
+      printf ("Pong (%e ms) !\n", delai);
       return 1;
     }
   if (retour == ret_inexistant)
     {
-      fprintf (stderr, "Inexistant (%e sec) !\n", delai);
+      fprintf (stderr, "Inexistant (%e ms) !\n", delai);
       return 0;
     }
-  fprintf (stderr, "Opération impossible (%e sec)!\n", delai);
+  fprintf (stderr, "Opération impossible (%e ms) !\n", delai);
   return 0;
 }
 
@@ -252,6 +252,7 @@ main (int argc, char **argv)
       prot_params.type = sock_udp;
       client_creer_socket ();
     }
+  fancy_prompt();
   client_main_loop ();
   return EXIT_SUCCESS;
 }
