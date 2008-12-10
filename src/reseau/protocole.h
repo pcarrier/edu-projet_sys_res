@@ -7,7 +7,7 @@
 /*!
  * \brief Opérations disponibles dans le protocole
  *
- * L'opérations est le premier élément communiqué au serveur
+ * L'opération est le premier élément communiqué au serveur
  * lors d'une requête.
  *
  */
@@ -37,6 +37,12 @@ typedef enum
   ret_pong = 42,
 } prot_ret_e;
 
+/*!
+ * \brief Type de socket
+ *
+ * TCP ou UDP
+ *
+ */
 typedef enum
 {
   sock_tcp,
@@ -63,8 +69,8 @@ typedef struct
  * \brief Réponses du serveur au client
  *
  * Les réponses du serveur sont composées d'un code de retour,
- * d'un tableau de livres et d'un adhérent. Si la requête ne nécessite
- * pas un élément, la valeur NULL est utilisée.
+ * de tableaux de livres et adhérents. La fin des résultats est marquée
+ * par un nom ou titre vide.
  *
  */
 typedef struct
@@ -74,6 +80,13 @@ typedef struct
   adherent_t adhs[RESULT_LMAX];	///< Adhérent si la requête le requiert
 } prot_reponse_t;
 
+/*!
+ * \brief Paramètres du protocole
+ *
+ * Paramètres réseau utilisés par le client et le serveur, générés au
+ * lancement en interprétant les options de la ligne de commande.
+ *
+ */
 typedef struct
 {
   char *host;
