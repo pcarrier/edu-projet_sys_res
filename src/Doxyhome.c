@@ -103,8 +103,10 @@
  * considérable de mémoire non-initialisée est envoyée au client
  * (ce problème pourrait rapidement être résolu).
  *
- * Les déconnexions et erreurs de transmission sont gérées de façon insuffisante,
- * on gagnerait à compléter fon.c à cette fin.
+ * Les déconnexion et erreurs de transmission sont gérées de façon insuffisante,
+ * on gagnerait à compléter fon.c à cette fin. De plus, la consistance des
+ * informations transmises est insuffisamment vérifiée (en cas d'erreur sur le
+ * serveur, on observe des segfaults).
  *
  * On utilise des énumérations pour les types d'opérations et codes de retour,
  * qui sont donc des entiers. Le protocole dépend donc de la plateforme utilisée
