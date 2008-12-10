@@ -72,6 +72,7 @@ trait_consulter_auteur(char * catalogue, char * nom_auteur, livre_t * tab_result
 
 prot_ret_e
 trait_consulter_adherent(char * annuaire, char * nom, adherent_t * tab_result){
+	/*
   //on bloque le fichier de lecture
   bdd_acces_lecture_debut();
   int retour = bdd_load_annuaire(annuaire);
@@ -97,11 +98,12 @@ trait_consulter_adherent(char * annuaire, char * nom, adherent_t * tab_result){
     }
   }else{
     return ret_operation_impossible;
-  }
+  }*/
 }
 
 prot_ret_e
 trait_emprunter(char * annuaire, char * catalogue, char * params){
+	/*
   char * nom_adh = params;
   char * nom_livre = params + strlen(nom_adh) + 1;
 
@@ -156,4 +158,5 @@ trait_emprunter(char * annuaire, char * catalogue, char * params){
   }else{
     return ret_operation_impossible;
   }
+  */
 }

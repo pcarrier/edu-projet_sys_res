@@ -135,7 +135,7 @@ traitement_serveur ()
 			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
-	      exit(EXIT_SUCCESS);
+	      //return exit(EXIT_SUCCESS);
 	    }
 	}
     }
