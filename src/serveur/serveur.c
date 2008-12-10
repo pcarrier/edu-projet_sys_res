@@ -83,7 +83,7 @@ traitement_serveur ()
 		      sizeof (prot_requete_t)) > 0)
 		{
 		  int i;
-		  affiche_requete (rqt_client);
+		  affiche_requete_informations (rqt_client);
 		  switch (rqt_client.operation)
 		    {
 		    case (op_consulter_auteur):
@@ -122,7 +122,7 @@ traitement_serveur ()
 			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
-	      //return exit(EXIT_SUCCESS);
+	      return exit(EXIT_SUCCESS);
 	    }
 	}
     }

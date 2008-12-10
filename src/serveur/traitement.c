@@ -125,7 +125,7 @@ trait_consulter_adherent (char *annuaire, char *nom, adherent_t * tab_result)
 prot_ret_e
 trait_emprunter (char *annuaire, char *catalogue, char *params)
 {
-  /*
+  
      char * nom_adh = params;
      char * nom_livre = params + strlen(nom_adh) + 1;
 
@@ -180,5 +180,5 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
      }else{
      return ret_operation_impossible;
      }
-   */
+   
 }
