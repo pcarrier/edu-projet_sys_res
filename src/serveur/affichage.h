@@ -12,6 +12,7 @@ void affiche_requete_informations (prot_requete_t op);
  * Le paramètre type est une chaine de caractère représantant le nom
  * de l'opération recue ("consulter_auteur", "consulter_titre",...) 
  */
-void simple_affiche (char *type);
+void simple_affiche_requete (char *type, char * param);
 
+void affiche_requete_status(prot_ret_e status);
 #endif

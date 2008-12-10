@@ -38,6 +38,6 @@ prot_ret_e trait_emprunter(char * annuaire, char * catalogue, char * params);
  * en fonction des deux parties de la chaine params passée en dernier paramètre
  */
 prot_ret_e
-trait_emprunter (char *annuaire, char *catalogue, char *params);
+trait_rendre (char *annuaire, char *catalogue, char *params);
 
 #endif
