@@ -111,7 +111,7 @@ traitement_serveur ()
 			  afficher_livre (livres_results[i]);
 			}
 		      break;
-		    case(op_consulter_adherents):
+		    case(op_consulter_adherent):
 		      rep_client.code = ret_operation_impossible;
 		      break;
 		    case(op_emprunter):
@@ -146,7 +146,10 @@ traitement_serveur ()
       printf (" en udp.\n");
     }
 }
-
+/*
+prot_reponse_c traite_requete(){
+	return NULL;
+}*/
 /*----------------------------------------------------------*/
 /* MAIN : lancement du serveur                               */
 /*----------------------------------------------------------*/
