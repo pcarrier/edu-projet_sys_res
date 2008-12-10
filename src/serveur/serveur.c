@@ -18,7 +18,7 @@
 #include <gestion/gestionadherents.h>
 #include <gestion/gestionlivres.h>
 #include "serveur.h"
-
+#include "reseau_srv.h"
 void serveur_appli (char *service, char *protocole);
 
 //Parametres du protocol du serveur (port, type de proto).
@@ -44,7 +44,7 @@ traitement_serveur ()
   //Socket file descriptor.
   int sockfd;
   //sockaddr serveur
-  struct sockaddr_in sa;
+  //struct sockaddr_in sa;
   char hostname[26];
   //On récupère le hostname
   gethostname (hostname, 25);
@@ -60,14 +60,15 @@ traitement_serveur ()
   //Pour le fork()
   int pid_fils;
   //Si on fait du tcp...
-  if (prot_params.type == sock_tcp)
-    {
+  //if (prot_params.type == sock_tcp)
+    //{
       //Création de la socket serveur
-      sockfd = h_socket (AF_INET, SOCK_STREAM);
+      //sockfd = h_socket (AF_INET, SOCK_STREAM);
       //Renseignement des adresses de la socket
-      adr_socket (prot_params.port, hostname, "tcp", &sa, SERVEUR);
+      //adr_socket (prot_params.port, hostname, "tcp", &sa, SERVEUR);
       //Association...
-      h_bind (sockfd, &sa);
+      //h_bind (sockfd, &sa);
+      sockfd=create_sock(prot_params, hostname);
       //On passe en mode écoute
       h_listen (sockfd, 10);
       while (1)
@@ -76,22 +77,19 @@ traitement_serveur ()
 	  pid_fils = fork ();
 	  if (pid_fils == 0)
 	    {
-	      while (h_reads
-		     (clientfd, (char *) (&rqt_client),
-		      sizeof (prot_requete_t)) > 0)
+	     // while (h_reads (clientfd, (char *) (&rqt_client),sizeof (prot_requete_t)) > 0)
+	      while((serveur_lire(prot_params, clientfd, &rqt_client)) >0)
 		{
 		  affiche_requete_informations (rqt_client);
 		  rqt_status = traite_requete (rqt_client, &rep_client);
 		  affiche_requete_status (rqt_status);
-		  h_writes (clientfd, (char *) (&rep_client),
-			    sizeof (rep_client));
+		  //h_writes (clientfd, (char *) (&rep_client),sizeof (rep_client));
+		  serveur_ecrire(prot_params, clientfd, &rep_client);
 		}
-	      h_close (clientfd);
+	       serveur_fermer_client(clientfd);
 	      return exit (EXIT_SUCCESS);
 	    }
-	}
-    }else if (prot_params.type == sock_udp){
-	printf("Protocol udp non encore implémenté");
+	//}
     }
 
 }
