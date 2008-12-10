@@ -173,8 +173,8 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 	}
       else
 	{
-	  Annuaire[i].nb_prets++;
 	  strcpy (Annuaire[i].prets[Annuaire[i].nb_prets], nom_livre);
+	  Annuaire[i].nb_prets++;
 	  Catalogue[j].livre_dispos--;
 	  Catalogue[j].livre_nbemprunts++;
 
