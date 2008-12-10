@@ -71,6 +71,7 @@ client_traiter (prot_requete_t * req, double *delai)
   prot_reponse_t rep;
   clock_gettime (CLOCK_MONOTONIC, &debut);
   client_envoyer_requete (req);
+  rep.code = ret_probleme_local;
   rep = client_recevoir_reponse ();
   clock_gettime (CLOCK_MONOTONIC, &fin);
   *delai =
@@ -82,6 +83,11 @@ client_traiter (prot_requete_t * req, double *delai)
 int
 client_gerer_code (prot_ret_e retour, double delai)
 {
+  if (retour == ret_probleme_local)
+    {
+      printf ("Problème local !\n");
+      return 0;
+    }
   if (retour == ret_succes)
     {
       printf ("Réponse après %e ms :\n", delai);
