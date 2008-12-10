@@ -1,7 +1,7 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
-#define PORT_DEFAUT "1111"
+#define PORT_DEFAUT "3070"
 #define PROTOCOLE_DEFAUT "udp"
 #define SERVEUR_DEFAUT "localhost"
 #define PROTOCOL_LMAX 4
