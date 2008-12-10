@@ -106,7 +106,9 @@
  * Les déconnexion et erreurs de transmission sont gérées de façon insuffisante,
  * on gagnerait à compléter fon.c à cette fin. De plus, la consistance des
  * informations transmises est insuffisamment vérifiée (en cas d'erreur sur le
- * serveur, on observe des segfaults).
+ * serveur, on observe des segfaults), on gagnerait à être plus prudents dans
+ * les printf notamment (utilisation des fonctions d'affichage des livres
+ * et adhérents fournis par les enseignants sans adaptation aux contraintes réseau).
  *
  * On utilise des énumérations pour les types d'opérations et codes de retour,
  * qui sont donc des entiers. Le protocole dépend donc de la plateforme utilisée
