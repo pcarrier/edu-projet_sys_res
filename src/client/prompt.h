@@ -22,7 +22,7 @@ char *lire_ligne (char *prompt);
  * Affiche l'hôte, le port et le protocole.
  *
  */
-void fancy_prompt (char prompt[PROMPT_SIZE]);
+void fancy_prompt ();
 
 /*!
  * \brief Lire une commande

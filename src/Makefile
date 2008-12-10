@@ -1,7 +1,8 @@
 PROGS=gestiondonnees.bin client.bin serveur.bin
 
 SOURCES_client=reseau/fon.c donnees/donnees.c client/doc.c client/prompt.c client/reseau.c client/client.c 
-SOURCES_serveur=reseau/fon.c donnees/bdd.c donnees/donnees.c gestion/gestionlivres.c gestion/gestionadherents.c serveur/serveur.c serveur/traitement.c serveur/affichage.c
+SOURCES_serveur=reseau/fon.c donnees/bdd.c donnees/donnees.c gestion/gestionlivres.c \
+		gestion/gestionadherents.c serveur/serveur.c serveur/traitement.c serveur/affichage.c
 SOURCES_GestionDonnees=donnees/bdd.c donnees/donnees.c gestion/gestiondonnees.c gestion/gestionlivres.c gestion/gestionadherents.c
 SOURCES=$(SOURCES_client) $(SOURCES_serveur) $(SOURCES_projet)
 
@@ -12,7 +13,7 @@ SYSTEM:sh = uname -s
 
 # Options de compilation (à commenter ou pas suivant ce qu'on veut)
 # On garde les informations de débogage
-#CFLAGS += -g
+CFLAGS += -g
 # Optimisation du code par le compilateur
 CFLAGS += -O2
 # DÈtection d'un maximum d'erreurs
@@ -33,7 +34,7 @@ CFLAGS += -I.
 CC=gcc
 
 # Bibliothèques à utiliser
-LIBS = -ltermcap -lcurses -lreadline -lhistory
+LIBS = -ltermcap -lcurses -lreadline -lhistory -lrt
 # Bibliothèques supplémentaires spécifiques à SunOS/Solaris
 LIBS_SunOS = -lnsl -lsocket
 # Bibliothèques supplémentaires spécifiques à Linux

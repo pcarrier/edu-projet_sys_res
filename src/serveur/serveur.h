@@ -1,12 +1,15 @@
-#ifndef __SERVER_H_
-#define __SERVER_H_
+#ifndef __SERVER_H__
+#define __SERVER_H__
+
 /**
- * Affiche l'aide sur les paramètres à donner au serveur l'ors du démarage.
+ * Affiche l'aide sur les paramètres à donner au serveur lors du démarage.
  */
-void serveur_doc_syntaxe (char *prorgamme);
+void serveur_doc_syntaxe (char *programme);
+
 typedef struct
 {
-  char *  fichierAnnuaire;
-  char  * fichierCatalogue;
-} dbfiles;
+  char *fichier_annuaire;
+  char *fichier_catalogue;
+} db_files_t;
+
 #endif

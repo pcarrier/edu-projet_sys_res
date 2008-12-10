@@ -1,47 +1,31 @@
-/******************************************************************************/
-/*			Application: ....			              */
-/******************************************************************************/
-/*									      */
-/*			 programme  SERVEUR 				      */
-/*									      */
-/******************************************************************************/
-/*									      */
-/*		Auteurs :  ....						      */
-/*		Date :  ....						      */
-/*									      */
-/******************************************************************************/
-
 #include <stdio.h>
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <ctype.h>
+#include <unistd.h>
 #include <sys/signal.h>
 #include <sys/wait.h>
 
-#include <reseau/fon.h>		/* Primitives de la boite a outils */
-#include <reseau/protocole.h>	/* Types pour la communication client <-> serveur */
+#include <reseau/fon.h>
+#include <reseau/protocole.h>
 
 #include <common.h>
 #include <donnees/bdd.h>
 #include <donnees/donnees.h>
 #include "traitement.h"
-#include "serveur.h"
 #include "affichage.h"
 #include <gestion/gestionadherents.h>
 #include <gestion/gestionlivres.h>
-#include <ctype.h>
-#include <unistd.h>
-void serveur_appli (char *service, char *protocole);	/* programme serveur */
+#include "serveur.h"
+
+void serveur_appli (char *service, char *protocole);
 
 //static char port_courant[PORT_LMAX] = PORT_DEFAUT;
 //static char protocole_courant[PROTOCOL_LMAX] = PROTOCOLE_DEFAUT;
 prot_params_t prot_params;
 
-dbfiles files_conf;
-/*------------------------------------------------------------------*/
-/* SERVEUR															*/
-/*------------------------------------------------------------------*/
+db_files_t files_conf;
 
 void
 serveur_doc_syntaxe (char *progname)
@@ -50,7 +34,8 @@ serveur_doc_syntaxe (char *progname)
 	   "-p port: utiliser le port p plutot que " PORT_DEFAUT "\n"
 	   "-t utiliser TPC plutot que UDP\n"
 	   "-a utiliser un fichier annuaire différent que celui par défaut\n"
-	   "-d utiliser un ficher caatalogue différent que celui par défaut.\n",progname);
+	   "-d utiliser un ficher caatalogue différent que celui par défaut.\n",
+	   progname);
 }
 
 /*------------------------------------------------------------------*/
@@ -98,16 +83,16 @@ traitement_serveur ()
 		      sizeof (prot_requete_t)) > 0)
 		{
 		  int i;
-		  printf ("Recu operation de type : %i \n",
-			  rqt_client.operation);
+		  affiche_requete_informations (rqt_client);
 		  switch (rqt_client.operation)
 		    {
 		    case (op_consulter_auteur):
 
 		      rep_client.code =
-			trait_consulter_auteur (files_conf.fichierCatalogue,rqt_client.param,
+			trait_consulter_auteur (files_conf.fichier_catalogue,
+						rqt_client.param,
 						livres_results);
-		     // rep_client.livres = (livre_t*) livres_results;
+		      // rep_client.livres = (livre_t*) livres_results;
 
 		      for (i = 0; i < LIVRES_NBMAX; i++)
 			{
@@ -116,7 +101,8 @@ traitement_serveur ()
 		      break;
 		    case (op_consulter_titre):
 		      rep_client.code =
-			trait_consulter_titre (files_conf.fichierCatalogue,rqt_client.param,
+			trait_consulter_titre (files_conf.fichier_catalogue,
+					       rqt_client.param,
 					       livres_results);
 		      //rep_client.livres = (livre_t*) livres_results;
 
@@ -125,8 +111,17 @@ traitement_serveur ()
 			  afficher_livre (livres_results[i]);
 			}
 		      break;
+		    case(op_consulter_adherents):
+		      rep_client.code = ret_operation_impossible;
+		      break;
+		    case(op_emprunter):
+		      rep_client.code = ret_operation_impossible; 
+		      break;
+		     case(op_rendre):
+		      rep_client.code = ret_operation_impossible;
+		      break;
 		    case (op_ping):
-		      rep_client.code=ret_pong;
+		      rep_client.code = ret_pong;
 		      break;
 		    default:
 		      rep_client.code = ret_operation_impossible;
@@ -136,6 +131,7 @@ traitement_serveur ()
 			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
+	      return exit(EXIT_SUCCESS);
 	    }
 	}
     }
@@ -163,8 +159,8 @@ main (int argc, char **argv)
   prot_params.port = PORT_DEFAUT;
 
 
-  files_conf.fichierAnnuaire=F_ANN_NAME;
-  files_conf.fichierCatalogue=F_CAT_NAME;
+  files_conf.fichier_annuaire = F_ANN_NAME;
+  files_conf.fichier_catalogue = F_CAT_NAME;
   while ((c = getopt (argc, argv, "tp:a:d")) != -1)
     {
       switch (c)
@@ -175,11 +171,11 @@ main (int argc, char **argv)
 	case 'p':
 	  prot_params.port = optarg;
 	  break;
-	 case 'a':
-	  files_conf.fichierAnnuaire = optarg;
+	case 'a':
+	  files_conf.fichier_annuaire = optarg;
 	  break;
-	 case 'd':
-	  files_conf.fichierCatalogue= optarg;
+	case 'd':
+	  files_conf.fichier_catalogue = optarg;
 	  break;
 	case '?':
 	  if (optopt == 'p')

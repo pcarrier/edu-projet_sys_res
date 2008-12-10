@@ -5,13 +5,13 @@
  * \brief{Affiche à l'écran les informations sur les requètes entrantes
  * en fonction de leurs type.}
  */
-void affiche_requete_informations(prot_requete_t op);
+void affiche_requete_informations (prot_requete_t op);
 
 /**
  * \brief Affichage standardisé pour chaque requête.
  * Le paramètre type est une chaine de caractère représantant le nom
  * de l'opération recue ("consulter_auteur", "consulter_titre",...) 
  */
-void simple_affiche(char * type);
+void simple_affiche (char *type);
 
 #endif
