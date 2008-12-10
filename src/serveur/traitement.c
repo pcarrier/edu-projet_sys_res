@@ -221,6 +221,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
   if (retour_ann == 0 && retour_cat == 0)
     {
 
+      // recherche de la position de l'adhérent dans le tableau
       int i;
       for (i = 0; i < ann_nb_adhs; i++)
 	{
@@ -230,6 +231,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 	    }
 	}
 
+      //recherche de la position correspondant au retour dans le tableau
       int j;
       for (j = 0; j < Annuaire[i].nb_prets; j++)
 	{
@@ -239,6 +241,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 	    }
 	}
 
+      //recherche de la position du livre dans le Catalogue de livres
       int k;
       for (k = 0; k < cat_nb_livres; k++)
 	{
@@ -248,7 +251,8 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 	    }
 	}
 
-      if (i == ann_nb_adhs || j == cat_nb_livres)
+
+      if (i == ann_nb_adhs || j == Annuaire[i].nb_prets || Annuaire[i].nb_prets == 0 || k == cat_nb_livres)
 	{
 	  return ret_operation_impossible;
 	}
