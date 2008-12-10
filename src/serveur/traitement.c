@@ -183,7 +183,8 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 }
 
 prot_ret_e
-trait_rendre(char * annuaire, char * catalogue, char * params){
+trait_rendre(char * annuaire, char * catalogue, char * params)
+{
   char * nom_adh = params;
   char * nom_livre = params + strlen(nom_adh) + 1;
 
@@ -197,7 +198,7 @@ trait_rendre(char * annuaire, char * catalogue, char * params){
   if (retour_ann == 0 && retour_cat == 0){
 
     int i;
-    for (i = 0 ; i < ann_nb_ahds ; i++){
+    for (i = 0 ; i < ann_nb_adhs ; i++){
       if (Annuaire[i].nom == nom_adh){
 	break;
       }
@@ -211,7 +212,7 @@ trait_rendre(char * annuaire, char * catalogue, char * params){
     }
 
     int k;
-    for (k = 0 ; k < cat_nb_livres){
+    for (k = 0 ; k < cat_nb_livres; k++){
       if (Catalogue[k].titre == nom_livre){
 	break;
       }
@@ -226,7 +227,7 @@ trait_rendre(char * annuaire, char * catalogue, char * params){
 	strcpy(Annuaire[i].prets[j], "");
       }else {
 	strcpy(Annuaire[i].prets[j], Annuaire[i].prets[j+1]);
-	strcpy(Annuaire[i].prets[j+1], "")
+	strcpy(Annuaire[i].prets[j+1], "");
       }
 
       Catalogue[j].livre_dispos++;
@@ -243,5 +244,6 @@ trait_rendre(char * annuaire, char * catalogue, char * params){
 	return ret_inexistant;
 	
     }
+  }
   }
 }
