@@ -26,7 +26,13 @@ client_ouvrir_session ()
     {
       fprintf (stderr, "UDP -> pas d'ouverture de session !\n");
     }
-  client_creer_socket ();
+  if (prot_params.utilisable)
+    {
+      fprintf (stderr, "Déjà ouvert !\n");
+      return;
+    }
+  else
+    client_creer_socket ();
   printf ("Fini.\n");
 }
 
@@ -36,6 +42,11 @@ client_fermer_session ()
   if (prot_params.type == sock_udp)
     {
       fprintf (stderr, "UDP -> pas de fermeture de session !\n");
+    }
+  if (!prot_params.utilisable)
+    {
+      fprintf (stderr, "Pas ouvert !\n");
+      return;
     }
   client_fermer_socket ();
   printf ("Fini.\n");
@@ -184,7 +195,7 @@ client_main_loop ()
 	  else
 	    client_doc_commandes ();
 	}
-      else if (!strcmp (commande, "ouvrir"))
+      else if (!strcmp (commande, "ouvrir")) {
 	client_ouvrir_session ();
       else if (!strcmp (commande, "fermer"))
 	client_fermer_session ();

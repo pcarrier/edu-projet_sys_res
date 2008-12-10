@@ -15,7 +15,8 @@ int create_sock(prot_params_t param_srv, char * hostname){
 		return sockfd;
 	}else if(param_srv.type==sock_udp){
 		sockfd=h_socket(AF_INET, SOCK_DGRAM);
-		//h_bind(sockfd, &sa);
+		adr_socket(param_srv.port, hostname, "udp", &sa, SERVEUR);
+		h_bind(sockfd, &sa);
 		return sockfd;
 	}
 	return -1;

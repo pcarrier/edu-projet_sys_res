@@ -19,13 +19,13 @@ CFLAGS += -O2
 # DÈtection d'un maximum d'erreurs
 CFLAGS += -Wall
 # On ne crée pas le programme tant qu'il y a des erreurs
-CFLAGS += -Werror
+#CFLAGS += -Werror
 # On fait tout d'ici...
 CFLAGS += -I.
 
 # Si la ligne suivante est décommentée, du code de debug est compilé
 # dans fon.c. Il permet d'observer les messages.
-#CPPFLAGS += -DDEBUG
+CPPFLAGS += -DDEBUG
 
 # Permet de compiler la solution (enseignants seulement)
 #CPPFLAGS += -DSOLUTION
