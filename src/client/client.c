@@ -125,7 +125,7 @@ client_emprunter_livre (char *adherent, char *titre)
   double delai;
   req.operation = op_emprunter;
   strncpy (req.param, adherent, PARAM_LMAX);
-  strncpy (req.param + strlen(adherent), titre,
+  strncpy (req.param + strlen(adherent) + 1, titre,
 	   PARAM_LMAX - strlen(adherent) - 1);
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
@@ -141,7 +141,7 @@ client_rendre_livre (char *adherent, char *titre)
   double delai;
   req.operation = op_rendre;
   strncpy (req.param, adherent, PARAM_LMAX);
-  strncpy (req.param + strlen(adherent), titre,
+  strncpy (req.param + strlen(adherent) + 1, titre,
 	   PARAM_LMAX - strlen(adherent) - 1);
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
