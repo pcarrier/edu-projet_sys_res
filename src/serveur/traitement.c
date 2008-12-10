@@ -115,7 +115,7 @@ trait_emprunter(char * annuaire, char * catalogue, char * params){
   if (retour_ann == 0 && retour_cat == 0){
     int i;
     for (i = 0; i < ann_nb_adhs; i++){
-      if (Annuaire[i].titre == nom_livre){
+      if (Annuaire[i].nom == nom_adh){
 	break;
       } 
     }
@@ -128,7 +128,7 @@ trait_emprunter(char * annuaire, char * catalogue, char * params){
     }
     int k = 0;
     while (k != PRETS_NBMAX){
-      if (Annuaire[i].prets[k] == ""){
+      if (strcmp(Annuaire[i].prets[k],"") == 0){
 	break;
       }
       k++;
@@ -138,13 +138,13 @@ trait_emprunter(char * annuaire, char * catalogue, char * params){
       return ret_inexistant;
     }else{
       Annuaire[i].nb_prets++;
-      Annuaire[i].prets[k] = nom_livre;
+      strcpy(Annuaire[i].prets[k], nom_livre);
       Catalogue[j].livre_dispos--;
       Catalogue[j].livre_nbemprunts++;
       
       bdd_acces_ecriture_debut();
-      int retour_sauv_ann = bdd_save_annuaire();
-      int retour_sauv_cat = bdd_save_catalogue();
+      int retour_sauv_ann = bdd_save_annuaire(annuaire);
+      int retour_sauv_cat = bdd_save_catalogue(catalogue);
       bdd_acces_ecriture_fin();
      
       if (retour_sauv_ann == 0 && retour_sauv_cat == 0){
@@ -155,5 +155,69 @@ trait_emprunter(char * annuaire, char * catalogue, char * params){
     }
   }else{
     return ret_operation_impossible;
+  }
+}
+
+prot_ret_e
+trait_rendre(char * annuaire, char * catalogue, char * params){
+  char * nom_adh = params;
+  char * nom_livre = params + strlen(nom_adh) + 1;
+
+  //on bloque le fichier de lecture
+  bdd_acces_lecture_debut();
+  int retour_ann = bdd_load_annuaire(annuaire);
+  int retour_cat = bdd_load_catalogue(catalogue);
+  //on débloque le fichier de lecture
+  bdd_acces_lecture_fin();
+
+  if (retour_ann == 0 && retour_cat == 0){
+
+    int i;
+    for (i = 0 ; i < ann_nb_ahds ; i++){
+      if (Annuaire[i].nom == nom_adh){
+	break;
+      }
+    }
+
+    int j;
+    for (j = 0 ; j < Annuaire[i].nb_prets ; j++){
+      if (Annuaire[i].prets[j] == nom_livre){
+	break;
+      }
+    }
+
+    int k;
+    for (k = 0 ; k < cat_nb_livres){
+      if (Catalogue[k].titre == nom_livre){
+	break;
+      }
+    }
+
+    if (i == ann_nb_adhs || j == cat_nb_livres){
+      return ret_inexistant;
+    }else{
+      Annuaire[i].nb_prets--;
+
+      if ((j == PRETS_NBMAX) || (strcmp(Annuaire[i].prets[j+1],"") == 0)){
+	strcpy(Annuaire[i].prets[j], "");
+      }else {
+	strcpy(Annuaire[i].prets[j], Annuaire[i].prets[j+1]);
+	strcpy(Annuaire[i].prets[j+1], "")
+      }
+
+      Catalogue[j].livre_dispos++;
+      Catalogue[j].livre_nbemprunts--;
+      
+      bdd_acces_ecriture_debut();
+      int retour_sauv_ann = bdd_save_annuaire(annuaire);
+      int retour_sauv_cat = bdd_save_catalogue(catalogue);
+      bdd_acces_ecriture_fin();
+     
+      if (retour_sauv_ann == 0 && retour_sauv_cat == 0){
+	return ret_trouve;
+      }else{
+	return ret_inexistant;
+	
+    }
   }
 }

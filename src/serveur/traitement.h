@@ -29,4 +29,10 @@ prot_ret_e trait_consulter_adherent(char * annuaire, char * nom, adherent_t * ta
  * en fonction des deux parties de la chaine params passée en dernier paramètre
  */
 prot_ret_e trait_emprunter(char * annuaire, char * catalogue, char * params)
+
+/** 
+ * Cette fonction lit puis écrit dans les fichiers d'annuaire et de catalogue
+ * en fonction des deux parties de la chaine params passée en dernier paramètre
+ */
+prot_ret_e trait_rendre(cahr * annuaire, char * catalogue, char * params);
 #endif
