@@ -148,7 +148,7 @@ client_rendre_livre (char *adherent, char *titre)
   strncpy (req.param, adherent, PARAM_LMAX);
   strncpy (req.param + strlen (adherent) + 1, titre,
 	   PARAM_LMAX - strlen (adherent) - 1);
-  printf ("|%s|%s|\n", req.param, req.param + strlen (adherent) + 1);
+  printf ("|%s|%s|\n", req.param, req.param + strlen (req.param) + 1);
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
     return;
