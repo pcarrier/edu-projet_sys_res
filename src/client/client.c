@@ -44,7 +44,7 @@ client_fermer_session ()
 int
 client_gerer_code (prot_ret_e retour, double delai)
 {
-  if (retour == ret_trouve)
+  if (retour == ret_succes)
     {
       printf ("Réponse après %e ms :\n", delai);
       return 1;
@@ -143,45 +143,56 @@ client_consulter_adherent (char *nom)
 void
 client_emprunter_livre (char *adherent, char *titre)
 {
-  printf ("OK\n");
+  prot_requete_t req;
+  prot_reponse_t rep;
+  double delai;
+  req.operation = op_emprunter;
+  strncpy (req.param, adherent, PARAM_LMAX);
+  strncpy (req.param + strlen(adherent), titre,
+	   PARAM_LMAX - strlen(adherent) - 1);
+  rep = client_traiter (&req, &delai);
+  if (!client_gerer_code (rep.code, delai))
+    return;
+  client_afficher_adherents (rep.adhs);
 }
 
 void
 client_rendre_livre (char *adherent, char *titre)
 {
-  printf ("OK\n");
+op_rendre
 }
 
 int
 client_main_loop ()
 {
   int boucler = 1;
-  char *commande, *suite;
+  char *commande, *arg1, *arg2;
   while (boucler && (commande = lire_commande ()))
     {
-      suite = extraire_parametre (commande);
+      arg1 = extraire_parametre (commande);
+      arg2 = extraire_parametre (arg1);
       if (!strcmp (commande, "quitter"))
 	boucler = 0;
       else if (!strcmp (commande, "aide"))
 	{
 	  extraire_parametre (suite);
-	  if (!strcmp (suite, "quitter"))
+	  if (!strcmp (arg1, "quitter"))
 	    client_doc_quitter ();
-	  else if (!strcmp (suite, "aide"))
+	  else if (!strcmp (arg1, "aide"))
 	    client_doc_aide ();
-	  else if (!strcmp (suite, "ouvrir"))
+	  else if (!strcmp (arg1, "ouvrir"))
 	    client_doc_ouvrir ();
-	  else if (!strcmp (suite, "fermer"))
+	  else if (!strcmp (arg1, "fermer"))
 	    client_doc_fermer ();
-	  else if (!strcmp (suite, "titre"))
+	  else if (!strcmp (arg1, "titre"))
 	    client_doc_titre ();
-	  else if (!strcmp (suite, "auteur"))
+	  else if (!strcmp (arg1, "auteur"))
 	    client_doc_auteur ();
-	  else if (!strcmp (suite, "emprunter"))
+	  else if (!strcmp (arg1, "emprunter"))
 	    client_doc_emprunter ();
-	  else if (!strcmp (suite, "rendre"))
+	  else if (!strcmp (arg1, "rendre"))
 	    client_doc_rendre ();
-	  else if (!strcmp (suite, "adherent"))
+	  else if (!strcmp (arg1, "adherent"))
 	    client_doc_adherent ();
 	  else
 	    client_doc_commandes ();
@@ -191,14 +202,14 @@ client_main_loop ()
       else if (!strcmp (commande, "fermer"))
 	client_fermer_session ();
       else if (!strcmp (commande, "titre"))
-	client_consulter_titre (suite);
+	client_consulter_titre (arg1);
       else if (!strcmp (commande, "auteur"))
-	client_consulter_auteur (suite);
+	client_consulter_auteur (arg1);
       else if (!strcmp (commande, "emprunter"))
-	{
-	}
+	client_emprunter_livre (arg1, arg2);
       else if (!strcmp (commande, "rendre"))
 	{
+	  client_rendre_livre (arg1, arg2);
 	}
       else if (!strcmp (commande, "adherent"))
 	client_consulter_adherent (suite);

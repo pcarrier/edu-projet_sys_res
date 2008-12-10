@@ -32,7 +32,7 @@ typedef enum
 {
   ret_operation_impossible = -2,
   ret_inexistant = -1,
-  ret_trouve = 0,
+  ret_succes = 0,
   ret_pong = 42
 } prot_ret_e;
 
