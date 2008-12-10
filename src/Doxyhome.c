@@ -6,6 +6,20 @@
  *
  * \mainpage
  *
+ * \section avancement Avancement
+ *
+ * \subsection etat État actuel du projet
+ *
+ * Sauf erreur de notre part, l'ensemble des fonctionnalités demandées
+ * ont été implémentées, de même que le support de l'UDP, l'affichage
+ * côté client des temps de requête.
+ * 
+ * \subsection difficultes Difficultés rencontrées
+ *
+ * Nous n'avons découvert que mardi midi les corrections proposées par
+ * les enseignants, et avons donc perdu du temps lundi sur des
+ * dysfonctionnements liés notamment aux duplications de code.
+ *
  * \section choix Choix de conception
  *
  * \subsection requetes Gestion des requêtes côté serveur
@@ -28,6 +42,10 @@
  * d'un commutateur.
  *
  * \section methodologie Méthode de travail
+ *
+ * \subsection planning Planning de travail
+ *
+ * 
  *
  * \subsection repartition Répartition des tâches
  *

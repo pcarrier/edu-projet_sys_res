@@ -137,8 +137,6 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
   char *nom_adh = params;
   char *nom_livre = params + strlen (params) + 1;
 
-  printf("|%s|%s|\n", nom_adh, nom_livre);
-
   //on bloque le fichier de lecture
   bdd_acces_lecture_debut ();
   int retour_ann = bdd_load_annuaire (annuaire);
@@ -151,7 +149,7 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
       int i;
       for (i = 0; i < ann_nb_adhs; i++)
 	{
-	  if (Annuaire[i].nom == nom_adh)
+	  if (!strcmp(Annuaire[i].nom,nom_adh))
 	    {
 	      break;
 	    }
@@ -160,7 +158,7 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
       int j;
       for (j = 0; j < cat_nb_livres; j++)
 	{
-	  if (Catalogue[j].titre == nom_livre)
+	  if (!strcmp(Catalogue[j].titre,nom_livre))
 	    {
 	      break;
 	    }
@@ -174,10 +172,9 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 	    }
 	  k++;
 	}
-
-      if (i == ann_nb_adhs || j == cat_nb_livres || Catalogue[j].livre_dispos)
+      if (i == ann_nb_adhs || j == cat_nb_livres || Catalogue[j].livre_dispos == 0 || k == PRETS_NBMAX)
 	{
-	  return ret_inexistant;
+	  return ret_operation_impossible;
 	}
       else
 	{
@@ -194,10 +191,11 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 	  if (retour_sauv_ann == 0 && retour_sauv_cat == 0)
 	    {
 	      return ret_succes;
+	      printf("%s a emprunté le livre : %s\n", nom_adh, nom_livre);
 	    }
 	  else
 	    {
-	      return ret_inexistant;
+	      return ret_operation_impossible;
 	    }
 	}
     }
@@ -226,7 +224,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
       int i;
       for (i = 0; i < ann_nb_adhs; i++)
 	{
-	  if (Annuaire[i].nom == nom_adh)
+	  if (!strcmp(Annuaire[i].nom, nom_adh))
 	    {
 	      break;
 	    }
@@ -235,7 +233,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
       int j;
       for (j = 0; j < Annuaire[i].nb_prets; j++)
 	{
-	  if (Annuaire[i].prets[j] == nom_livre)
+	  if (!strcmp(Annuaire[i].prets[j], nom_livre))
 	    {
 	      break;
 	    }
@@ -244,7 +242,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
       int k;
       for (k = 0; k < cat_nb_livres; k++)
 	{
-	  if (Catalogue[k].titre == nom_livre)
+	  if (!strcmp(Catalogue[k].titre, nom_livre))
 	    {
 	      break;
 	    }
@@ -252,7 +250,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 
       if (i == ann_nb_adhs || j == cat_nb_livres)
 	{
-	  return ret_inexistant;
+	  return ret_operation_impossible;
 	}
       else
 	{
@@ -280,10 +278,11 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 	  if (retour_sauv_ann == 0 && retour_sauv_cat == 0)
 	    {
 	      return ret_succes;
+	      printf("%s a rendu le livre : %s\n", nom_adh, nom_livre);
 	    }
 	  else
 	    {
-	      return ret_inexistant;
+	      return ret_operation_impossible;
 
 	    }
 	}
