@@ -71,7 +71,9 @@ traitement_serveur ()
 
 		  pid_fils = fork ();
 	  }else{
+		printf("attente udp\n");
 	  	h_recvfrom(sockfd,(char * ) & rqt_client, sizeof(prot_requete_t), &addr_client);
+		printf("RECU !!\n");
 	  }
 	  if (pid_fils == 0)
 	    {
