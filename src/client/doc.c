@@ -45,7 +45,7 @@ client_doc_emprunter ()
 {
   fprintf (stdout, "[emprunter]\n"
 	   "  Usage: emprunter a l\n"
-	   "  L'adhérent de référence 'a' emprunte le livre de référence 'l'.\n");
+	   "  L'adhérent de nom 'a' emprunte le livre de titre 'l'.\n");
 }
 
 void
@@ -53,7 +53,7 @@ client_doc_rendre ()
 {
   fprintf (stdout, "[retour]\n"
 	   "  Usage: retour a l\n"
-	   "  L'adhérent de référence 'a' retourne le livre de référence 'l'.\n");
+	   "  L'adhérent de nom 'a' retourne le livre de titre 'l'.\n");
 }
 
 void

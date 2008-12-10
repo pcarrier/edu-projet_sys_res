@@ -21,8 +21,6 @@ void client_ouvrir_session ();
  */
 void client_fermer_session ();
 
-int client_gerer_code (prot_ret_e retour, double delai);
-
 /**
  * Envoi d'un ping
  */

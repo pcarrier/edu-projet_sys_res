@@ -41,29 +41,6 @@ client_fermer_session ()
   printf ("Fini.\n");
 }
 
-int
-client_gerer_code (prot_ret_e retour, double delai)
-{
-  if (retour == ret_succes)
-    {
-      printf ("Réponse après %e ms :\n", delai);
-      return 1;
-    }
-  if (retour == ret_pong)
-    {
-      printf ("Pong (%e ms) !\n", delai);
-      return 1;
-    }
-  if (retour == ret_inexistant)
-    {
-      fprintf (stderr, "Inexistant (%e ms) !\n", delai);
-      return 0;
-    }
-  fprintf (stderr, "Opération impossible (%e ms) !\n", delai);
-  return 0;
-}
-
-
 void
 client_ping ()
 {
@@ -153,13 +130,23 @@ client_emprunter_livre (char *adherent, char *titre)
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
     return;
-  client_afficher_adherents (rep.adhs);
+  printf("Effectué.\n");
 }
 
 void
 client_rendre_livre (char *adherent, char *titre)
 {
-op_rendre
+  prot_requete_t req;
+  prot_reponse_t rep;
+  double delai;
+  req.operation = op_rendre;
+  strncpy (req.param, adherent, PARAM_LMAX);
+  strncpy (req.param + strlen(adherent), titre,
+	   PARAM_LMAX - strlen(adherent) - 1);
+  rep = client_traiter (&req, &delai);
+  if (!client_gerer_code (rep.code, delai))
+    return;
+  printf("Effectué.\n");
 }
 
 int

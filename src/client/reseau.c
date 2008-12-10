@@ -61,3 +61,25 @@ client_traiter (prot_requete_t * req, double *delai)
     (fin.tv_nsec - debut.tv_nsec) / 1000000;
   return rep;
 }
+
+int
+client_gerer_code (prot_ret_e retour, double delai)
+{
+  if (retour == ret_succes)
+    {
+      printf ("Réponse après %e ms :\n", delai);
+      return 1;
+    }
+  if (retour == ret_pong)
+    {
+      printf ("Pong (%e ms) !\n", delai);
+      return 1;
+    }
+  if (retour == ret_inexistant)
+    {
+      fprintf (stderr, "Inexistant (%e ms) !\n", delai);
+      return 0;
+    }
+  fprintf (stderr, "Opération impossible (%e ms) !\n", delai);
+  return 0;
+}
