@@ -19,14 +19,14 @@ client_creer_socket ()
   if (prot_params.type == sock_udp)
     h_bind (client_socket, &sa);
   h_connect (client_socket, &sa);
-  prot_params.connecte = 1;
+  prot_params.utilisable = 1;
 }
 
 void
 client_fermer_socket ()
 {
   h_close (client_socket);
-  prot_params.connecte = 0;
+  prot_params.utilisable = 0;
 }
 
 void
