@@ -173,9 +173,9 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 	  k++;
 	}
 
-      if (i == ann_nb_adhs || j == cat_nb_livres || Catalogue[j].livre_dispos)
+      if (i == ann_nb_adhs || j == cat_nb_livres || Catalogue[j].livre_dispos == 0 || k == PRETS_NBMAX)
 	{
-	  return ret_inexistant;
+	  return ret_operation_impossible;
 	}
       else
 	{
@@ -195,7 +195,7 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 	    }
 	  else
 	    {
-	      return ret_inexistant;
+	      return ret_operation_impossible;
 	    }
 	}
     }
@@ -250,7 +250,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 
       if (i == ann_nb_adhs || j == cat_nb_livres)
 	{
-	  return ret_inexistant;
+	  return ret_operation_impossible;
 	}
       else
 	{
@@ -281,7 +281,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 	    }
 	  else
 	    {
-	      return ret_inexistant;
+	      return ret_operation_impossible;
 
 	    }
 	}
