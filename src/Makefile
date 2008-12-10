@@ -12,7 +12,7 @@ SYSTEM:sh = uname -s
 
 # Options de compilation (à commenter ou pas suivant ce qu'on veut)
 # On garde les informations de débogage
-#CFLAGS += -g
+CFLAGS += -g
 # Optimisation du code par le compilateur
 CFLAGS += -O2
 # DÈtection d'un maximum d'erreurs
