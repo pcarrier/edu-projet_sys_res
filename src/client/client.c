@@ -162,7 +162,6 @@ client_main_loop ()
 	boucler = 0;
       else if (!strcmp (commande, "aide"))
 	{
-	  extraire_parametre (suite);
 	  if (!strcmp (arg1, "quitter"))
 	    client_doc_quitter ();
 	  else if (!strcmp (arg1, "aide"))
@@ -199,7 +198,7 @@ client_main_loop ()
 	  client_rendre_livre (arg1, arg2);
 	}
       else if (!strcmp (commande, "adherent"))
-	client_consulter_adherent (suite);
+	client_consulter_adherent (arg1);
       else if (!strcmp (commande, "ping"))
 	client_ping ();
       else

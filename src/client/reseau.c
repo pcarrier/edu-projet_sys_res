@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <reseau/fon.h>
 #include <reseau/protocole.h>
