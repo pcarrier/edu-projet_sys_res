@@ -124,13 +124,12 @@ client_emprunter_livre (char *adherent, char *titre)
   prot_reponse_t rep;
   double delai;
   req.operation = op_emprunter;
-  strncpy (req.param, adherent, PARAM_LMAX);
   strncpy (req.param + strlen(adherent) + 1, titre,
 	   PARAM_LMAX - strlen(adherent) - 1);
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
     return;
-  printf("Effectué.\n");
+  printf ("Effectué.\n");
 }
 
 void
@@ -140,13 +139,12 @@ client_rendre_livre (char *adherent, char *titre)
   prot_reponse_t rep;
   double delai;
   req.operation = op_rendre;
-  strncpy (req.param, adherent, PARAM_LMAX);
   strncpy (req.param + strlen(adherent) + 1, titre,
 	   PARAM_LMAX - strlen(adherent) - 1);
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
     return;
-  printf("Effectué.\n");
+  printf ("Effectué.\n");
 }
 
 int
@@ -187,23 +185,27 @@ client_main_loop ()
 	client_ouvrir_session ();
       else if (!strcmp (commande, "fermer"))
 	client_fermer_session ();
-      else if (!strcmp (commande, "titre"))
-	client_consulter_titre (arg1);
-      else if (!strcmp (commande, "auteur"))
-	client_consulter_auteur (arg1);
-      else if (!strcmp (commande, "emprunter"))
-	client_emprunter_livre (arg1, arg2);
-      else if (!strcmp (commande, "rendre"))
+      else if (prot_params.utilisable)
 	{
-	  client_rendre_livre (arg1, arg2);
+	  if (!strcmp (commande, "titre"))
+	    client_consulter_titre (arg1);
+	  else if (!strcmp (commande, "auteur"))
+	    client_consulter_auteur (arg1);
+	  else if (!strcmp (commande, "emprunter"))
+	    client_emprunter_livre (arg1, arg2);
+	  else if (!strcmp (commande, "rendre"))
+	    {
+	      client_rendre_livre (arg1, arg2);
+	    }
+	  else if (!strcmp (commande, "adherent"))
+	    client_consulter_adherent (arg1);
+	  else if (!strcmp (commande, "ping"))
+	    client_ping ();
 	}
-      else if (!strcmp (commande, "adherent"))
-	client_consulter_adherent (arg1);
-      else if (!strcmp (commande, "ping"))
-	client_ping ();
       else
 	{
-	  fprintf (stderr, "Commande inconnue ! Voir 'aide'.\n");
+	  fprintf (stderr, "Commande inconnue ou ouverture"
+		   " nécessaire ! Voir 'aide'.\n");
 	}
       free (commande);
     }
@@ -243,14 +245,17 @@ main (int argc, char **argv)
       return EXIT_SUCCESS;
     }
   if (tflag)
-    prot_params.type = sock_tcp;
+    {
+      prot_params.type = sock_tcp;
+      prot_params.utilisable = 0;
+    }
   else
     {
       prot_params.type = sock_udp;
+      prot_params.utilisable = 1;
       client_creer_socket ();
     }
-  prot_params.connecte = 0;
-  fancy_prompt();
+  fancy_prompt ();
   client_main_loop ();
   return EXIT_SUCCESS;
 }

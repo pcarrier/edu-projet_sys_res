@@ -14,5 +14,6 @@ typedef struct
 } db_files_t;
 
 
-prot_ret_e traite_requete(prot_requete_t rqt_client, prot_reponse_t  * rep_client);
+prot_ret_e traite_requete (prot_requete_t rqt_client,
+			   prot_reponse_t * rep_client);
 #endif
