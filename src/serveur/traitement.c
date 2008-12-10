@@ -39,7 +39,7 @@ trait_consulter_titre (char *catalogue, char *nom_livre, livre_t * tab_result)
 	}
       else
 	{
-	  return ret_trouve;
+	  return ret_succes;
 	}
     }
   else
@@ -81,7 +81,7 @@ trait_consulter_auteur (char *catalogue, char *nom_auteur,
 	}
       else
 	{
-	  return ret_trouve;
+	  return ret_succes;
 	}
     }
   else
@@ -121,7 +121,7 @@ trait_consulter_adherent (char *annuaire, char *nom, adherent_t * tab_result)
 	}
       else
 	{
-	  return ret_trouve;
+	  return ret_succes;
 	}
     }
   else
@@ -191,7 +191,7 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
 
 	  if (retour_sauv_ann == 0 && retour_sauv_cat == 0)
 	    {
-	      return ret_trouve;
+	      return ret_succes;
 	    }
 	  else
 	    {
@@ -277,7 +277,7 @@ trait_rendre (char *annuaire, char *catalogue, char *params)
 
 	  if (retour_sauv_ann == 0 && retour_sauv_cat == 0)
 	    {
-	      return ret_trouve;
+	      return ret_succes;
 	    }
 	  else
 	    {

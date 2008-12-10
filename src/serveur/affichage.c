@@ -50,7 +50,7 @@ void affiche_requete_status(prot_ret_e status){
 		case(ret_inexistant):
 			printf("Aucun résultat trouvé\n");
 			break;
-		case(ret_trouve):
+		case(ret_succes):
 			printf("Trouvé\n");
 			break;
 		case(ret_pong):
