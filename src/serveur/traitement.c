@@ -93,33 +93,33 @@ trait_consulter_auteur (char *catalogue, char *nom_auteur,
 prot_ret_e
 trait_consulter_adherent (char *annuaire, char *nom, adherent_t * tab_result)
 {
-  /*
-     //on bloque le fichier de lecture
-     bdd_acces_lecture_debut();
-     int retour = bdd_load_annuaire(annuaire);
-     //on débloque le fichier de lecture
-     bdd_acces_lecture_fin();
+ 
+  //on bloque le fichier de lecture
+  bdd_acces_lecture_debut();
+  int retour = bdd_load_annuaire(annuaire);
+  //on débloque le fichier de lecture
+  bdd_acces_lecture_fin();
 
-     if (retour == 0){
-     int i;
-     int j = 0;
-     for (i = 0 ; i < ann_nb_adhs ; i++){
-     //on recherche la chaine de caractère reçue en paramètre parmis tous les nom d'adhérents
-     //si une occurence est trouvée, elle est rajoutée au tablea de résultat
-     if (strstr(Annuaire[i].nom, nom) != 0){
-     tab_result[j] = Annuaire[i];
-     j++;
-     }
-     }
-     strcpy(tab_result[j].nom, "");
-     if (j == 0){
-     return ret_inexistant;
-     }else{
-     return ret_trouve;
-     }
-     }else{
-     return ret_operation_impossible;
-     } */
+  if (retour == 0){
+    int i;
+    int j = 0;
+    for (i = 0 ; i < ann_nb_adhs ; i++){
+      //on recherche la chaine de caractère reçue en paramètre parmis tous les nom d'adhérents
+      //si une occurence est trouvée, elle est rajoutée au tablea de résultat
+      if (strstr(Annuaire[i].nom, nom) != 0){
+	tab_result[j] = Annuaire[i];
+	j++;
+      }
+    }
+    strcpy(tab_result[j].nom, "");
+    if (j == 0){
+      return ret_inexistant;
+    }else{
+      return ret_trouve;
+    }
+  }else{
+    return ret_operation_impossible;
+  }
 }
 
 prot_ret_e
@@ -181,60 +181,6 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
   }else{
     return ret_operation_impossible;
   }
-=======
-     //on bloque le fichier de lecture
-     bdd_acces_lecture_debut();
-     int retour_ann = bdd_load_annuaire(annuaire);
-     int retour_cat = bdd_load_catalogue(catalogue);
-     //on débloque le fichier de lecture
-     bdd_acces_lecture_fin();
-
-     if (retour_ann == 0 && retour_cat == 0){
-     int i;
-     for (i = 0; i < ann_nb_adhs; i++){
-     if (Annuaire[i].titre == nom_livre){
-     break;
-     } 
-     }
-
-     int j;
-     for (j = 0 ; j < cat_nb_livres ; j++){
-     if (Catalogue[j].titre == nom_livre){
-     break;
-     }
-     }
-     int k = 0;
-     while (k != PRETS_NBMAX){
-     if (Annuaire[i].prets[k] == ""){
-     break;
-     }
-     k++;
-     }
-
-     if (i == ann_nb_adhs || j == cat_nb_livres || Catalogue[j].livre_dispos){
-     return ret_inexistant;
-     }else{
-     Annuaire[i].nb_prets++;
-     Annuaire[i].prets[k] = nom_livre;
-     Catalogue[j].livre_dispos--;
-     Catalogue[j].livre_nbemprunts++;
-
-     bdd_acces_ecriture_debut();
-     int retour_sauv_ann = bdd_save_annuaire();
-     int retour_sauv_cat = bdd_save_catalogue();
-     bdd_acces_ecriture_fin();
-
-     if (retour_sauv_ann == 0 && retour_sauv_cat == 0){
-     return ret_trouve;
-     }else{
-     return ret_inexistant;
-     }
-     }
-     }else{
-     return ret_operation_impossible;
-     }
-   
->>>>>>> a6e403b3bb6d0326b4f7eeb504a52dffdc39e11f:src/serveur/traitement.c
 }
 
 prot_ret_e
