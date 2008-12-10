@@ -21,6 +21,9 @@ typedef struct
   unsigned int livre_dispos;	/* Ceux qui sont disponibles */
 } livre_t;
 
+/*
+ * TODO : initialiser le tableau des prêts à ""
+ */
 typedef struct
 {
   char nom[ADH_NMAX + 1];	/*nom */

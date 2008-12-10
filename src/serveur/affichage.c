@@ -12,12 +12,18 @@ void affiche_requete_informations(prot_requete_t op){
 			break;
 		case(op_emprunter):
 			simple_affiche("emprunter_livre");
+			break;
 		case(op_rendre):
 			simple_affiche("rendre_livre");
+			break;
 		case(op_consulter_adherent):
 			simple_affiche("consulter_adherents");
+			break;
 		case(op_ping):
 			simple_affiche("ping");
+			break;
+		default:
+			simple_affiche("operation inconnue");
 			
 	}
 }

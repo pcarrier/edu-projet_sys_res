@@ -98,8 +98,7 @@ traitement_serveur ()
 		      sizeof (prot_requete_t)) > 0)
 		{
 		  int i;
-		  printf ("Recu operation de type : %i \n",
-			  rqt_client.operation);
+		  affiche_requete(rqt_client);
 		  switch (rqt_client.operation)
 		    {
 		    case (op_consulter_auteur):
@@ -136,6 +135,7 @@ traitement_serveur ()
 			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
+	      exit(EXIT_SUCCESS);
 	    }
 	}
     }
