@@ -129,7 +129,6 @@ trait_emprunter (char *annuaire, char *catalogue, char *params)
      char * nom_adh = params;
      char * nom_livre = params + strlen(nom_adh) + 1;
 
-<<<<<<< HEAD:src/serveur/traitement.c
   //on bloque le fichier de lecture
   bdd_acces_lecture_debut();
   int retour_ann = bdd_load_annuaire(annuaire);
