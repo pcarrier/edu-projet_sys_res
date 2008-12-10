@@ -39,6 +39,10 @@ client_envoyer_requete (prot_requete_t * req)
   else
     octets_emis =
       h_writes (client_socket, (char *) req, sizeof (prot_requete_t));
+  if (octets_emis != octets_a_emettre)
+    {
+      fprintf(stderr, "Un souci !\n"); 
+    }
 }
 
 prot_reponse_t
@@ -53,6 +57,10 @@ client_recevoir_reponse ()
   else
     octets_recus =
       h_reads (client_socket, (char *) (&rep), sizeof (prot_reponse_t));
+  if (octets_recus != octets_attendus)
+    {
+      fprintf(stderr, "Un souci !\n"); 
+    }
   return rep;
 }
 

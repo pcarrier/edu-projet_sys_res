@@ -124,14 +124,9 @@ client_emprunter_livre (char *adherent, char *titre)
   prot_reponse_t rep;
   double delai;
   req.operation = op_emprunter;
-<<<<<<< HEAD:src/client/client.c
   strncpy (req.param, adherent, PARAM_LMAX);
   strncpy (req.param + strlen (adherent) + 1, titre,
 	   PARAM_LMAX - strlen (adherent) - 1);
-=======
-  strncpy (req.param + strlen(adherent) + 1, titre,
-	   PARAM_LMAX - strlen(adherent) - 1);
->>>>>>> origin:src/client/client.c
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
     return;
