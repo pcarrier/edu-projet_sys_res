@@ -90,7 +90,7 @@ traitement_serveur ()
 		    affiche_requete_informations(rqt_client);
 		    rqt_status= traite_requete(rqt_client, &rep_client);
 		    affiche_requete_status(rqt_status);
-		    serveur_ecrire_udp(prot_params, clientfd, &rep_client, &addr_client);
+		    serveur_ecrire_udp(prot_params, sockfd, &rep_client, &addr_client);
 	    }
     }
 
