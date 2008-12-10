@@ -16,8 +16,6 @@ client_creer_socket ()
 	      (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
   adr_socket (prot_params.port, prot_params.host,
 	      (prot_params.type == sock_tcp) ? "tcp" : "udp", &sa, CLIENT);
-  if (prot_params.type == sock_udp)
-    h_bind (client_socket, &sa);
   h_connect (client_socket, &sa);
   prot_params.utilisable = 1;
 }
@@ -50,6 +48,7 @@ client_recevoir_reponse ()
 {
   prot_reponse_t rep;
   int octets_recus, octets_attendus = sizeof (prot_reponse_t);
+  rep.code = ret_probleme_local;
   if (prot_params.type == sock_udp)
     octets_recus =
       h_recvfrom (client_socket, (char *) (&rep), sizeof (prot_reponse_t),
@@ -71,7 +70,6 @@ client_traiter (prot_requete_t * req, double *delai)
   prot_reponse_t rep;
   clock_gettime (CLOCK_MONOTONIC, &debut);
   client_envoyer_requete (req);
-  rep.code = ret_probleme_local;
   rep = client_recevoir_reponse ();
   clock_gettime (CLOCK_MONOTONIC, &fin);
   *delai =
