@@ -35,5 +35,5 @@ affiche_requete_informations (prot_requete_t op)
 void
 simple_affiche (char *type)
 {
-  printf ("from %s : %s", "Distant", type);
+  printf ("from %s : %s\n", "Distant", type);
 }

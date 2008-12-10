@@ -61,6 +61,7 @@ traitement_serveur ()
   int pid_fils;
 
   livre_t livres_results[RESULT_LMAX];
+  adherent_t adh_results[RESULT_LMAX];
   //Si on fait du tcp...
   if (prot_params.type == sock_tcp)
     {
@@ -82,7 +83,7 @@ traitement_serveur ()
 		     (clientfd, (char *) (&rqt_client),
 		      sizeof (prot_requete_t)) > 0)
 		{
-		  int i;
+		  //int i;
 		  affiche_requete_informations (rqt_client);
 		  switch (rqt_client.operation)
 		    {
@@ -92,27 +93,21 @@ traitement_serveur ()
 			trait_consulter_auteur (files_conf.fichier_catalogue,
 						rqt_client.param,
 						livres_results);
-		      // rep_client.livres = (livre_t*) livres_results;
-
-		      for (i = 0; i < LIVRES_NBMAX; i++)
-			{
-			  afficher_livre (livres_results[i]);
-			}
-		      break;
+		      memcpy(rep_client.livres,  livres_results, sizeof(livre_t)*RESULT_LMAX);
+				      break;
 		    case (op_consulter_titre):
 		      rep_client.code =
 			trait_consulter_titre (files_conf.fichier_catalogue,
 					       rqt_client.param,
 					       livres_results);
-		      //rep_client.livres = (livre_t*) livres_results;
-
-		      for (i = 0; i < LIVRES_NBMAX; i++)
-			{
-			  afficher_livre (livres_results[i]);
-			}
+		      memcpy(rep_client.livres, livres_results, sizeof(livre_t) * RESULT_LMAX);
 		      break;
 		    case(op_consulter_adherent):
-		      rep_client.code = ret_operation_impossible;
+		      rep_client.code = trait_consulter_adherent(files_conf.fichier_annuaire,
+				                                 rqt_client.param,
+								 adh_results);
+
+		      memcpy(rep_client.adhs, adh_results, sizeof(adherent_t) * RESULT_LMAX);
 		      break;
 		    case(op_emprunter):
 		      rep_client.code = ret_operation_impossible; 
@@ -200,6 +195,7 @@ main (int argc, char **argv)
       prot_params.type = sock_udp;
     }
   /* Lancement de l'interface client */
+  printf("%s, %s \n", files_conf.fichier_catalogue, files_conf.fichier_annuaire);
   traitement_serveur ();
 
   return EXIT_SUCCESS;
