@@ -93,26 +93,33 @@ traitement_serveur ()
 			trait_consulter_auteur (files_conf.fichier_catalogue,
 						rqt_client.param,
 						livres_results);
-		      memcpy(rep_client.livres,  livres_results, sizeof(livre_t)*RESULT_LMAX);
-				      break;
+		      memcpy (rep_client.livres, livres_results,
+			      sizeof (livre_t) * RESULT_LMAX);
+		      break;
 		    case (op_consulter_titre):
 		      rep_client.code =
 			trait_consulter_titre (files_conf.fichier_catalogue,
 					       rqt_client.param,
 					       livres_results);
-		      memcpy(rep_client.livres, livres_results, sizeof(livre_t) * RESULT_LMAX);
+		      memcpy (rep_client.livres, livres_results,
+			      sizeof (livre_t) * RESULT_LMAX);
 		      break;
-		    case(op_consulter_adherent):
-		      rep_client.code = trait_consulter_adherent(files_conf.fichier_annuaire,
-				                                 rqt_client.param,
-								 adh_results);
+		    case (op_consulter_adherent):
+		      rep_client.code =
+			trait_consulter_adherent (files_conf.fichier_annuaire,
+						  rqt_client.param,
+						  adh_results);
 
-		      memcpy(rep_client.adhs, adh_results, sizeof(adherent_t) * RESULT_LMAX);
+		      memcpy (rep_client.adhs, adh_results,
+			      sizeof (adherent_t) * RESULT_LMAX);
 		      break;
-		    case(op_emprunter):
-		      rep_client.code = ret_operation_impossible; 
+		    case (op_emprunter):
+		      rep_client.code =
+			trait_emprunter (files_conf.annuaire,
+					 files_conf.catalogue,
+					 rqt_client.params);
 		      break;
-		     case(op_rendre):
+		    case (op_rendre):
 		      rep_client.code = ret_operation_impossible;
 		      break;
 		    case (op_ping):
@@ -126,7 +133,7 @@ traitement_serveur ()
 			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
-	      return exit(EXIT_SUCCESS);
+	      return exit (EXIT_SUCCESS);
 	    }
 	}
     }
@@ -141,6 +148,7 @@ traitement_serveur ()
       printf (" en udp.\n");
     }
 }
+
 /*
 prot_reponse_c traite_requete(){
 	return NULL;
@@ -195,7 +203,8 @@ main (int argc, char **argv)
       prot_params.type = sock_udp;
     }
   /* Lancement de l'interface client */
-  printf("%s, %s \n", files_conf.fichier_catalogue, files_conf.fichier_annuaire);
+  printf ("%s, %s \n", files_conf.fichier_catalogue,
+	  files_conf.fichier_annuaire);
   traitement_serveur ();
 
   return EXIT_SUCCESS;
