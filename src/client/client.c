@@ -24,7 +24,7 @@ client_ouvrir_session ()
 {
   if (prot_params.type == sock_udp)
     {
-      fprintf (stderr, "TCP -> pas d'ouverture de session !\n");
+      fprintf (stderr, "UDP -> pas d'ouverture de session !\n");
     }
   client_creer_socket ();
   printf ("Fini.\n");
@@ -125,7 +125,7 @@ client_emprunter_livre (char *adherent, char *titre)
   double delai;
   req.operation = op_emprunter;
   strncpy (req.param, adherent, PARAM_LMAX);
-  strncpy (req.param + strlen (adherent), titre,
+  strncpy (req.param + strlen (adherent) + 1, titre,
 	   PARAM_LMAX - strlen (adherent) - 1);
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
@@ -141,8 +141,9 @@ client_rendre_livre (char *adherent, char *titre)
   double delai;
   req.operation = op_rendre;
   strncpy (req.param, adherent, PARAM_LMAX);
-  strncpy (req.param + strlen (adherent), titre,
+  strncpy (req.param + strlen (adherent) + 1, titre,
 	   PARAM_LMAX - strlen (adherent) - 1);
+  printf ("|%s|%s|\n", req.param, req.param + strlen (adherent) + 1);
   rep = client_traiter (&req, &delai);
   if (!client_gerer_code (rep.code, delai))
     return;
