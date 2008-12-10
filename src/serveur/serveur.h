@@ -1,5 +1,7 @@
 #ifndef __SERVER_H_
 #define __SERVER_H_
+#include <stdlib.h>
+#include <stdio.h>
 /**
  * Affiche l'aide sur les paramètres à donner au serveur l'ors du démarage.
  */

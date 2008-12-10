@@ -27,6 +27,7 @@
 #include <donnees/donnees.h>
 #include "traitement.h"
 #include "serveur.h"
+#include "affichage.h"
 #include <gestion/gestionadherents.h>
 #include <gestion/gestionlivres.h>
 #include <ctype.h>
@@ -94,11 +95,10 @@ traitement_serveur ()
 	    {
 	      while (h_reads
 		     (clientfd, (char *) (&rqt_client),
-		      sizeof (rqt_client)) > 0)
+		      sizeof (prot_requete_t)) > 0)
 		{
 		  int i;
-		  printf ("Recu operation de type : %c \n",
-			  rqt_client.operation);
+		  affiche_requete(rqt_client);
 		  switch (rqt_client.operation)
 		    {
 		    case (op_consulter_auteur):
@@ -126,6 +126,7 @@ traitement_serveur ()
 		      break;
 		    case (op_ping):
 		      rep_client.code=ret_pong;
+		      break;
 		    default:
 		      rep_client.code = ret_operation_impossible;
 		      break;
@@ -134,6 +135,7 @@ traitement_serveur ()
 			    sizeof (rep_client));
 		}
 	      h_close (clientfd);
+	      //return exit(EXIT_SUCCESS);
 	    }
 	}
     }
