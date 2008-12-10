@@ -16,9 +16,10 @@ client_creer_socket ()
 	      (prot_params.type == sock_tcp) ? SOCK_STREAM : SOCK_DGRAM);
   adr_socket (prot_params.port, prot_params.host,
 	      (prot_params.type == sock_tcp) ? "tcp" : "udp", &sa, CLIENT);
-  if (prot_params.type == sock_tcp)
+  if (prot_params.type == sock_tcp) {
     h_connect (client_socket, &sa);
-  prot_params.utilisable = 1;
+    prot_params.utilisable = 1;
+  }
 }
 
 void
