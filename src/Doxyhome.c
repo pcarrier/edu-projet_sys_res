@@ -6,7 +6,7 @@
  *
  * \mainpage
  *
- * \section Choix de conception
+ * \section    Choix de conception
  *
  * \subsection Interactions côté client
  *
@@ -16,7 +16,7 @@
  * La complétion pourrait être une fonctionnalité intéressante mais nous
  * avons choisi d'autres priorités.
  *
- * \section Méthode de travail
+ * \section    Méthode de travail
  *
  * \subsection Répartition des tâches
  *
@@ -55,7 +55,7 @@
  * Le seul problème identifié après étude dans Valgrind sur des milliers
  * de commandes concerne l'historique de readline.
  *
- * \section Défauts
+ * \section    Défauts
  *
  * Les données transmises ne sont pas initialisées, donc une quantité
  * considérable de mémoire non-initialisée est envoyée au client

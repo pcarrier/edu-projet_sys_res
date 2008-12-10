@@ -13,4 +13,6 @@ prot_reponse_t client_recevoir_reponse ();
 
 prot_reponse_t client_traiter (prot_requete_t * req, double *delai);
 
+int client_gerer_code (prot_ret_e retour, double delai);
+
 #endif
