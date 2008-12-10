@@ -7,7 +7,7 @@
 /*!
  * \brief Opérations disponibles dans le protocole
  *
- * L'opérations est le premier élément communiqué au serveur
+ * L'opération est le premier élément communiqué au serveur
  * lors d'une requête.
  *
  */
