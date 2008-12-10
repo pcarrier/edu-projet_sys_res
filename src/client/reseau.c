@@ -32,20 +32,27 @@ client_fermer_socket ()
 void
 client_envoyer_requete (prot_requete_t * req)
 {
+  int octets_emis, octets_a_emettre = sizeof (prot_requete_t);
   if (prot_params.type == sock_udp)
-    h_sendto (client_socket, (char *) req, sizeof (prot_requete_t), &sa);
+    octets_emis =
+      h_sendto (client_socket, (char *) req, sizeof (prot_requete_t), &sa);
   else
-    h_writes (client_socket, (char *) req, sizeof (prot_requete_t));
+    octets_emis =
+      h_writes (client_socket, (char *) req, sizeof (prot_requete_t));
 }
 
 prot_reponse_t
 client_recevoir_reponse ()
 {
   prot_reponse_t rep;
+  int octets_recus, octets_attendus = sizeof (prot_reponse_t);
   if (prot_params.type == sock_udp)
-    h_recvfrom (client_socket, (char *) (&rep), sizeof (prot_reponse_t), &sa);
+    octets_recus =
+      h_recvfrom (client_socket, (char *) (&rep), sizeof (prot_reponse_t),
+		  &sa);
   else
-    h_reads (client_socket, (char *) (&rep), sizeof (prot_reponse_t));
+    octets_recus =
+      h_reads (client_socket, (char *) (&rep), sizeof (prot_reponse_t));
   return rep;
 }
 

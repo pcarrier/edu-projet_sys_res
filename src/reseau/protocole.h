@@ -30,10 +30,11 @@ typedef enum
  */
 typedef enum
 {
+  ret_probleme_local = -3;
   ret_operation_impossible = -2,
   ret_inexistant = -1,
   ret_succes = 0,
-  ret_pong = 42
+  ret_pong = 42,
 } prot_ret_e;
 
 typedef enum
