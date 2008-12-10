@@ -78,6 +78,7 @@ typedef struct
   char * host;
   socktype_e type;
   char * port;
+  int connecte;
 } prot_params_t;
 
 #endif

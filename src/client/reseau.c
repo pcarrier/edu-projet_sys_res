@@ -19,20 +19,21 @@ client_creer_socket ()
   if (prot_params.type == sock_udp)
     h_bind (client_socket, &sa);
   h_connect (client_socket, &sa);
+  prot_params.connecte = 1;
 }
 
 void
 client_fermer_socket ()
 {
   h_close (client_socket);
+  prot_params.connecte = 0;
 }
 
 void
 client_envoyer_requete (prot_requete_t * req)
 {
   if (prot_params.type == sock_udp)
-    {
-    }
+    h_sendto (client_socket, (char *) req, sizeof (prot_requete_t), &sa);
   else
     h_writes (client_socket, (char *) req, sizeof (prot_requete_t));
 }
@@ -42,8 +43,7 @@ client_recevoir_reponse ()
 {
   prot_reponse_t rep;
   if (prot_params.type == sock_udp)
-    {
-    }
+    h_recvfrom (client_socket, (char *) (&rep), sizeof (prot_reponse_t), &sa);
   else
     h_reads (client_socket, (char *) (&rep), sizeof (prot_reponse_t));
   return rep;

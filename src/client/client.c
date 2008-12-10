@@ -249,6 +249,7 @@ main (int argc, char **argv)
       prot_params.type = sock_udp;
       client_creer_socket ();
     }
+  prot_params.connecte = 0;
   fancy_prompt();
   client_main_loop ();
   return EXIT_SUCCESS;
